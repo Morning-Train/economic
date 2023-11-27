@@ -15,7 +15,8 @@
         }
     ],
     "require": {
-        "php": "^8.1"
+        "php": "^8.1",
+        "illuminate/support": "^10.33"
     },
     "require-dev": {
         "pestphp/pest": "^2.15",
@@ -29,7 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "MorningTrain\\Economic\\Tests\\": "tests"
+            "Morningtrain\\Economic\\Tests\\": "tests"
         }
     },
     "scripts": {
