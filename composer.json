@@ -19,8 +19,9 @@
         "illuminate/support": "^10.33"
     },
     "require-dev": {
-        "pestphp/pest": "^2.15",
         "laravel/pint": "^1.0",
+        "mockery/mockery": "^1.6",
+        "pestphp/pest": "^2.15",
         "spatie/ray": "^1.28"
     },
     "autoload": {
