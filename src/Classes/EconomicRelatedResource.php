@@ -2,11 +2,10 @@
 
 namespace MorningTrain\Economic\Classes;
 
+use Exception;
 use MorningTrain\Economic\Abstracts\Endpoint;
 use MorningTrain\Economic\Abstracts\Resource;
-use MorningTrain\Economic\Attributes\Resources\GetSingle;
 use MorningTrain\Economic\Services\EconomicApiService;
-use Exception;
 
 /**
  * @template R of Resource
@@ -19,6 +18,7 @@ class EconomicRelatedResource
 
     /**
      * @return R|null
+     *
      * @throws Exception
      */
     public function find(string|int $reference): ?Resource
@@ -27,7 +27,7 @@ class EconomicRelatedResource
 
         $response = EconomicApiService::get($this->endpointSingle->getEndpoint(array_values($references)));
 
-        if($response->getStatusCode() !== 200) {
+        if ($response->getStatusCode() !== 200) {
             // Todo: Log error and throw exception
 
             return null;

@@ -2,17 +2,16 @@
 
 namespace MorningTrain\Economic\Classes;
 
+use Closure;
 use MorningTrain\Economic\Abstracts\Endpoint;
-use MorningTrain\Economic\Abstracts\Resource;
 use MorningTrain\Economic\Attributes\Resources\GetCollection;
 use MorningTrain\Economic\Services\EconomicApiService;
-use Closure;
 
 /**
  * @template ResourceClass
  */
-class EconomicQueryBuilder {
-
+class EconomicQueryBuilder
+{
     protected array $queryArgs = [];
 
     protected ?EconomicQueryFilterBuilder $filter;
@@ -32,11 +31,11 @@ class EconomicQueryBuilder {
 
     protected function getEndpoint(): string
     {
-        if(!isset($this->endpoint)) {
+        if (! isset($this->endpoint)) {
             return $this->resourceClass::getEndpoint(GetCollection::class);
         }
 
-        if(is_a($this->endpoint, Endpoint::class)) {
+        if (is_a($this->endpoint, Endpoint::class)) {
             return $this->endpoint->getEndpoint();
         }
 
@@ -45,7 +44,7 @@ class EconomicQueryBuilder {
 
     public function where(int|string|Closure $propertyName, string $operatorOrValue = null, mixed $value = null): static
     {
-        if(!isset($this->filter)) {
+        if (! isset($this->filter)) {
             $this->filter = new EconomicQueryFilterBuilder(EconomicQueryFilterBuilder::FILTER_RELATION_AND);
         }
 
@@ -56,7 +55,7 @@ class EconomicQueryBuilder {
 
     public function orWhere(int|string|Closure $propertyName, string $operatorOrValue = null, mixed $value = null): static
     {
-        if(!isset($this->filter)) {
+        if (! isset($this->filter)) {
             $this->filter = new EconomicQueryFilterBuilder(EconomicQueryFilterBuilder::FILTER_RELATION_OR);
         }
 
@@ -65,25 +64,26 @@ class EconomicQueryBuilder {
         return $this;
     }
 
-    public function first() {
+    public function first()
+    {
         $args = array_merge($this->queryArgs, [
             'pageSize' => 1,
-            'skipPages' => 0
+            'skipPages' => 0,
         ]);
 
-        if(!empty($this->filter)) {
+        if (! empty($this->filter)) {
             $args['filter'] = $this->filter->buildString();
         }
 
         $response = EconomicApiService::get($this->getEndpoint(), $args);
 
-        if($response->getStatusCode() !== 200) {
+        if ($response->getStatusCode() !== 200) {
             // Todo: Log error and throw exception
 
             return null;
         }
 
-        if(empty($response->getProperty('collection'))) {
+        if (empty($response->getProperty('collection'))) {
             return null;
         }
 
@@ -91,11 +91,11 @@ class EconomicQueryBuilder {
     }
 
     /**
-     * @param callable $callback
      * @return ResourceClass|mixed|null
      */
-    public function firstOr(callable $callback): mixed {
-        if(!is_null($resource = $this->first())) {
+    public function firstOr(callable $callback): mixed
+    {
+        if (! is_null($resource = $this->first())) {
             return $resource;
         }
 
@@ -111,12 +111,12 @@ class EconomicQueryBuilder {
 
         $args = $this->queryArgs;
 
-        if(!empty($this->filter)) {
+        if (! empty($this->filter)) {
             $args['filter'] = $this->filter->buildString();
         }
 
-        if(!empty($args)) {
-            $self .= '?' . http_build_query($args);
+        if (! empty($args)) {
+            $self .= '?'.http_build_query($args);
         }
 
         return new EconomicCollection(new EconomicCollectionIterator($self, $this->resourceClass));

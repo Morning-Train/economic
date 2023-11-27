@@ -10,7 +10,8 @@ use MorningTrain\Economic\Traits\Resources\GetSingleable;
 
 #[GetCollection('payment-types')]
 #[GetSingle('payment-types/:paymentTypeNumber')]
-class PaymentType extends Resource {
+class PaymentType extends Resource
+{
     use GetCollectionable, GetSingleable;
 
     public string $name;

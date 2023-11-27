@@ -2,6 +2,7 @@
 
 namespace MorningTrain\Economic\Resources\AccountingYear;
 
+use DateTime;
 use MorningTrain\Economic\Abstracts\Resource;
 use MorningTrain\Economic\Attributes\Resources\GetCollection;
 use MorningTrain\Economic\Attributes\Resources\GetSingle;
@@ -10,7 +11,6 @@ use MorningTrain\Economic\Attributes\Resources\Properties\ResourceType;
 use MorningTrain\Economic\Attributes\Resources\Properties\Sortable;
 use MorningTrain\Economic\Classes\EconomicCollection;
 use MorningTrain\Economic\Resources\AccountingYear;
-use DateTime;
 use MorningTrain\Economic\Traits\Resources\GetCollectionable;
 use MorningTrain\Economic\Traits\Resources\GetSingleable;
 

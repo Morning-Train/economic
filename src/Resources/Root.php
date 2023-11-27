@@ -2,8 +2,8 @@
 
 namespace MorningTrain\Economic\Resources;
 
-use MorningTrain\Economic\Abstracts\Resource;
 use DateTime;
+use MorningTrain\Economic\Abstracts\Resource;
 use MorningTrain\Economic\Attributes\Resources\GetSingle;
 use MorningTrain\Economic\Services\EconomicApiService;
 use MorningTrain\Economic\Traits\Resources\EndpointResolvable;
@@ -31,7 +31,7 @@ class Root extends Resource
     {
         $response = EconomicApiService::get(static::getEndpoint(GetSingle::class));
 
-        if($response->getStatusCode() !== 200) {
+        if ($response->getStatusCode() !== 200) {
             // Todo: Log error and throw exception
 
             return null;
@@ -39,5 +39,4 @@ class Root extends Resource
 
         return new static($response->getBody());
     }
-
 }

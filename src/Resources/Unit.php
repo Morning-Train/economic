@@ -27,7 +27,7 @@ use MorningTrain\Economic\Traits\Resources\Updatable;
 #[GetCollection('units/:unitNumber/products', 'products')]
 class Unit extends Resource
 {
-    use GetCollectionable, GetSingleable, Creatable, Updatable, Deletable;
+    use Creatable, Deletable, GetCollectionable, GetSingleable, Updatable;
 
     #[Required]
     public string $name;
@@ -37,6 +37,7 @@ class Unit extends Resource
 
     /**
      * Products that references the unit
+     *
      * @var EconomicCollection<Product>
      */
     #[ResourceType(Product::class)]
@@ -45,20 +46,19 @@ class Unit extends Resource
     /**
      * Create new Unit
      * https://restdocs.e-conomic.com/#post-units
-     * @param string $name
-     * @return static
      */
     public static function create(string $name): static
     {
         return static::createRequest([
-            'name' => $name
+            'name' => $name,
         ]);
     }
 
     /**
      * Get Products that references the unit - https://restdocs.e-conomic.com/#get-units-unitnumber-products
-     * @param int $unitNumber
+     *
      * @return EconomicCollection<Product>
+     *
      * @throws \Exception
      */
     public static function getProductsForUnit(int $unitNumber): EconomicCollection

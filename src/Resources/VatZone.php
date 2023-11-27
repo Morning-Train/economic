@@ -17,13 +17,11 @@ class VatZone extends Resource
 
     /**
      * If true, the VAT zone can be used for customers
-     * @var bool
      */
     public bool $enabledForCustomer;
 
     /**
      * If true, the VAT zone can be used for suppliers
-     * @var bool
      */
     public bool $enabledForSupplier;
 

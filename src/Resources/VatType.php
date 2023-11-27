@@ -7,7 +7,6 @@ use MorningTrain\Economic\Attributes\Resources\GetCollection;
 use MorningTrain\Economic\Attributes\Resources\GetSingle;
 use MorningTrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use MorningTrain\Economic\Classes\EconomicCollection;
-use MorningTrain\Economic\Classes\EconomicQueryBuilder;
 use MorningTrain\Economic\Resources\VatType\VatReportSetup;
 use MorningTrain\Economic\Traits\Resources\GetCollectionable;
 use MorningTrain\Economic\Traits\Resources\GetSingleable;
@@ -25,6 +24,7 @@ class VatType extends Resource
 
     /**
      * @return EconomicCollection<VatReportSetup>
+     *
      * @throws \Exception
      */
     public function getVatReportSetups(): EconomicCollection

@@ -7,5 +7,4 @@ use MorningTrain\Economic\Abstracts\Endpoint;
 
 #[Attribute(Attribute::TARGET_CLASS)] class GetSingle extends Endpoint
 {
-
 }

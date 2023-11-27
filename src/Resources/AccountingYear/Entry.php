@@ -12,5 +12,4 @@ class Entry extends Resource
     public float $amount;
 
     public float $amountInBaseCurrency;
-
 }

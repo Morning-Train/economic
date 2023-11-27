@@ -2,17 +2,17 @@
 
 namespace MorningTrain\Economic\Resources;
 
+use Datetime;
 use MorningTrain\Economic\Abstracts\Resource;
 use MorningTrain\Economic\Attributes\Resources\Create;
 use MorningTrain\Economic\Attributes\Resources\GetCollection;
 use MorningTrain\Economic\Attributes\Resources\GetSingle;
 use MorningTrain\Economic\Attributes\Resources\Properties\Filterable;
 use MorningTrain\Economic\Attributes\Resources\Properties\Required;
-use MorningTrain\Economic\Attributes\Resources\Properties\Sortable;
 use MorningTrain\Economic\Attributes\Resources\Properties\ResourceType;
+use MorningTrain\Economic\Attributes\Resources\Properties\Sortable;
 use MorningTrain\Economic\Classes\EconomicCollection;
 use MorningTrain\Economic\Resources\AccountingYear\Entry;
-use Datetime;
 use MorningTrain\Economic\Resources\AccountingYear\Period;
 use MorningTrain\Economic\Resources\AccountingYear\Total;
 use MorningTrain\Economic\Resources\AccountingYear\Voucher;
@@ -28,7 +28,7 @@ class AccountingYear extends Resource
     /**
      * @use GetCollectionable<AccountingYear>
      */
-    use GetCollectionable, GetSingleable, Creatable;
+    use Creatable, GetCollectionable, GetSingleable;
 
     public bool $closed;
 

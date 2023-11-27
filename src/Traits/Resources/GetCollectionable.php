@@ -2,10 +2,8 @@
 
 namespace MorningTrain\Economic\Traits\Resources;
 
-use MorningTrain\Economic\Attributes\Resources\GetCollection;
 use MorningTrain\Economic\Classes\EconomicCollection;
 use MorningTrain\Economic\Classes\EconomicQueryBuilder;
-use MorningTrain\Economic\Services\EconomicApiService;
 
 /**
  * @template ResourceClass
@@ -15,9 +13,6 @@ trait GetCollectionable
     use EndpointResolvable;
 
     /**
-     * @param int|string $propertyName
-     * @param string $operatorOrValue
-     * @param mixed|null $value
      * @return EconomicQueryBuilder<ResourceClass>
      */
     public static function where(int|string $propertyName, string $operatorOrValue, mixed $value = null): EconomicQueryBuilder

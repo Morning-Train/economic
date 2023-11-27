@@ -20,7 +20,7 @@ class EconomicCollection extends LazyCollection
      */
     public function __construct($source = null)
     {
-        if(is_a($source, EconomicCollectionIterator::class)) {
+        if (is_a($source, EconomicCollectionIterator::class)) {
             $this->source = $source;
 
             return;
@@ -31,13 +31,12 @@ class EconomicCollection extends LazyCollection
 
     protected function makeIterator($source)
     {
-        if(is_a($source, EconomicCollectionIterator::class)) {
+        if (is_a($source, EconomicCollectionIterator::class)) {
             return $source;
         }
 
         return parent::makeIterator($source);
     }
-
 
     public function getResourceClass(): string
     {
@@ -46,7 +45,7 @@ class EconomicCollection extends LazyCollection
 
     public function getSelf(): ?string
     {
-        if(is_a($this->source, EconomicCollectionIterator::class)) {
+        if (is_a($this->source, EconomicCollectionIterator::class)) {
             return $this->source->getSelf();
         }
 
