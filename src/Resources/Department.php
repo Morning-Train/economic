@@ -8,5 +8,4 @@ use MorningTrain\Economic\Attributes\Resources\GetCollection;
 #[GetCollection()]
 class Department extends Resource
 {
-
 }

@@ -23,7 +23,7 @@ use MorningTrain\Economic\Traits\Resources\Updatable;
 #[Delete('customer-groups/:customerGroupNumber')]
 class CustomerGroup extends Resource
 {
-    use GetCollectionable, GetSingleable, Creatable, Updatable, Deletable;
+    use Creatable, Deletable, GetCollectionable, GetSingleable, Updatable;
 
     public Account $account;
 

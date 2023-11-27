@@ -10,7 +10,6 @@ use MorningTrain\Economic\Attributes\Resources\GetSingle;
 use MorningTrain\Economic\Attributes\Resources\Update;
 use MorningTrain\Economic\Classes\EconomicRelatedResource;
 use MorningTrain\Economic\Resources\Customer;
-use MorningTrain\Economic\Services\EconomicApiService;
 use MorningTrain\Economic\Traits\Resources\Creatable;
 use MorningTrain\Economic\Traits\Resources\EndpointResolvable;
 
@@ -21,7 +20,7 @@ use MorningTrain\Economic\Traits\Resources\EndpointResolvable;
 #[Delete('customers/:customerNumber/contacts/:contactNumber')]
 class Contact extends Resource
 {
-    use EndpointResolvable, Creatable;
+    use Creatable, EndpointResolvable;
 
     public Customer $customer;
 
@@ -43,7 +42,8 @@ class Contact extends Resource
 
     public int $sortKey;
 
-    public static function fromCustomer(Customer|int $customer) {
+    public static function fromCustomer(Customer|int $customer)
+    {
         return new EconomicRelatedResource(
             static::getEndpointInstance(GetCollection::class),
             static::getEndpointInstance(GetSingle::class),
@@ -55,11 +55,11 @@ class Contact extends Resource
     public static function create(
         Customer $customer,
         string $name,
-        ?string $email = null,
-        ?string $phone = null,
-        ?string $notes = null,
-        ?string $eInvoiceId = null,
-        ?array $emailNotifications = null
+        string $email = null,
+        string $phone = null,
+        string $notes = null,
+        string $eInvoiceId = null,
+        array $emailNotifications = null
     ) {
         return static::createRequest(array_filter(compact(
             'customer',

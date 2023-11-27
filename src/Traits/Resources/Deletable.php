@@ -13,7 +13,7 @@ trait Deletable
     {
         $response = EconomicApiService::delete(static::getEndpoint(Delete::class, $this->getPrimaryKey()));
 
-        if($response->getStatusCode() !== 204) {
+        if ($response->getStatusCode() !== 204) {
             // TODO: Log error and throw exception
 
             return false;

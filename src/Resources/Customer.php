@@ -2,6 +2,7 @@
 
 namespace MorningTrain\Economic\Resources;
 
+use DateTime;
 use MorningTrain\Economic\Abstracts\Resource;
 use MorningTrain\Economic\Attributes\Resources\Create;
 use MorningTrain\Economic\Attributes\Resources\GetCollection;
@@ -10,11 +11,9 @@ use MorningTrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use MorningTrain\Economic\Attributes\Resources\Properties\ResourceType;
 use MorningTrain\Economic\Classes\EconomicCollection;
 use MorningTrain\Economic\Resources\Customer\Contact;
-use MorningTrain\Economic\Resources\Customer\Total;
 use MorningTrain\Economic\Traits\Resources\Creatable;
 use MorningTrain\Economic\Traits\Resources\GetCollectionable;
 use MorningTrain\Economic\Traits\Resources\GetSingleable;
-use DateTime;
 use Morningtrain\TestPlugin\Models\Employee;
 
 #[GetCollection('customers')]
@@ -25,7 +24,7 @@ class Customer extends Resource
     /**
      * @use GetCollectionable<Customer>
      */
-    use GetCollectionable, GetSingleable, Creatable;
+    use Creatable, GetCollectionable, GetSingleable;
 
     public string $address;
 
@@ -108,27 +107,26 @@ class Customer extends Resource
         Currency|string $currency,
         VatZone|int $vatZone,
         PaymentTerm|int $paymentTerms,
-        ?string $email = null,
-        ?string $address = null,
-        ?string $zip = null,
-        ?string $city = null,
-        ?string $country = null,
-        ?string $corporateIdentificationNumber = null,
-        ?string $pNumber = null,
-        ?string $vatNumber = null,
-        ?string $ean = null,
-        ?string $publicEntryNumber = null,
-        ?string $website = null,
-        ?string $mobilePhone = null,
-        ?string $telephoneAndFaxNumber = null,
-        ?bool $barred = null,
-        ?bool $eInvoicingDisabledByDefault = null,
-        ?float $creditLimit = null,
-        ?int $customerNumber = null,
-        Layout|int|null $layout = null,
-        Employee|int|null $salesPerson = null,
-    ): static
-    {
+        string $email = null,
+        string $address = null,
+        string $zip = null,
+        string $city = null,
+        string $country = null,
+        string $corporateIdentificationNumber = null,
+        string $pNumber = null,
+        string $vatNumber = null,
+        string $ean = null,
+        string $publicEntryNumber = null,
+        string $website = null,
+        string $mobilePhone = null,
+        string $telephoneAndFaxNumber = null,
+        bool $barred = null,
+        bool $eInvoicingDisabledByDefault = null,
+        float $creditLimit = null,
+        int $customerNumber = null,
+        Layout|int $layout = null,
+        Employee|int $salesPerson = null,
+    ): static {
         return static::createRequest(array_filter(compact(
             'name',
             'customerGroup',

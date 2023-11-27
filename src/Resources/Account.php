@@ -6,7 +6,6 @@ use MorningTrain\Economic\Abstracts\Resource;
 
 class Account extends Resource
 {
-
     public AccountingYear $accountingYear;
 
     public int $accountNumber;

@@ -5,6 +5,7 @@ namespace MorningTrain\Economic\Classes;
 class EconomicResponse
 {
     protected int $statusCode;
+
     protected array $body;
 
     public function __construct(int $statusCode, array $body)

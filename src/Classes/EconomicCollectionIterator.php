@@ -2,16 +2,18 @@
 
 namespace MorningTrain\Economic\Classes;
 
+use ArrayAccess;
+use Countable;
 use MorningTrain\Economic\Abstracts\Resource;
 use MorningTrain\Economic\Services\EconomicApiService;
 use SeekableIterator;
-use ArrayAccess;
-use Countable;
 
-class EconomicCollectionIterator implements SeekableIterator, ArrayAccess, Countable
+class EconomicCollectionIterator implements ArrayAccess, Countable, SeekableIterator
 {
     protected int $itemCount;
+
     protected array $items = [];
+
     protected int $pageSize = 20;
 
     protected int $currentPosition = 0;
@@ -22,17 +24,17 @@ class EconomicCollectionIterator implements SeekableIterator, ArrayAccess, Count
 
     protected function getItem(int $position): ?Resource
     {
-        if(isset($this->items[$position])) {
+        if (isset($this->items[$position])) {
             return $this->items[$position];
         }
 
-        if(isset($this->itemCount) && $position >= $this->itemCount) {
+        if (isset($this->itemCount) && $position >= $this->itemCount) {
             return null;
         }
 
         $this->fetchItems($position);
 
-        if(!isset($this->items[$position])) {
+        if (! isset($this->items[$position])) {
             return null;
         }
 
@@ -41,14 +43,14 @@ class EconomicCollectionIterator implements SeekableIterator, ArrayAccess, Count
 
     protected function fetchItems(int $position): void
     {
-        $skipPages = (int) floor($position/$this->pageSize);
+        $skipPages = (int) floor($position / $this->pageSize);
 
         $response = EconomicApiService::get($this->self, [
             'skipPages' => $skipPages,
-            'pageSize' => $this->pageSize
+            'pageSize' => $this->pageSize,
         ]);
 
-        if($response->getStatusCode() !== 200) {
+        if ($response->getStatusCode() !== 200) {
             // TODO: log error and throw exception
 
             return;
@@ -56,7 +58,7 @@ class EconomicCollectionIterator implements SeekableIterator, ArrayAccess, Count
 
         $offset = $this->pageSize * $skipPages;
 
-        foreach($response->getProperty('collection') as $key => $item) {
+        foreach ($response->getProperty('collection') as $key => $item) {
             $this->items[$key + $offset] = new $this->resourceClass($item);
         }
 
@@ -64,7 +66,7 @@ class EconomicCollectionIterator implements SeekableIterator, ArrayAccess, Count
 
         $pagination = $response->getProperty('pagination');
 
-        if(isset($pagination['results'])) {
+        if (isset($pagination['results'])) {
             $this->itemCount = $pagination['results'];
         } else {
             $this->itemCount = count($this->items);
@@ -88,7 +90,7 @@ class EconomicCollectionIterator implements SeekableIterator, ArrayAccess, Count
 
     public function valid(): bool
     {
-        if(!isset($this->itemCount)) {
+        if (! isset($this->itemCount)) {
             $this->fetchItems($this->currentPosition);
         }
 
@@ -102,7 +104,7 @@ class EconomicCollectionIterator implements SeekableIterator, ArrayAccess, Count
 
     public function offsetExists(mixed $offset): bool
     {
-        return !is_null($this->getItem($offset));
+        return ! is_null($this->getItem($offset));
     }
 
     public function offsetGet(mixed $offset): mixed

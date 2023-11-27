@@ -38,7 +38,7 @@ class EconomicQueryFilterBuilder
 
     protected function convertOperator(string $operator): string
     {
-        switch($operator) {
+        switch ($operator) {
             case '=':
                 return static::FILTER_OPERATOR_EQUAL;
             case '!=':
@@ -65,7 +65,8 @@ class EconomicQueryFilterBuilder
         return $operator;
     }
 
-    protected function whereNested(Closure $closure) {
+    protected function whereNested(Closure $closure)
+    {
 
         call_user_func($closure, $this);
 
@@ -74,7 +75,7 @@ class EconomicQueryFilterBuilder
 
     public function where(int|string|Closure $propertyName, string $operatorOrValue = null, mixed $value = null): static
     {
-        if($propertyName instanceof Closure) {
+        if ($propertyName instanceof Closure) {
             return $this->whereNested($propertyName);
         }
 
@@ -105,19 +106,20 @@ class EconomicQueryFilterBuilder
     {
         $strings = [];
 
-        foreach($this->filters as $filter) {
-            if(is_a($filter, static::class)) {
+        foreach ($this->filters as $filter) {
+            if (is_a($filter, static::class)) {
                 $strings[] = (string) $filter;
+
                 continue;
             }
 
             $string = '';
 
-            if(!empty($strings)) {
+            if (! empty($strings)) {
                 $string .= static::FILTER_RELATION_AND;
             }
 
-            $string .= $filter['property'] . $this->convertOperator($filter['operator']) . $filter['value'];
+            $string .= $filter['property'].$this->convertOperator($filter['operator']).$filter['value'];
 
             $strings[] = $string;
         }
@@ -127,6 +129,6 @@ class EconomicQueryFilterBuilder
 
     public function __toString(): string
     {
-        return $this->relation . '(' . $this->buildString() . ')';
+        return $this->relation.'('.$this->buildString().')';
     }
 }

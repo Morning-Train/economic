@@ -2,8 +2,8 @@
 
 namespace MorningTrain\Economic\Services;
 
-use MorningTrain\Economic\Interfaces\EconomicDriver;
 use MorningTrain\Economic\Classes\EconomicResponse;
+use MorningTrain\Economic\Interfaces\EconomicDriver;
 
 class EconomicApiService
 {
@@ -21,7 +21,7 @@ class EconomicApiService
      */
     public static function getDriver(): EconomicDriver
     {
-        if(empty(static::$driver)) {
+        if (empty(static::$driver)) {
             EconomicLoggerService::error('No driver has been set for the Economic API Service');
 
             throw new \Exception('No driver has been set for the Economic API Service');
@@ -34,7 +34,7 @@ class EconomicApiService
     {
         $endpoint = str_replace(static::$url, '', $endpoint);
 
-        return static::$url . '/' . $endpoint;
+        return static::$url.'/'.$endpoint;
     }
 
     public static function get(string $endpoint, array $queryArgs = []): EconomicResponse
@@ -64,8 +64,8 @@ class EconomicApiService
 
     protected static function castParameters(array $body): array
     {
-        foreach($body as &$value) {
-            if(is_a($value, 'DateTime')) {
+        foreach ($body as &$value) {
+            if (is_a($value, 'DateTime')) {
                 $value = $value->format('Y-m-d');
             }
         }

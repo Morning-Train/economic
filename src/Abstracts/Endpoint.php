@@ -15,24 +15,24 @@ abstract class Endpoint
         // Find all references in endpoint
         preg_match_all('/\:[a-zA-Z]+/', $endpoint, $matches);
 
-        if(!empty($references) && is_array(array_values($references)[0])) {
+        if (! empty($references) && is_array(array_values($references)[0])) {
             $references = array_values($references)[0];
         }
 
         $matches = $matches[0]; // Get first match group
 
-        foreach($references as $name => $reference) {
-            if(is_int($name)) {
-                if(isset($matches[$name])) {
+        foreach ($references as $name => $reference) {
+            if (is_int($name)) {
+                if (isset($matches[$name])) {
                     $name = $matches[$name];
                 } else {
                     throw new \Exception('Reference not found');
                 }
             }
 
-            $name = str_starts_with($name, ':') ? $name : ':' . $name;
+            $name = str_starts_with($name, ':') ? $name : ':'.$name;
 
-            if(!in_array($name, $matches)) {
+            if (! in_array($name, $matches)) {
                 throw new \Exception('Reference not found');
             }
 
@@ -44,12 +44,10 @@ abstract class Endpoint
 
     /**
      * Check if endpoint is the same as the given slug
-     * @param string $slug
-     * @return bool
      */
     public function is(string $slug): bool
     {
-        if(!isset($this->slug)) {
+        if (! isset($this->slug)) {
             return false;
         }
 

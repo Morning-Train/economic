@@ -6,5 +6,4 @@ use MorningTrain\Economic\Abstracts\Resource;
 
 class Voucher extends Resource
 {
-
 }

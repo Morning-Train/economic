@@ -23,7 +23,7 @@ use MorningTrain\Economic\Traits\Resources\GetSingleable;
 #[Create('products')]
 class Product extends Resource
 {
-    use GetCollectionable, GetSingleable, Creatable;
+    use Creatable, GetCollectionable, GetSingleable;
 
     #[Filterable]
     #[Sortable]
@@ -36,8 +36,6 @@ class Product extends Resource
     #[Filterable]
     #[Sortable]
     public float $costPrice;
-
-    
 
     /**
      * @var EconomicCollection<Entry>

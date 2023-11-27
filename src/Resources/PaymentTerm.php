@@ -22,16 +22,24 @@ use MorningTrain\Economic\Traits\Resources\Updatable;
 #[Delete('payment-terms/:paymentTermsNumber')]
 class PaymentTerm extends Resource
 {
-    use GetCollectionable, GetSingleable, Creatable, Updatable, Deletable;
+    use Creatable, Deletable, GetCollectionable, GetSingleable, Updatable;
 
     public const PAYMENT_TERMS_TYPE_NET = 'net';
+
     public const PAYMENT_TERMS_TYPE_INVOICE_MONTH = 'invoiceMonth';
+
     public const PAYMENT_TERMS_TYPE_PAID_IN_CASH = 'paidInCash';
+
     public const PAYMENT_TERMS_TYPE_PREPAID = 'prepaid';
+
     public const PAYMENT_TERMS_TYPE_DUE_DATE = 'dueDate';
+
     public const PAYMENT_TERMS_TYPE_FACTORING = 'factoring';
+
     public const PAYMENT_TERMS_TYPE_INVOICE_WEEK_STARTING_SUNDAY = 'invoiceWeekStartingSunday';
+
     public const PAYMENT_TERMS_TYPE_INVOICE_WEEK_STARTING_MONDAY = 'invoiceWeekStartingMonday';
+
     public const PAYMENT_TERMS_TYPE_CREDITCARD = 'creditcard';
 
     public Account $contraAccountForPrepaidAmount;
