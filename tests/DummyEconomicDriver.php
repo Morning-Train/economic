@@ -8,6 +8,7 @@ use MorningTrain\Economic\Interfaces\EconomicDriver;
 class DummyEconomicDriver implements EconomicDriver
 {
     protected string $appSecretToken;
+
     protected string $agreementGrantToken;
 
     public function __construct(string $appSecretToken, string $agreementGrantToken)
