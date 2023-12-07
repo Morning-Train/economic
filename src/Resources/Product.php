@@ -28,6 +28,7 @@ class Product extends Resource
     use Creatable, GetCollectionable, GetSingleable;
 
     public ?string $name;
+
     #[Filterable]
     #[Sortable]
     public ?string $barCode;
