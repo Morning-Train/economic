@@ -31,6 +31,9 @@ it('creates draft invoice', function () {
                     ],
                     'lines' => [
                         [
+                            'product' => [
+                                'productNumber' => 1,
+                            ],
                             'quantity' => 1,
                             'unitNetPrice' => 500,
                         ],

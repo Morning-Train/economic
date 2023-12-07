@@ -7,6 +7,7 @@ use MorningTrain\Economic\Attributes\Resources\Create;
 use MorningTrain\Economic\Attributes\Resources\GetCollection;
 use MorningTrain\Economic\Attributes\Resources\GetSingle;
 use MorningTrain\Economic\Attributes\Resources\Properties\Filterable;
+use MorningTrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use MorningTrain\Economic\Attributes\Resources\Properties\ResourceType;
 use MorningTrain\Economic\Attributes\Resources\Properties\Sortable;
 use MorningTrain\Economic\Classes\EconomicCollection;
@@ -72,6 +73,9 @@ class Product extends Resource
     #[Filterable]
     #[Sortable]
     public string $year;
+
+    #[PrimaryKey]
+    public int $productNumber;
 
     public static function create(DateTime $fromDate, DateTime $toDate): static
     {
