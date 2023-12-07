@@ -28,7 +28,7 @@ abstract class Resource
     {
         foreach ($properties as $property => $value) {
             if (! property_exists($this, $property)) {
-                EconomicLoggerService::warning('Property '.$property.' does not exist on '.static::class);
+                EconomicLoggerService::warning('Property ' . $property . ' does not exist on ' . static::class);
 
                 continue;
             }
@@ -54,7 +54,7 @@ abstract class Resource
         if (is_a($reflectionTypeName, EconomicCollection::class, true)) {
             $attribute = $propertyReflection->getAttributes(ResourceType::class);
 
-            if (! empty($attribute[0])) {
+            if (! empty($attribute[0]) && ! empty($value)) {
                 $resourceType = $attribute[0]->newInstance();
 
                 return new EconomicCollection(new EconomicCollectionIterator($value, $resourceType->getTypeClass()));
@@ -62,7 +62,7 @@ abstract class Resource
         }
 
         // If is a class
-        if (class_exists($reflectionTypeName)) {
+        if (class_exists($reflectionTypeName) && ! empty($value)) {
             return new ($propertyReflection->getType()->getName())($value);
         }
 

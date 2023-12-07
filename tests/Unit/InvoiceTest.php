@@ -32,6 +32,7 @@ it('creates draft invoice', function () {
                     'lines' => [
                         [
                             'product' => [
+                                'name' => 'T-shirt - Size L',
                                 'productNumber' => '1',
                             ],
                             'quantity' => 1,
@@ -63,7 +64,10 @@ it('creates draft invoice', function () {
         )
     )
         ->addLine(ProductLine::new(
-            product: new Product(1),
+            product: Product::new(
+                productNumber: 1,
+                name: 'T-shirt - Size L',
+            ),
             quantity: 1,
             unitNetPrice: 500
         ))

@@ -2,6 +2,7 @@
 
 namespace MorningTrain\Economic\Resources;
 
+use DateTime;
 use MorningTrain\Economic\Abstracts\Resource;
 use MorningTrain\Economic\Attributes\Resources\Create;
 use MorningTrain\Economic\Attributes\Resources\GetCollection;
@@ -26,53 +27,54 @@ class Product extends Resource
 {
     use Creatable, GetCollectionable, GetSingleable;
 
+    public string $name;
     #[Filterable]
     #[Sortable]
-    public string $barCode;
+    public ?string $barCode;
 
     #[Filterable]
     #[Sortable]
-    public bool $barred;
+    public ?bool $barred;
 
     #[Filterable]
     #[Sortable]
-    public float $costPrice;
+    public ?float $costPrice;
 
     /**
-     * @var EconomicCollection<Entry>
+     * @var EconomicCollection<Entry>|null
      */
     #[ResourceType(Entry::class)]
-    public EconomicCollection $entries;
+    public ?EconomicCollection $entries;
 
     #[Filterable]
     #[Sortable]
-    public DateTime $fromDate;
+    public ?DateTime $fromDate;
 
     /**
-     * @var EconomicCollection<Period>
+     * @var EconomicCollection<Period>|null
      */
     #[ResourceType(Period::class)]
-    public EconomicCollection $periods;
+    public ?EconomicCollection $periods;
 
     #[Filterable]
     #[Sortable]
-    public DateTime $toDate;
+    public ?DateTime $toDate;
 
     /**
-     * @var EconomicCollection<Total>
+     * @var EconomicCollection<Total>|null
      */
     #[ResourceType(Total::class)]
-    public EconomicCollection $totals;
+    public ?EconomicCollection $totals;
 
     /**
-     * @var EconomicCollection<Voucher>
+     * @var EconomicCollection<Voucher>|null
      */
     #[ResourceType(Voucher::class)]
-    public EconomicCollection $vouchers;
+    public ?EconomicCollection $vouchers;
 
     #[Filterable]
     #[Sortable]
-    public string $year;
+    public ?string $year;
 
     #[PrimaryKey]
     public string $productNumber;
@@ -80,5 +82,35 @@ class Product extends Resource
     public static function create(DateTime $fromDate, DateTime $toDate): static
     {
         return static::createRequest(compact('fromDate', 'toDate'));
+    }
+
+    public static function new(
+        string $productNumber,
+        string $name = null,
+        string $barCode = null,
+        bool $barred = null,
+        float $costPrice = null,
+        EconomicCollection $entries = null,
+        DateTime|string $fromDate = null,
+        EconomicCollection $periods = null,
+        DateTime|string $toDate = null,
+        EconomicCollection $totals = null,
+        EconomicCollection $vouchers = null,
+        string $year = null,
+    ): static {
+        return new static([
+            'productNumber' => $productNumber,
+            'name' => $name,
+            'barCode' => $barCode,
+            'barred' => $barred,
+            'costPrice' => $costPrice,
+            'entries' => $entries,
+            'fromDate' => $fromDate,
+            'periods' => $periods,
+            'toDate' => $toDate,
+            'totals' => $totals,
+            'vouchers' => $vouchers,
+            'year' => $year,
+        ]);
     }
 }
