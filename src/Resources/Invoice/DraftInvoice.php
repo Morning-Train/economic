@@ -62,7 +62,7 @@ class DraftInvoice extends Resource
         return static::createRequest([
             'customer' => $this->customer,
             'layout' => $this->layout,
-            'currency' => $this->currency,
+            'currency' => $this->currency->isoNumber,
             'paymentTerms' => $this->paymentTerms,
             'date' => $this->date->format('Y-m-d'),
             'recipient' => $this->recipient,

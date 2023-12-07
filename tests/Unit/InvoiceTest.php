@@ -18,9 +18,7 @@ it('creates draft invoice', function () {
                     'layout' => [
                         'layoutNumber' => 1,
                     ],
-                    'currency' => [
-                        'isoNumber' => 'DKK',
-                    ],
+                    'currency' => 'DKK',
                     'paymentTerms' => [
                         'paymentTermsNumber' => 1,
                     ],
