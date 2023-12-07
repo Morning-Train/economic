@@ -75,7 +75,7 @@ class Product extends Resource
     public string $year;
 
     #[PrimaryKey]
-    public int $productNumber;
+    public string $productNumber;
 
     public static function create(DateTime $fromDate, DateTime $toDate): static
     {
