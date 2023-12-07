@@ -15,7 +15,7 @@ abstract class Resource
 {
     public string $self;
 
-    public function __construct(array|string|int|float $properties = null)
+    public function __construct(array|string|int|float|null $properties = null)
     {
         if (is_array($properties)) {
             $this->populate($properties);
@@ -43,8 +43,15 @@ abstract class Resource
 
         $propertyReflection = $reflection->getProperty($property);
 
+        $reflectionTypeName = $propertyReflection->getType()->getName();
+
+        // If is already the expected type
+        if ($value instanceof $reflectionTypeName) {
+            return $value;
+        }
+
         // If is EconomicCollection
-        if (is_a($propertyReflection->getType()->getName(), EconomicCollection::class, true)) {
+        if (is_a($reflectionTypeName, EconomicCollection::class, true)) {
             $attribute = $propertyReflection->getAttributes(ResourceType::class);
 
             if (! empty($attribute[0])) {
@@ -55,7 +62,7 @@ abstract class Resource
         }
 
         // If is a class
-        if (class_exists($propertyReflection->getType()->getName())) {
+        if (class_exists($reflectionTypeName)) {
             return new ($propertyReflection->getType()->getName())($value);
         }
 
@@ -150,5 +157,20 @@ abstract class Resource
     public function __toString(): string
     {
         return json_encode($this->toArray());
+    }
+
+    protected static function filterEmpty(array $values): array
+    {
+        foreach ($values as $key => $value) {
+            if (is_array($value)) {
+                $values[$key] = static::filterEmpty($value);
+            }
+
+            if (empty($values[$key])) {
+                unset($values[$key]);
+            }
+        }
+
+        return $values;
     }
 }

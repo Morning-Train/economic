@@ -53,7 +53,7 @@ class PaymentTerm extends Resource
     public string $name;
 
     #[PrimaryKey]
-    public int $paymentTermNumber;
+    public int $paymentTermsNumber;
 
     public string $paymentTermsType;
 
