@@ -2,8 +2,10 @@
 
 use MorningTrain\Economic\Classes\EconomicResponse;
 use MorningTrain\Economic\DTOs\Recipient;
+use MorningTrain\Economic\Enums\PaymentTermsType;
 use MorningTrain\Economic\Resources\Invoice\DraftInvoice;
 use MorningTrain\Economic\Resources\Invoice\ProductLine;
+use MorningTrain\Economic\Resources\PaymentTerm;
 use MorningTrain\Economic\Resources\Product;
 use MorningTrain\Economic\Resources\VatZone;
 
@@ -21,6 +23,7 @@ it('creates draft invoice', function () {
                     'currency' => 'DKK',
                     'paymentTerms' => [
                         'paymentTermsNumber' => 1,
+                        'paymentTermsType' => 'paidInCash',
                     ],
                     'date' => '2021-01-01',
                     'recipient' => [
@@ -56,7 +59,10 @@ it('creates draft invoice', function () {
         1,
         1,
         'DKK',
-        1,
+        PaymentTerm::new(
+            paymentTermsNumber: 1,
+            paymentTermsType: PaymentTermsType::PAID_IN_CASH,
+        ),
         DateTime::createFromFormat('Y-m-d', '2021-01-01'),
         Recipient::new(
             'John Doe',
