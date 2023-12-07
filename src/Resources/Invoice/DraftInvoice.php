@@ -60,6 +60,7 @@ class DraftInvoice extends Resource
     public function create()
     {
         ray($this->recipient);
+
         return static::createRequest([
             'customer' => $this->customer,
             'layout' => $this->layout,
