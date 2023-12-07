@@ -25,7 +25,7 @@ class Invoice extends Resource
         Customer|int $customer,
         Layout|int $layout,
         Currency|string $currency,
-        PaymentTerm|int $paymentTerms
+        PaymentTerm|int $paymentTerms,
     ) {
         return new static([
             'customer' => $customer,
@@ -35,7 +35,10 @@ class Invoice extends Resource
         ]);
     }
 
-    public function addLine(ProductLine $line)
+    public function addLine(ProductLine $line): static
     {
+        $this->lines[] = $line;
+
+        return $this;
     }
 }

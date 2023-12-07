@@ -20,25 +20,30 @@ class DummyEconomicDriver implements EconomicDriver
     public function get(string $url, array $queryArgs = []): EconomicResponse
     {
         // TODO: Implement get() method.
+        ray(func_get_args());
     }
 
     public function post(string $url, array $body = []): EconomicResponse
     {
         // TODO: Implement post() method.
+        ray(func_get_args());
     }
 
     public function put(string $url, array $body = []): EconomicResponse
     {
         // TODO: Implement put() method.
+        ray(func_get_args());
     }
 
     public function delete(string $url): EconomicResponse
     {
         // TODO: Implement delete() method.
+        ray(func_get_args());
     }
 
     public function patch(string $url): EconomicResponse
     {
         // TODO: Implement patch() method.
+        ray(func_get_args());
     }
 }

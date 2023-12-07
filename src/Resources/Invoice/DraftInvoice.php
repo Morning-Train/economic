@@ -15,6 +15,7 @@ use MorningTrain\Economic\Resources\PaymentTerm;
 use MorningTrain\Economic\Traits\Resources\Creatable;
 use MorningTrain\Economic\Traits\Resources\GetCollectionable;
 use MorningTrain\Economic\Traits\Resources\GetSingleable;
+use MorningTrain\Economic\Traits\Resources\HasLines;
 
 #[GetCollection('invoices/drafts')]
 #[GetSingle('invoices/drafts/:draftInvoiceNumber', ':draftInvoiceNumber')]
@@ -22,6 +23,7 @@ use MorningTrain\Economic\Traits\Resources\GetSingleable;
 class DraftInvoice extends Resource
 {
     use Creatable, GetCollectionable, GetSingleable;
+    use HasLines;
 
     public Customer $customer;
 
@@ -64,6 +66,7 @@ class DraftInvoice extends Resource
             'paymentTerms' => $this->paymentTerms,
             'date' => $this->date->format('Y-m-d'),
             'recipient' => $this->recipient,
+            'lines' => $this->lines ?? null,
         ]);
     }
 
