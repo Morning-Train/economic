@@ -41,7 +41,15 @@ it('creates draft invoice', function () {
                 ];
         })
         ->once()
-        ->andReturn(new EconomicResponse(201, []));
+        ->andReturn(new EconomicResponse(201, [
+            'draftInvoiceNumber' => 1,
+            'recipient' => [
+                'name' => 'John Doe',
+                'vatZone' => [
+                    'vatZoneNumber' => 1,
+                ],
+            ],
+        ]));
 
     DraftInvoice::new(
         1,
@@ -49,7 +57,7 @@ it('creates draft invoice', function () {
         'DKK',
         1,
         DateTime::createFromFormat('Y-m-d', '2021-01-01'),
-        new Recipient(
+        Recipient::new(
             'John Doe',
             new VatZone(1),
         )

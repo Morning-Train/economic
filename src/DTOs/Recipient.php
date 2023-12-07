@@ -2,20 +2,42 @@
 
 namespace MorningTrain\Economic\DTOs;
 
+use MorningTrain\Economic\Abstracts\Resource;
 use MorningTrain\Economic\Resources\VatZone;
 
-class Recipient
+class Recipient extends Resource
 {
-    public function __construct(
-        public readonly string $name,
-        public readonly VatZone $vatZone,
-        public ?string $address = null,
-        public ?string $zip = null,
-        public ?string $city = null,
-        public ?string $country = null,
-        public ?string $ean = null,
-        public ?string $publicEntryNumber = null,
-        //public ?Attention $attention = null,
-    ) {
+    public string $name;
+    public VatZone $vatZone;
+    public ?string $address = null;
+    public ?string $zip = null;
+    public ?string $city = null;
+    public ?string $country = null;
+    public ?string $ean = null;
+    public ?string $publicEntryNumber = null;
+    public ?Attention $attention = null;
+
+    public static function new(
+        string $name,
+        VatZone $vatZone,
+        ?string $address = null,
+        ?string $zip = null,
+        ?string $city = null,
+        ?string $country = null,
+        ?string $ean = null,
+        ?string $publicEntryNumber = null,
+        ?Attention $attention = null,
+    ): static {
+        return new static([
+            'name' => $name,
+            'vatZone' => $vatZone,
+            'address' => $address,
+            'zip' => $zip,
+            'city' => $city,
+            'country' => $country,
+            'ean' => $ean,
+            'publicEntryNumber' => $publicEntryNumber,
+            'attention' => $attention,
+        ]);
     }
 }
