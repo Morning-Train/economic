@@ -28,6 +28,7 @@ class Product extends Resource
     use Creatable, GetCollectionable, GetSingleable;
 
     public string $name;
+
     #[Filterable]
     #[Sortable]
     public ?string $barCode;
@@ -86,17 +87,17 @@ class Product extends Resource
 
     public static function new(
         string $productNumber,
-        string $name = null,
-        string $barCode = null,
-        bool $barred = null,
-        float $costPrice = null,
-        EconomicCollection $entries = null,
-        DateTime|string $fromDate = null,
-        EconomicCollection $periods = null,
-        DateTime|string $toDate = null,
-        EconomicCollection $totals = null,
-        EconomicCollection $vouchers = null,
-        string $year = null,
+        ?string $name = null,
+        ?string $barCode = null,
+        ?bool $barred = null,
+        ?float $costPrice = null,
+        ?EconomicCollection $entries = null,
+        DateTime|string|null $fromDate = null,
+        ?EconomicCollection $periods = null,
+        DateTime|string|null $toDate = null,
+        ?EconomicCollection $totals = null,
+        ?EconomicCollection $vouchers = null,
+        ?string $year = null,
     ): static {
         return new static([
             'productNumber' => $productNumber,
