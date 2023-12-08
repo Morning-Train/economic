@@ -10,12 +10,13 @@ use MorningTrain\Economic\Classes\EconomicCollection;
 use MorningTrain\Economic\Classes\EconomicCollectionIterator;
 use MorningTrain\Economic\Services\EconomicLoggerService;
 use ReflectionClass;
+use ReflectionMethod;
 
 abstract class Resource
 {
     public string $self;
 
-    public function __construct(array|string|int|float|null $properties = null)
+    public function __construct(array|string|int|float $properties = null)
     {
         if (is_array($properties)) {
             $this->populate($properties);
@@ -28,7 +29,7 @@ abstract class Resource
     {
         foreach ($properties as $property => $value) {
             if (! property_exists($this, $property)) {
-                EconomicLoggerService::warning('Property '.$property.' does not exist on '.static::class);
+                EconomicLoggerService::warning('Property ' . $property . ' does not exist on ' . static::class);
 
                 continue;
             }
@@ -37,7 +38,7 @@ abstract class Resource
         }
     }
 
-    protected function resolvePropertyValue(string $property, mixed $value): mixed
+    protected static function resolvePropertyValue(string $property, mixed $value): mixed
     {
         $reflection = new ReflectionClass(static::class);
 
@@ -172,5 +173,29 @@ abstract class Resource
         }
 
         return $values;
+    }
+
+    protected static function getMethodArgs(string $function, array $arguments): array
+    {
+        $reflection = new ReflectionMethod(...explode('::', $function));
+
+        $assoc = [];
+
+        foreach ($reflection->getParameters() as $i => $parameter) {
+            $assoc[$parameter->getName()] = $arguments[$i] ?? null;
+        }
+
+        return $assoc;
+    }
+
+    protected static function resolveArguments(array $arguments): array
+    {
+        $creationParameters = [];
+
+        foreach ($arguments as $name => $value) {
+            $creationParameters[$name] = static::resolvePropertyValue($name, $value);
+        }
+
+        return $creationParameters;
     }
 }

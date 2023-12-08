@@ -7,6 +7,7 @@ use MorningTrain\Economic\Attributes\Resources\Create;
 use MorningTrain\Economic\Attributes\Resources\Delete;
 use MorningTrain\Economic\Attributes\Resources\GetCollection;
 use MorningTrain\Economic\Attributes\Resources\GetSingle;
+use MorningTrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use MorningTrain\Economic\Attributes\Resources\Properties\ResourceType;
 use MorningTrain\Economic\Attributes\Resources\Update;
 use MorningTrain\Economic\Classes\EconomicCollection;
@@ -27,6 +28,7 @@ class CustomerGroup extends Resource
 
     public Account $account;
 
+    #[PrimaryKey]
     public int $customerGroupNumber;
 
     #[ResourceType(Customer::class)]
