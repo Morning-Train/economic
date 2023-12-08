@@ -73,7 +73,7 @@ class EconomicQueryFilterBuilder
         return $this;
     }
 
-    public function where(int|string|Closure $propertyName, ?string $operatorOrValue = null, mixed $value = null): static
+    public function where(int|string|Closure $propertyName, string $operatorOrValue = null, mixed $value = null): static
     {
         if ($propertyName instanceof Closure) {
             return $this->whereNested($propertyName);
@@ -91,7 +91,7 @@ class EconomicQueryFilterBuilder
         return $this;
     }
 
-    public function orWhere(int|string|Closure $propertyName, ?string $operatorOrValue = null, mixed $value = null): static
+    public function orWhere(int|string|Closure $propertyName, string $operatorOrValue = null, mixed $value = null): static
     {
         $instance = new static(static::FILTER_RELATION_OR);
 

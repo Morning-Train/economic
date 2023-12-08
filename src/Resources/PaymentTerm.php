@@ -46,14 +46,14 @@ class PaymentTerm extends Resource
 
     public static function new(
         int $paymentTermsNumber,
-        ?string $name = null,
-        ?string $description = null,
-        ?int $daysOfCredit = null,
-        ?PaymentTermsType $paymentTermsType = null,
-        ?Account $contraAccountForPrepaidAmount = null,
-        ?float $percentageForPrepaidAmount = null,
-        ?float $percentageForRemainderAmount = null,
-        ?Customer $creditCardCompany = null,
+        string $name = null,
+        string $description = null,
+        int $daysOfCredit = null,
+        PaymentTermsType $paymentTermsType = null,
+        Account $contraAccountForPrepaidAmount = null,
+        float $percentageForPrepaidAmount = null,
+        float $percentageForRemainderAmount = null,
+        Customer $creditCardCompany = null,
     ): static {
         return new static([
             'paymentTermsNumber' => $paymentTermsNumber,

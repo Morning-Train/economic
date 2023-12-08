@@ -9,7 +9,7 @@ class EconomicLoggerService
 {
     protected static array $loggers = [];
 
-    public static function registerLogger(LoggerInterface $logger, string|array|null $logLevels = null): void
+    public static function registerLogger(LoggerInterface $logger, string|array $logLevels = null): void
     {
         if ($logLevels === null) {
             static::$loggers['all'][] = $logger;

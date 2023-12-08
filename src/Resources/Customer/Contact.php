@@ -55,11 +55,11 @@ class Contact extends Resource
     public static function create(
         Customer $customer,
         string $name,
-        ?string $email = null,
-        ?string $phone = null,
-        ?string $notes = null,
-        ?string $eInvoiceId = null,
-        ?array $emailNotifications = null
+        string $email = null,
+        string $phone = null,
+        string $notes = null,
+        string $eInvoiceId = null,
+        array $emailNotifications = null
     ) {
         return static::createRequest(array_filter(compact(
             'customer',

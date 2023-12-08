@@ -28,13 +28,13 @@ class Recipient extends Resource
     public static function new(
         string $name,
         VatZone $vatZone,
-        ?string $address = null,
-        ?string $zip = null,
-        ?string $city = null,
-        ?string $country = null,
-        ?string $ean = null,
-        ?string $publicEntryNumber = null,
-        ?Attention $attention = null,
+        string $address = null,
+        string $zip = null,
+        string $city = null,
+        string $country = null,
+        string $ean = null,
+        string $publicEntryNumber = null,
+        Attention $attention = null,
     ): static {
         return new static([
             'name' => $name,

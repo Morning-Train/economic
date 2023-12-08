@@ -42,7 +42,7 @@ class EconomicQueryBuilder
         return $this->endpoint;
     }
 
-    public function where(int|string|Closure $propertyName, ?string $operatorOrValue = null, mixed $value = null): static
+    public function where(int|string|Closure $propertyName, string $operatorOrValue = null, mixed $value = null): static
     {
         if (! isset($this->filter)) {
             $this->filter = new EconomicQueryFilterBuilder(EconomicQueryFilterBuilder::FILTER_RELATION_AND);
@@ -53,7 +53,7 @@ class EconomicQueryBuilder
         return $this;
     }
 
-    public function orWhere(int|string|Closure $propertyName, ?string $operatorOrValue = null, mixed $value = null): static
+    public function orWhere(int|string|Closure $propertyName, string $operatorOrValue = null, mixed $value = null): static
     {
         if (! isset($this->filter)) {
             $this->filter = new EconomicQueryFilterBuilder(EconomicQueryFilterBuilder::FILTER_RELATION_OR);
