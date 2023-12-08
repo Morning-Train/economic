@@ -16,7 +16,7 @@ abstract class Resource
 {
     public string $self;
 
-    public function __construct(array|string|int|float $properties = null)
+    public function __construct(array|string|int|float|null $properties = null)
     {
         if (is_array($properties)) {
             $this->populate($properties);
