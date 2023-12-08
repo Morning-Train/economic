@@ -1,0 +1,56 @@
+{
+  "customerNumber": 1,
+  "currency": "DKK",
+  "paymentTerms": {
+    "paymentTermsNumber": 1,
+    "self": "https:\/\/restapi.e-conomic.com\/payment-terms\/1"
+  },
+  "customerGroup": {
+    "customerGroupNumber": 1,
+    "self": "https:\/\/restapi.e-conomic.com\/customer-groups\/1"
+  },
+  "balance": 1300,
+  "dueAmount": 1300,
+  "creditLimit": 0,
+  "name": "John Doe",
+  "vatZone": {
+    "vatZoneNumber": 1,
+    "self": "https:\/\/restapi.e-conomic.com\/vat-zones\/2"
+  },
+  "layout": {
+    "layoutNumber": 14,
+    "self": "https:\/\/restapi.e-conomic.com\/layouts\/14"
+  },
+  "lastUpdated": "2021-12-29T08:24:42Z",
+  "contacts": "https:\/\/restapi.e-conomic.com\/customers\/1\/contacts",
+  "templates": {
+    "invoice": "https:\/\/restapi.e-conomic.com\/customers\/1\/templates\/invoice",
+    "invoiceLine": "https:\/\/restapi.e-conomic.com\/customers\/1\/templates\/invoiceline",
+    "self": "https:\/\/restapi.e-conomic.com\/customers\/1\/templates"
+  },
+  "totals": {
+    "drafts": "https:\/\/restapi.e-conomic.com\/invoices\/totals\/drafts\/customers\/1",
+    "booked": "https:\/\/restapi.e-conomic.com\/invoices\/totals\/booked\/customers\/1",
+    "self": "https:\/\/restapi.e-conomic.com\/customers\/1\/totals"
+  },
+  "deliveryLocations": "https:\/\/restapi.e-conomic.com\/customers\/1\/delivery-locations",
+  "invoices": {
+    "drafts": "https:\/\/restapi.e-conomic.com\/customers\/1\/invoices\/drafts",
+    "booked": "https:\/\/restapi.e-conomic.com\/customers\/1\/invoices\/booked",
+    "self": "https:\/\/restapi.e-conomic.com\/customers\/1\/invoices"
+  },
+  "eInvoicingDisabledByDefault": false,
+  "metaData": {
+    "delete": {
+      "description": "Delete this customer.",
+      "href": "https:\/\/restapi.e-conomic.com\/customers\/1",
+      "httpMethod": "delete"
+    },
+    "replace": {
+      "description": "Replace this customer.",
+      "href": "https:\/\/restapi.e-conomic.com\/customers\/1",
+      "httpMethod": "put"
+    }
+  },
+  "self": "https:\/\/restapi.e-conomic.com\/customers\/1"
+}

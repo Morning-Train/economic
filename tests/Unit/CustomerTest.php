@@ -2,6 +2,9 @@
 
 use MorningTrain\Economic\Classes\EconomicResponse;
 use MorningTrain\Economic\Resources\Customer;
+use MorningTrain\Economic\Resources\CustomerGroup;
+use MorningTrain\Economic\Resources\PaymentTerm;
+use MorningTrain\Economic\Resources\VatZone;
 
 it('Filters by name', function () {
     $this->driver->expects()->get('https://restapi.e-conomic.com/customers', [
@@ -42,4 +45,46 @@ it('Handles OR filters', function () {
     Customer::where('email', 'ms@morningtrain.dk')
         ->orWhere('name', 'Morningtrain')
         ->first();
+});
+
+it('creates customer', function () {
+    $this->driver->expects()->post()
+        ->withArgs(function (string $url, array $body) {
+            return $url === 'https://restapi.e-conomic.com/customers'
+                && $body === [
+                    'name' => 'John Doe',
+                    'customerGroup' => [
+                        'customerGroupNumber' => 1,
+                    ],
+                    'currency' => 'DKK',
+                    'vatZone' => [
+                        'vatZoneNumber' => 1,
+                    ],
+                    'paymentTerms' => [
+                        'paymentTermsNumber' => 1,
+                    ],
+                ];
+        })
+        ->once()
+        ->andReturn(new EconomicResponse(201, fixture('Customers/create')));
+
+    $customer = Customer::create(
+        name: 'John Doe',
+        customerGroup: 1,
+        currency: 'DKK',
+        vatZone: 1,
+        paymentTerms: 1,
+    );
+
+    expect($customer)
+        ->toBeInstanceOf(Customer::class)
+        ->customerNumber->toBe(1)
+        ->name->toBe('John Doe')
+        ->customerGroup->toBeInstanceOf(CustomerGroup::class)
+        ->customerGroup->customerGroupNumber->toBe(1)
+        ->currency->toBe('DKK')
+        ->vatZone->toBeInstanceOf(VatZone::class)
+        ->vatZone->vatZoneNumber->toBe(1)
+        ->paymentTerms->toBeInstanceOf(PaymentTerm::class)
+        ->paymentTerms->paymentTermsNumber->toBe(1);
 });
