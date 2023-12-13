@@ -29,12 +29,12 @@ class ProductLine extends Resource
         Product|int $product,
         float $quantity,
         float $unitNetPrice,
-        string $description = null,
-        float $discountPercentage = null,
-        float $marginInBaseCurrency = null,
-        float $marginPercentage = null,
-        int $sortKey = null,
-        float $unitCostPrice = null,
+        ?string $description = null,
+        ?float $discountPercentage = null,
+        ?float $marginInBaseCurrency = null,
+        ?float $marginPercentage = null,
+        ?int $sortKey = null,
+        ?float $unitCostPrice = null,
     ): static {
         return new static([
             'product' => $product,
