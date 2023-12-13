@@ -3,6 +3,7 @@
 use MorningTrain\Economic\Classes\EconomicResponse;
 use MorningTrain\Economic\DTOs\Recipient;
 use MorningTrain\Economic\Enums\PaymentTermsType;
+use MorningTrain\Economic\Resources\Invoice\BookedInvoice;
 use MorningTrain\Economic\Resources\Invoice\DraftInvoice;
 use MorningTrain\Economic\Resources\Invoice\ProductLine;
 use MorningTrain\Economic\Resources\PaymentTerm;
@@ -163,3 +164,25 @@ it('can add lines', function () {
         ->product->toBeInstanceOf(Product::class)
         ->quantity->toBe(5.0);
 });
+
+it('returns expected booked invoice data', function () {
+    $this->driver->expects()->post()
+        ->withArgs(function (string $url, array $body) {
+            return $url === 'https://restapi.e-conomic.com/invoices/booked'
+                && $body === [
+                    'draftInvoice' => [
+                        'draftInvoiceNumber' => 1,
+                    ],
+                ];
+        })
+        ->once()
+        ->andReturn(new EconomicResponse(201, [
+            'bookedInvoiceNumber' => 1,
+        ]));
+
+    $bookedInvoice = BookedInvoice::createFromDraft(1);
+
+    expect($bookedInvoice)
+        ->bookedInvoiceNumber->toBe(1);
+});
+

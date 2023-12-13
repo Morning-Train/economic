@@ -9,8 +9,10 @@ use MorningTrain\Economic\Attributes\Resources\GetSingle;
 #[GetCollection('invoices/booked')]
 #[GetSingle('invoices/booked/:bookedInvoiceNumber', ':bookedInvoiceNumber')]
 #[Create('invoices/booked')]
-class BookedInvoice extends DraftInvoice
+class BookedInvoice extends Invoice
 {
+    public ?int $bookedInvoiceNumber = null;
+
     public static function createFromDraft(int|DraftInvoice $draft)
     {
         return static::createRequest([

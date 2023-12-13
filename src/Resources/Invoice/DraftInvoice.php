@@ -20,42 +20,9 @@ use MorningTrain\Economic\Traits\Resources\HasLines;
 #[GetCollection('invoices/drafts')]
 #[GetSingle('invoices/drafts/:draftInvoiceNumber', ':draftInvoiceNumber')]
 #[Create('invoices/drafts')]
-class DraftInvoice extends Resource
+class DraftInvoice extends Invoice
 {
-    use Creatable, GetCollectionable, GetSingleable;
-    use HasLines;
-
-    public Customer $customer;
-
-    public Layout $layout;
-
-    public Currency $currency;
-
-    public PaymentTerm $paymentTerms;
-
-    public DateTime $date;
-
-    public Recipient $recipient;
-
     public ?int $draftInvoiceNumber = null;
-
-    public static function new(
-        Customer|int $customer,
-        Layout|int $layout,
-        Currency|string $currency,
-        PaymentTerm|int $paymentTerms,
-        DateTime $date,
-        Recipient $recipient,
-    ): static {
-        return new static([
-            'customer' => $customer,
-            'layout' => $layout,
-            'currency' => $currency,
-            'paymentTerms' => $paymentTerms,
-            'date' => $date,
-            'recipient' => $recipient,
-        ]);
-    }
 
     public function create()
     {
