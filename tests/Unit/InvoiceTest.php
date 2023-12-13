@@ -185,4 +185,3 @@ it('returns expected booked invoice data', function () {
     expect($bookedInvoice)
         ->bookedInvoiceNumber->toBe(1);
 });
-

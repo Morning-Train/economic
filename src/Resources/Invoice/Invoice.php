@@ -4,9 +4,6 @@ namespace MorningTrain\Economic\Resources\Invoice;
 
 use DateTime;
 use MorningTrain\Economic\Abstracts\Resource;
-use MorningTrain\Economic\Attributes\Resources\Create;
-use MorningTrain\Economic\Attributes\Resources\GetCollection;
-use MorningTrain\Economic\Attributes\Resources\GetSingle;
 use MorningTrain\Economic\DTOs\Recipient;
 use MorningTrain\Economic\Resources\Currency;
 use MorningTrain\Economic\Resources\Customer;
