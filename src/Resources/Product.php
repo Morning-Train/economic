@@ -41,6 +41,14 @@ class Product extends Resource
     #[Sortable]
     public ?float $costPrice;
 
+    #[Filterable]
+    #[Sortable]
+    public ?float $recommendedPrice;
+
+    #[Filterable]
+    #[Sortable]
+    public ?float $salesPrice;
+
     /**
      * @var EconomicCollection<Entry>|null
      */
@@ -91,6 +99,8 @@ class Product extends Resource
         ?string $barCode = null,
         ?bool $barred = null,
         ?float $costPrice = null,
+        ?float $recommendedPrice = null,
+        ?float $salesPrice = null,
         ?EconomicCollection $entries = null,
         DateTime|string|null $fromDate = null,
         ?EconomicCollection $periods = null,
@@ -105,6 +115,8 @@ class Product extends Resource
             'barCode' => $barCode,
             'barred' => $barred,
             'costPrice' => $costPrice,
+            'recommendedPrice' => $recommendedPrice,
+            'salesPrice' => $salesPrice,
             'entries' => $entries,
             'fromDate' => $fromDate,
             'periods' => $periods,
