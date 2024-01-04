@@ -1,4 +1,4 @@
-# This is my package e-conomic
+# PHP SDK for E-conomic
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/morning-train/e-conomic.svg?style=flat-square)](https://packagist.org/packages/morning-train/e-conomic)
 [![Tests](https://img.shields.io/github/actions/workflow/status/morning-train/e-conomic/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/morning-train/e-conomic/actions/workflows/run-tests.yml)
@@ -9,7 +9,7 @@
 You can install the package via composer:
 
 ```bash
-composer require morning-train/e-conomic
+composer require morningtrain/economic
 ```
 
 ## Usage
@@ -39,6 +39,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
+- [Martin Schadegg Brønniche](https://github.com/mschadegg)
 - [Simon Jønsson](https://github.com/Morning-Train)
 - [All Contributors](../../contributors)
 
