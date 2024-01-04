@@ -1,9 +1,9 @@
 <?php
 
-namespace MorningTrain\Economic\Resources\AccountingYear;
+namespace Morningtrain\Economic\Resources\AccountingYear;
 
-use MorningTrain\Economic\Abstracts\Resource;
-use MorningTrain\Economic\Resources\Account;
+use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Resources\Account;
 
 class Entry extends Resource
 {

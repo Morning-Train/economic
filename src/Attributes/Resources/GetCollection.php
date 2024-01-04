@@ -1,9 +1,9 @@
 <?php
 
-namespace MorningTrain\Economic\Attributes\Resources;
+namespace Morningtrain\Economic\Attributes\Resources;
 
 use Attribute;
-use MorningTrain\Economic\Abstracts\Endpoint;
+use Morningtrain\Economic\Abstracts\Endpoint;
 
 #[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)] class GetCollection extends Endpoint
 {

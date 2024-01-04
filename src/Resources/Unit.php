@@ -1,23 +1,23 @@
 <?php
 
-namespace MorningTrain\Economic\Resources;
+namespace Morningtrain\Economic\Resources;
 
-use MorningTrain\Economic\Abstracts\Resource;
-use MorningTrain\Economic\Attributes\Resources\Create;
-use MorningTrain\Economic\Attributes\Resources\Delete;
-use MorningTrain\Economic\Attributes\Resources\GetCollection;
-use MorningTrain\Economic\Attributes\Resources\GetSingle;
-use MorningTrain\Economic\Attributes\Resources\Properties\PrimaryKey;
-use MorningTrain\Economic\Attributes\Resources\Properties\Required;
-use MorningTrain\Economic\Attributes\Resources\Properties\ResourceType;
-use MorningTrain\Economic\Attributes\Resources\Update;
-use MorningTrain\Economic\Classes\EconomicCollection;
-use MorningTrain\Economic\Classes\EconomicQueryBuilder;
-use MorningTrain\Economic\Traits\Resources\Creatable;
-use MorningTrain\Economic\Traits\Resources\Deletable;
-use MorningTrain\Economic\Traits\Resources\GetCollectionable;
-use MorningTrain\Economic\Traits\Resources\GetSingleable;
-use MorningTrain\Economic\Traits\Resources\Updatable;
+use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Attributes\Resources\Create;
+use Morningtrain\Economic\Attributes\Resources\Delete;
+use Morningtrain\Economic\Attributes\Resources\GetCollection;
+use Morningtrain\Economic\Attributes\Resources\GetSingle;
+use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
+use Morningtrain\Economic\Attributes\Resources\Properties\Required;
+use Morningtrain\Economic\Attributes\Resources\Properties\ResourceType;
+use Morningtrain\Economic\Attributes\Resources\Update;
+use Morningtrain\Economic\Classes\EconomicCollection;
+use Morningtrain\Economic\Classes\EconomicQueryBuilder;
+use Morningtrain\Economic\Traits\Resources\Creatable;
+use Morningtrain\Economic\Traits\Resources\Deletable;
+use Morningtrain\Economic\Traits\Resources\GetCollectionable;
+use Morningtrain\Economic\Traits\Resources\GetSingleable;
+use Morningtrain\Economic\Traits\Resources\Updatable;
 
 #[GetCollection('units')]
 #[GetSingle('units/:unitNumber')]

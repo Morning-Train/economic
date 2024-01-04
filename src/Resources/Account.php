@@ -1,8 +1,8 @@
 <?php
 
-namespace MorningTrain\Economic\Resources;
+namespace Morningtrain\Economic\Resources;
 
-use MorningTrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Abstracts\Resource;
 
 class Account extends Resource
 {

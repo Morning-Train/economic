@@ -1,8 +1,8 @@
 <?php
 
-namespace MorningTrain\Economic\DTOs;
+namespace Morningtrain\Economic\DTOs;
 
-use MorningTrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Abstracts\Resource;
 
 class Attention extends Resource
 {

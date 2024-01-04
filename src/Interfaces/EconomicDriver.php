@@ -1,8 +1,8 @@
 <?php
 
-namespace MorningTrain\Economic\Interfaces;
+namespace Morningtrain\Economic\Interfaces;
 
-use MorningTrain\Economic\Classes\EconomicResponse;
+use Morningtrain\Economic\Classes\EconomicResponse;
 
 interface EconomicDriver
 {

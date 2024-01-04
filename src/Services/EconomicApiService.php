@@ -1,9 +1,9 @@
 <?php
 
-namespace MorningTrain\Economic\Services;
+namespace Morningtrain\Economic\Services;
 
-use MorningTrain\Economic\Classes\EconomicResponse;
-use MorningTrain\Economic\Interfaces\EconomicDriver;
+use Morningtrain\Economic\Classes\EconomicResponse;
+use Morningtrain\Economic\Interfaces\EconomicDriver;
 
 class EconomicApiService
 {

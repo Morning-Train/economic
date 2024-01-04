@@ -1,6 +1,6 @@
 <?php
 
-namespace MorningTrain\Economic\Classes;
+namespace Morningtrain\Economic\Classes;
 
 use Closure;
 

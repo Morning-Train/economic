@@ -1,14 +1,14 @@
 <?php
 
-namespace MorningTrain\Economic\Abstracts;
+namespace Morningtrain\Economic\Abstracts;
 
 use Exception;
-use MorningTrain\Economic\Attributes\Resources\GetSingle;
-use MorningTrain\Economic\Attributes\Resources\Properties\PrimaryKey;
-use MorningTrain\Economic\Attributes\Resources\Properties\ResourceType;
-use MorningTrain\Economic\Classes\EconomicCollection;
-use MorningTrain\Economic\Classes\EconomicCollectionIterator;
-use MorningTrain\Economic\Services\EconomicLoggerService;
+use Morningtrain\Economic\Attributes\Resources\GetSingle;
+use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
+use Morningtrain\Economic\Attributes\Resources\Properties\ResourceType;
+use Morningtrain\Economic\Classes\EconomicCollection;
+use Morningtrain\Economic\Classes\EconomicCollectionIterator;
+use Morningtrain\Economic\Services\EconomicLoggerService;
 use ReflectionClass;
 use ReflectionMethod;
 

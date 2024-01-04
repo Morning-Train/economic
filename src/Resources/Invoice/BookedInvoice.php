@@ -1,10 +1,10 @@
 <?php
 
-namespace MorningTrain\Economic\Resources\Invoice;
+namespace Morningtrain\Economic\Resources\Invoice;
 
-use MorningTrain\Economic\Attributes\Resources\Create;
-use MorningTrain\Economic\Attributes\Resources\GetCollection;
-use MorningTrain\Economic\Attributes\Resources\GetSingle;
+use Morningtrain\Economic\Attributes\Resources\Create;
+use Morningtrain\Economic\Attributes\Resources\GetCollection;
+use Morningtrain\Economic\Attributes\Resources\GetSingle;
 
 #[GetCollection('invoices/booked')]
 #[GetSingle('invoices/booked/:bookedInvoiceNumber', ':bookedInvoiceNumber')]

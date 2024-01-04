@@ -1,9 +1,9 @@
 <?php
 
-namespace MorningTrain\Economic\Resources\Invoice;
+namespace Morningtrain\Economic\Resources\Invoice;
 
-use MorningTrain\Economic\Abstracts\Resource;
-use MorningTrain\Economic\Resources\Product;
+use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Resources\Product;
 
 class ProductLine extends Resource
 {

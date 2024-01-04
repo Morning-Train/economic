@@ -1,12 +1,12 @@
 <?php
 
-namespace MorningTrain\Economic\Resources;
+namespace Morningtrain\Economic\Resources;
 
 use DateTime;
-use MorningTrain\Economic\Abstracts\Resource;
-use MorningTrain\Economic\Attributes\Resources\GetSingle;
-use MorningTrain\Economic\Services\EconomicApiService;
-use MorningTrain\Economic\Traits\Resources\EndpointResolvable;
+use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Attributes\Resources\GetSingle;
+use Morningtrain\Economic\Services\EconomicApiService;
+use Morningtrain\Economic\Traits\Resources\EndpointResolvable;
 
 #[GetSingle('')]
 class Root extends Resource

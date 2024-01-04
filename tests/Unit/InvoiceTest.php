@@ -1,14 +1,14 @@
 <?php
 
-use MorningTrain\Economic\Classes\EconomicResponse;
-use MorningTrain\Economic\DTOs\Recipient;
-use MorningTrain\Economic\Enums\PaymentTermsType;
-use MorningTrain\Economic\Resources\Invoice\BookedInvoice;
-use MorningTrain\Economic\Resources\Invoice\DraftInvoice;
-use MorningTrain\Economic\Resources\Invoice\ProductLine;
-use MorningTrain\Economic\Resources\PaymentTerm;
-use MorningTrain\Economic\Resources\Product;
-use MorningTrain\Economic\Resources\VatZone;
+use Morningtrain\Economic\Classes\EconomicResponse;
+use Morningtrain\Economic\DTOs\Recipient;
+use Morningtrain\Economic\Enums\PaymentTermsType;
+use Morningtrain\Economic\Resources\Invoice\BookedInvoice;
+use Morningtrain\Economic\Resources\Invoice\DraftInvoice;
+use Morningtrain\Economic\Resources\Invoice\ProductLine;
+use Morningtrain\Economic\Resources\PaymentTerm;
+use Morningtrain\Economic\Resources\Product;
+use Morningtrain\Economic\Resources\VatZone;
 
 it('creates draft invoice', function () {
     $this->driver->expects()->post()

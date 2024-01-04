@@ -1,8 +1,8 @@
 <?php
 
-namespace MorningTrain\Economic\Resources\Customer;
+namespace Morningtrain\Economic\Resources\Customer;
 
-use MorningTrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Abstracts\Resource;
 
 class Total extends Resource
 {

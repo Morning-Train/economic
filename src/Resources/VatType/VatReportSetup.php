@@ -1,11 +1,11 @@
 <?php
 
-namespace MorningTrain\Economic\Resources\VatType;
+namespace Morningtrain\Economic\Resources\VatType;
 
-use MorningTrain\Economic\Abstracts\Resource;
-use MorningTrain\Economic\Attributes\Resources\GetCollection;
-use MorningTrain\Economic\Classes\EconomicQueryBuilder;
-use MorningTrain\Economic\Traits\Resources\EndpointResolvable;
+use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Attributes\Resources\GetCollection;
+use Morningtrain\Economic\Classes\EconomicQueryBuilder;
+use Morningtrain\Economic\Traits\Resources\EndpointResolvable;
 
 #[GetCollection('vat-types/:vatTypeId/vat-report-setups')]
 class VatReportSetup extends Resource

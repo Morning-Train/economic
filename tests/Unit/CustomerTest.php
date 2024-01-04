@@ -1,10 +1,10 @@
 <?php
 
-use MorningTrain\Economic\Classes\EconomicResponse;
-use MorningTrain\Economic\Resources\Customer;
-use MorningTrain\Economic\Resources\CustomerGroup;
-use MorningTrain\Economic\Resources\PaymentTerm;
-use MorningTrain\Economic\Resources\VatZone;
+use Morningtrain\Economic\Classes\EconomicResponse;
+use Morningtrain\Economic\Resources\Customer;
+use Morningtrain\Economic\Resources\CustomerGroup;
+use Morningtrain\Economic\Resources\PaymentTerm;
+use Morningtrain\Economic\Resources\VatZone;
 
 it('Filters by name', function () {
     $this->driver->expects()->get('https://restapi.e-conomic.com/customers', [

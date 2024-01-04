@@ -1,24 +1,24 @@
 <?php
 
-namespace MorningTrain\Economic\Resources;
+namespace Morningtrain\Economic\Resources;
 
 use Datetime;
-use MorningTrain\Economic\Abstracts\Resource;
-use MorningTrain\Economic\Attributes\Resources\Create;
-use MorningTrain\Economic\Attributes\Resources\GetCollection;
-use MorningTrain\Economic\Attributes\Resources\GetSingle;
-use MorningTrain\Economic\Attributes\Resources\Properties\Filterable;
-use MorningTrain\Economic\Attributes\Resources\Properties\Required;
-use MorningTrain\Economic\Attributes\Resources\Properties\ResourceType;
-use MorningTrain\Economic\Attributes\Resources\Properties\Sortable;
-use MorningTrain\Economic\Classes\EconomicCollection;
-use MorningTrain\Economic\Resources\AccountingYear\Entry;
-use MorningTrain\Economic\Resources\AccountingYear\Period;
-use MorningTrain\Economic\Resources\AccountingYear\Total;
-use MorningTrain\Economic\Resources\AccountingYear\Voucher;
-use MorningTrain\Economic\Traits\Resources\Creatable;
-use MorningTrain\Economic\Traits\Resources\GetCollectionable;
-use MorningTrain\Economic\Traits\Resources\GetSingleable;
+use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Attributes\Resources\Create;
+use Morningtrain\Economic\Attributes\Resources\GetCollection;
+use Morningtrain\Economic\Attributes\Resources\GetSingle;
+use Morningtrain\Economic\Attributes\Resources\Properties\Filterable;
+use Morningtrain\Economic\Attributes\Resources\Properties\Required;
+use Morningtrain\Economic\Attributes\Resources\Properties\ResourceType;
+use Morningtrain\Economic\Attributes\Resources\Properties\Sortable;
+use Morningtrain\Economic\Classes\EconomicCollection;
+use Morningtrain\Economic\Resources\AccountingYear\Entry;
+use Morningtrain\Economic\Resources\AccountingYear\Period;
+use Morningtrain\Economic\Resources\AccountingYear\Total;
+use Morningtrain\Economic\Resources\AccountingYear\Voucher;
+use Morningtrain\Economic\Traits\Resources\Creatable;
+use Morningtrain\Economic\Traits\Resources\GetCollectionable;
+use Morningtrain\Economic\Traits\Resources\GetSingleable;
 
 #[GetCollection('accounting-years')]
 #[GetSingle('accounting-years/:accountingYear')]

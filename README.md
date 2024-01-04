@@ -15,8 +15,8 @@ composer require morningtrain/economic
 ## Usage
 
 ```php
-$skeleton = new MorningTrain\Economic();
-echo $skeleton->echoPhrase('Hello, MorningTrain!');
+$skeleton = new Morningtrain\Economic();
+echo $skeleton->echoPhrase('Hello, Morningtrain!');
 ```
 
 ## Testing

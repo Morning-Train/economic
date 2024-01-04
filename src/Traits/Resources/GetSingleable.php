@@ -1,11 +1,11 @@
 <?php
 
-namespace MorningTrain\Economic\Traits\Resources;
+namespace Morningtrain\Economic\Traits\Resources;
 
 use Exception;
-use MorningTrain\Economic\Attributes\Resources\GetSingle;
-use MorningTrain\Economic\Services\EconomicApiService;
-use MorningTrain\Economic\Services\EconomicLoggerService;
+use Morningtrain\Economic\Attributes\Resources\GetSingle;
+use Morningtrain\Economic\Services\EconomicApiService;
+use Morningtrain\Economic\Services\EconomicLoggerService;
 
 trait GetSingleable
 {

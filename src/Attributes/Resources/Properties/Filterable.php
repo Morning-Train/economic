@@ -1,6 +1,6 @@
 <?php
 
-namespace MorningTrain\Economic\Attributes\Resources\Properties;
+namespace Morningtrain\Economic\Attributes\Resources\Properties;
 
 use Attribute;
 

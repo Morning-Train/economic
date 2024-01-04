@@ -1,8 +1,8 @@
 <?php
 
-namespace MorningTrain\Economic\Resources\AccountingYear;
+namespace Morningtrain\Economic\Resources\AccountingYear;
 
-use MorningTrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Abstracts\Resource;
 
 class Voucher extends Resource
 {

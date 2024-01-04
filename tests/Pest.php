@@ -1,6 +1,6 @@
 <?php
 
-use MorningTrain\Economic\Services\EconomicApiService;
+use Morningtrain\Economic\Services\EconomicApiService;
 use Morningtrain\Economic\Tests\DummyEconomicDriver;
 
 uses()->beforeEach(function () {
