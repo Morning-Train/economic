@@ -1,13 +1,18 @@
 {
-    "name": "morning-train/e-conomic",
-    "description": "This is my package e-conomic",
+    "name": "morningtrain/economic",
+    "description": "PHP SDK for e-conomic",
     "keywords": [
-        "Morning-Train",
+        "morningtrain",
         "e-conomic"
     ],
-    "homepage": "https://github.com/morning-train/e-conomic",
+    "homepage": "https://github.com/morning-train/economic",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Martin Schadegg Brønniche",
+            "email": "ms@morningtrain.dk",
+            "role": "Developer"
+        },
         {
             "name": "Simon Jønsson",
             "email": "sj@morningtrain.dk",
