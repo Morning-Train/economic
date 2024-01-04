@@ -1,9 +1,9 @@
 <?php
 
-namespace MorningTrain\Economic\DTOs;
+namespace Morningtrain\Economic\DTOs;
 
-use MorningTrain\Economic\Abstracts\Resource;
-use MorningTrain\Economic\Resources\VatZone;
+use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Resources\VatZone;
 
 class Recipient extends Resource
 {

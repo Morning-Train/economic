@@ -1,9 +1,9 @@
 <?php
 
-namespace MorningTrain\Economic\Traits\Resources;
+namespace Morningtrain\Economic\Traits\Resources;
 
 use Exception;
-use MorningTrain\Economic\Abstracts\Endpoint;
+use Morningtrain\Economic\Abstracts\Endpoint;
 use ReflectionClass;
 
 trait EndpointResolvable

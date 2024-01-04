@@ -1,11 +1,11 @@
 <?php
 
-namespace MorningTrain\Economic\Classes;
+namespace Morningtrain\Economic\Classes;
 
 use ArrayAccess;
 use Countable;
-use MorningTrain\Economic\Abstracts\Resource;
-use MorningTrain\Economic\Services\EconomicApiService;
+use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Services\EconomicApiService;
 use SeekableIterator;
 
 class EconomicCollectionIterator implements ArrayAccess, Countable, SeekableIterator

@@ -1,8 +1,8 @@
 <?php
 
-namespace MorningTrain\Economic\Traits\Resources;
+namespace Morningtrain\Economic\Traits\Resources;
 
-use MorningTrain\Economic\Resources\Invoice\ProductLine;
+use Morningtrain\Economic\Resources\Invoice\ProductLine;
 
 trait HasLines
 {

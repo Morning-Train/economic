@@ -1,9 +1,9 @@
 <?php
 
-namespace MorningTrain\Economic\Traits\Resources;
+namespace Morningtrain\Economic\Traits\Resources;
 
-use MorningTrain\Economic\Classes\EconomicCollection;
-use MorningTrain\Economic\Classes\EconomicQueryBuilder;
+use Morningtrain\Economic\Classes\EconomicCollection;
+use Morningtrain\Economic\Classes\EconomicQueryBuilder;
 
 /**
  * @template ResourceClass

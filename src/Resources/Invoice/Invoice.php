@@ -1,18 +1,18 @@
 <?php
 
-namespace MorningTrain\Economic\Resources\Invoice;
+namespace Morningtrain\Economic\Resources\Invoice;
 
 use DateTime;
-use MorningTrain\Economic\Abstracts\Resource;
-use MorningTrain\Economic\DTOs\Recipient;
-use MorningTrain\Economic\Resources\Currency;
-use MorningTrain\Economic\Resources\Customer;
-use MorningTrain\Economic\Resources\Layout;
-use MorningTrain\Economic\Resources\PaymentTerm;
-use MorningTrain\Economic\Traits\Resources\Creatable;
-use MorningTrain\Economic\Traits\Resources\GetCollectionable;
-use MorningTrain\Economic\Traits\Resources\GetSingleable;
-use MorningTrain\Economic\Traits\Resources\HasLines;
+use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\DTOs\Recipient;
+use Morningtrain\Economic\Resources\Currency;
+use Morningtrain\Economic\Resources\Customer;
+use Morningtrain\Economic\Resources\Layout;
+use Morningtrain\Economic\Resources\PaymentTerm;
+use Morningtrain\Economic\Traits\Resources\Creatable;
+use Morningtrain\Economic\Traits\Resources\GetCollectionable;
+use Morningtrain\Economic\Traits\Resources\GetSingleable;
+use Morningtrain\Economic\Traits\Resources\HasLines;
 
 class Invoice extends Resource
 {

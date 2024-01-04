@@ -2,8 +2,8 @@
 
 namespace Morningtrain\Economic\Tests;
 
-use MorningTrain\Economic\Classes\EconomicResponse;
-use MorningTrain\Economic\Interfaces\EconomicDriver;
+use Morningtrain\Economic\Classes\EconomicResponse;
+use Morningtrain\Economic\Interfaces\EconomicDriver;
 
 class DummyEconomicDriver implements EconomicDriver
 {

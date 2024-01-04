@@ -1,6 +1,6 @@
 <?php
 
-namespace MorningTrain\Economic\Enums;
+namespace Morningtrain\Economic\Enums;
 
 enum PaymentTermsType: string
 {

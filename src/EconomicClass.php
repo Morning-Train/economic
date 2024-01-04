@@ -1,6 +1,6 @@
 <?php
 
-namespace MorningTrain\Economic;
+namespace Morningtrain\Economic;
 
 class EconomicClass
 {

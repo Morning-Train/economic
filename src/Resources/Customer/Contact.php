@@ -1,17 +1,17 @@
 <?php
 
-namespace MorningTrain\Economic\Resources\Customer;
+namespace Morningtrain\Economic\Resources\Customer;
 
-use MorningTrain\Economic\Abstracts\Resource;
-use MorningTrain\Economic\Attributes\Resources\Create;
-use MorningTrain\Economic\Attributes\Resources\Delete;
-use MorningTrain\Economic\Attributes\Resources\GetCollection;
-use MorningTrain\Economic\Attributes\Resources\GetSingle;
-use MorningTrain\Economic\Attributes\Resources\Update;
-use MorningTrain\Economic\Classes\EconomicRelatedResource;
-use MorningTrain\Economic\Resources\Customer;
-use MorningTrain\Economic\Traits\Resources\Creatable;
-use MorningTrain\Economic\Traits\Resources\EndpointResolvable;
+use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Attributes\Resources\Create;
+use Morningtrain\Economic\Attributes\Resources\Delete;
+use Morningtrain\Economic\Attributes\Resources\GetCollection;
+use Morningtrain\Economic\Attributes\Resources\GetSingle;
+use Morningtrain\Economic\Attributes\Resources\Update;
+use Morningtrain\Economic\Classes\EconomicRelatedResource;
+use Morningtrain\Economic\Resources\Customer;
+use Morningtrain\Economic\Traits\Resources\Creatable;
+use Morningtrain\Economic\Traits\Resources\EndpointResolvable;
 
 #[GetCollection('customers/:customerNumber/contacts')]
 #[GetSingle('customers/:customerNumber/contacts/:contactNumber')]

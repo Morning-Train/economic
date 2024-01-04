@@ -1,9 +1,9 @@
 <?php
 
-namespace MorningTrain\Economic\Traits\Resources;
+namespace Morningtrain\Economic\Traits\Resources;
 
-use MorningTrain\Economic\Attributes\Resources\Delete;
-use MorningTrain\Economic\Services\EconomicApiService;
+use Morningtrain\Economic\Attributes\Resources\Delete;
+use Morningtrain\Economic\Services\EconomicApiService;
 
 trait Deletable
 {

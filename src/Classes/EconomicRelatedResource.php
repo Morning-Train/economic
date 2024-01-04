@@ -1,11 +1,11 @@
 <?php
 
-namespace MorningTrain\Economic\Classes;
+namespace Morningtrain\Economic\Classes;
 
 use Exception;
-use MorningTrain\Economic\Abstracts\Endpoint;
-use MorningTrain\Economic\Abstracts\Resource;
-use MorningTrain\Economic\Services\EconomicApiService;
+use Morningtrain\Economic\Abstracts\Endpoint;
+use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Services\EconomicApiService;
 
 /**
  * @template R of Resource

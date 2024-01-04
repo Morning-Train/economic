@@ -1,15 +1,15 @@
 <?php
 
-namespace MorningTrain\Economic\Resources\AccountingYear;
+namespace Morningtrain\Economic\Resources\AccountingYear;
 
 use DateTime;
 use Exception;
-use MorningTrain\Economic\Abstracts\Resource;
-use MorningTrain\Economic\Attributes\Resources\GetCollection;
-use MorningTrain\Economic\Attributes\Resources\GetSingle;
-use MorningTrain\Economic\Classes\EconomicQueryBuilder;
-use MorningTrain\Economic\Resources\Account;
-use MorningTrain\Economic\Traits\Resources\EndpointResolvable;
+use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Attributes\Resources\GetCollection;
+use Morningtrain\Economic\Attributes\Resources\GetSingle;
+use Morningtrain\Economic\Classes\EconomicQueryBuilder;
+use Morningtrain\Economic\Resources\Account;
+use Morningtrain\Economic\Traits\Resources\EndpointResolvable;
 
 #[GetCollection('accounting-years/:accountingYear/totals')]
 #[GetSingle('accounting-years/:accountingYear/periods/:accountingYearPeriod/totals')]

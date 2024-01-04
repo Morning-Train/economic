@@ -1,11 +1,11 @@
 <?php
 
-namespace MorningTrain\Economic\Classes;
+namespace Morningtrain\Economic\Classes;
 
 use Closure;
-use MorningTrain\Economic\Abstracts\Endpoint;
-use MorningTrain\Economic\Attributes\Resources\GetCollection;
-use MorningTrain\Economic\Services\EconomicApiService;
+use Morningtrain\Economic\Abstracts\Endpoint;
+use Morningtrain\Economic\Attributes\Resources\GetCollection;
+use Morningtrain\Economic\Services\EconomicApiService;
 
 /**
  * @template ResourceClass

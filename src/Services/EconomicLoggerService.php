@@ -1,6 +1,6 @@
 <?php
 
-namespace MorningTrain\Economic\Services;
+namespace Morningtrain\Economic\Services;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;

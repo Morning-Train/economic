@@ -1,11 +1,11 @@
 <?php
 
-namespace MorningTrain\Economic\Traits\Resources;
+namespace Morningtrain\Economic\Traits\Resources;
 
 use Exception;
-use MorningTrain\Economic\Attributes\Resources\Update;
-use MorningTrain\Economic\Services\EconomicApiService;
-use MorningTrain\Economic\Services\EconomicLoggerService;
+use Morningtrain\Economic\Attributes\Resources\Update;
+use Morningtrain\Economic\Services\EconomicApiService;
+use Morningtrain\Economic\Services\EconomicLoggerService;
 
 trait Updatable
 {

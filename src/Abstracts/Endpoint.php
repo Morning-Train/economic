@@ -1,6 +1,6 @@
 <?php
 
-namespace MorningTrain\Economic\Abstracts;
+namespace Morningtrain\Economic\Abstracts;
 
 abstract class Endpoint
 {
