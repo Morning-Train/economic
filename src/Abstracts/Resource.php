@@ -62,6 +62,10 @@ abstract class Resource
             }
         }
 
+        if (enum_exists($reflectionTypeName) && ! empty($value)) {
+            return $reflectionTypeName::from($value);
+        }
+
         // If is a class
         if (class_exists($reflectionTypeName) && ! empty($value)) {
             return new ($propertyReflection->getType()->getName())($value);
