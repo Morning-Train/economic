@@ -189,7 +189,7 @@ it('returns expected booked invoice data', function () {
 it('handles populating resource with enum value', function () {
     $this->driver->expects()->post()
         ->withAnyArgs()
-        ->twice()
+        ->once()
         ->andReturn(new EconomicResponse(201, [
             'draftInvoiceNumber' => 1,
             'recipient' => [
