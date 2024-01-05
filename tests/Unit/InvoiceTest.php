@@ -186,8 +186,7 @@ it('returns expected booked invoice data', function () {
         ->bookedInvoiceNumber->toBe(1);
 });
 
-it('books invoice without enum issue', function () {
-
+it('handles populating resource with enum value', function () {
     $this->driver->expects()->post()
         ->withAnyArgs()
         ->twice()
@@ -198,6 +197,10 @@ it('books invoice without enum issue', function () {
                 'vatZone' => [
                     'vatZoneNumber' => 1,
                 ],
+            ],
+            'paymentTerms' => [
+                'paymentTermsNumber' => 1,
+                'paymentTermsType' => 'net',
             ],
         ]), new EconomicResponse(201, [
             'bookedInvoiceNumber' => 1,
@@ -216,5 +219,5 @@ it('books invoice without enum issue', function () {
             new VatZone(1),
         )
     )
-        ->create()->book();
+        ->create();
 });
