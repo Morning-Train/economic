@@ -185,3 +185,36 @@ it('returns expected booked invoice data', function () {
     expect($bookedInvoice)
         ->bookedInvoiceNumber->toBe(1);
 });
+
+it('books invoice without enum issue', function () {
+
+    $this->driver->expects()->post()
+        ->withAnyArgs()
+        ->twice()
+        ->andReturn(new EconomicResponse(201, [
+            'draftInvoiceNumber' => 1,
+            'recipient' => [
+                'name' => 'John Doe',
+                'vatZone' => [
+                    'vatZoneNumber' => 1,
+                ],
+            ],
+        ]), new EconomicResponse(201, [
+            'bookedInvoiceNumber' => 1,
+        ]));
+
+    DraftInvoice::new(
+        1,
+        1,
+        'DKK',
+        PaymentTerm::new(
+            paymentTermsNumber: 1,
+        ),
+        DateTime::createFromFormat('Y-m-d', '2021-01-01'),
+        Recipient::new(
+            'John Doe',
+            new VatZone(1),
+        )
+    )
+        ->create()->book();
+});
