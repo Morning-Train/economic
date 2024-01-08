@@ -88,3 +88,29 @@ it('creates customer', function () {
         ->paymentTerms->toBeInstanceOf(PaymentTerm::class)
         ->paymentTerms->paymentTermsNumber->toBe(1);
 });
+
+it('can update a customer', function () {
+    $this->driver->expects()->put()
+        ->withArgs(function (string $url, array $body) {
+            return $url === 'https://restapi.e-conomic.com/customers/1'
+                && $body === [
+                    'customerNumber' => 1,
+                    'name' => 'John Doe Renamed',
+                    'self' => 'customers/1',
+                ];
+        })
+        ->once()
+        ->andReturn(new EconomicResponse(200, fixture('Customers/update')));
+
+    $customer = new Customer([
+        'customerNumber' => 1,
+        'name' => 'John Doe Renamed',
+    ]);
+
+    $updatedCustomer = $customer->save();
+
+    expect($updatedCustomer)
+        ->toBeInstanceOf(Customer::class)
+        ->customerNumber->toBe(1)
+        ->name->toBe('John Doe Renamed');
+});

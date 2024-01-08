@@ -28,6 +28,6 @@ trait Updatable
             throw new Exception('Economic API Service returned a non 200 status code when updating a resource');
         }
 
-        return true;
+        return new static($response->getBody());
     }
 }
