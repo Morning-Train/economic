@@ -27,7 +27,16 @@ $customer->name = 'New name';
 $customer->save();
 ```
 
-This will update the customer name in E-conomic.
+This will update the customer name in E-conomic. You can also simply provide all the new values when instantiating the customer.
+
+```php
+$customer = new \Morningtrain\Economic\Resources\Customer([
+    'customerNumber' => 1,
+    'name' => 'New Name',
+]);
+
+$customer->save();
+```
 
 ## Testing
 
