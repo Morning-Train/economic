@@ -14,10 +14,20 @@ composer require morningtrain/economic
 
 ## Usage
 
+### Updating a resource
+Some resources can be updated after creation. This can be done as follows:
+
 ```php
-$skeleton = new Morningtrain\Economic();
-echo $skeleton->echoPhrase('Hello, Morningtrain!');
+$customer = new \Morningtrain\Economic\Resources\Customer([
+    'customerNumber' => 1,
+]);
+
+$customer->name = 'New name';
+
+$customer->save();
 ```
+
+This will update the customer name in E-conomic.
 
 ## Testing
 
