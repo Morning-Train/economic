@@ -12,7 +12,7 @@ trait GetSingleable
     use EndpointResolvable;
 
     /**
-     * @param ...$references - The references to pass to the endpoint. Can be string(s), integer(s) or a single array with named references
+     * @param  ...$references  - The references to pass to the endpoint. Can be string(s), integer(s) or a single array with named references
      *
      * @throws \Exception
      */
