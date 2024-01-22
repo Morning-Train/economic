@@ -9,8 +9,8 @@ use ReflectionClass;
 trait EndpointResolvable
 {
     /**
-     * @param  string  $endpointAttributeClass - The attribute class to resolve
-     * @param ...$references - The references to pass to the endpoint. Can be strings, integers or a single array with references
+     * @param  string  $endpointAttributeClass  - The attribute class to resolve
+     * @param  ...$references  - The references to pass to the endpoint. Can be strings, integers or a single array with references
      *
      * @throws Exception
      */
@@ -26,8 +26,8 @@ trait EndpointResolvable
     }
 
     /**
-     * @param  string  $slug - The attribute slug to resolve
-     * @param ...$references - The references to pass to the endpoint. Can be strings, integers or a single array with references
+     * @param  string  $slug  - The attribute slug to resolve
+     * @param  ...$references  - The references to pass to the endpoint. Can be strings, integers or a single array with references
      *
      * @throws Exception
      */
