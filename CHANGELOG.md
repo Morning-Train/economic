@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.2.3 - NemHandelType - 2024-01-22
+
+### What's Changed
+
+* Feature/nem handel type by @SimonJnsson in https://github.com/Morning-Train/economic/pull/4
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v0.2.2...v0.2.3
+
 ## v0.2.2 - Make Customer updatable - 2024-01-09
 
 ### What's Changed
