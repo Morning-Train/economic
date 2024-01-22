@@ -3,6 +3,7 @@
 namespace Morningtrain\Economic\DTOs;
 
 use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Enums\NemHandelType;
 use Morningtrain\Economic\Resources\VatZone;
 
 class Recipient extends Resource
@@ -25,6 +26,8 @@ class Recipient extends Resource
 
     public ?Attention $attention = null;
 
+    public ?NemHandelType $nemHandelType = null;
+
     public static function new(
         string $name,
         VatZone $vatZone,
@@ -35,6 +38,7 @@ class Recipient extends Resource
         ?string $ean = null,
         ?string $publicEntryNumber = null,
         ?Attention $attention = null,
+        ?NemHandelType $nemHandelType = null,
     ): static {
         return new static([
             'name' => $name,
@@ -46,6 +50,7 @@ class Recipient extends Resource
             'ean' => $ean,
             'publicEntryNumber' => $publicEntryNumber,
             'attention' => $attention,
+            'nemHandelType' => $nemHandelType,
         ]);
     }
 }
