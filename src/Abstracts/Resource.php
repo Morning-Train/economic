@@ -29,7 +29,7 @@ abstract class Resource
     {
         foreach ($properties as $property => $value) {
             if (! property_exists($this, $property)) {
-                EconomicLoggerService::warning('Property '.$property.' does not exist on '.static::class);
+                EconomicLoggerService::warning('Property ' . $property . ' does not exist on ' . static::class);
 
                 continue;
             }
@@ -171,7 +171,7 @@ abstract class Resource
                 $values[$key] = static::filterEmpty($value);
             }
 
-            if (empty($values[$key])) {
+            if ($values[$key] === null) {
                 unset($values[$key]);
             }
         }
