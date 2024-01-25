@@ -12,7 +12,67 @@ You can install the package via composer:
 composer require morningtrain/economic
 ```
 
+## Basic Concepts
+This SDK is built to make it simple to handle and use the e-conomic REST API.
+You can read the e-conomic REST API documentation here: [https://restdocs.e-conomic.com/](https://restdocs.e-conomic.com/).
+
+### Driver
+The SDK uses a driver to handle the communication with the e-conomic REST API.
+We have not implemented a driver in this package, since we want to make it possible to use the SDK with different frameworks.
+
+You are free to use some of our implementations, or make your own driver:
+
+| Framework | Git Repo                                                                            | Composer Package                                                                              |
+|-----------|-------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| Laravel   | [Morning-Train/laravel-economic](https://github.com/Morning-Train/laravel-economic) | [morningtrain/laravel-economic](https://packagist.org/packages/morningtrain/laravel-economic) |
+| WordPress | [Morning-Train/wp-economic](https://github.com/Morning-Train/wp-economic)           | [morningtrain/wp-economic](https://packagist.org/packages/morningtrain/wp-economic)           |
+
+If you make your own driver, you must implement the `Morningtrain\Economic\Interfaces\EconomicDriver` interface, and initialize the API like this:
+
+```php
+use Morningtrain\Economic\EconomicApi;
+
+EconomicApiService::setDriver(new YourDriver($appSecretToken, $agreementGrantToken));
+```
+
+### Loggers
+We have implemented a PSR logger interface, so you can log all the requests and responses from the e-conomic REST API.
+
+You can register a PSR logger by calling the `registerLogger` method on the `Morningtrain\Economic\Services\EconomicLoggerService` class.
+
+### Resources
+Every resource in the e-conomic REST API is represented by a class in this SDK. 
+The resources are located in the `src/Resources` folder.
+
+### Collections
+Collections are used to fetch multiple resources from the e-conomic REST API.
+We make use of Laravels lazy collections to make it easy to work with the collection.
+This means, that you can use all the methods from the Laravel collection class on the collections returned from the SDK.
+The lazy collection will automatically get the resources you need and handle pagination for you. The API is only called when you need the resources, so the collection will not contain data before you need it.
+
+### Filtering
+When fetching resources from the e-conomic REST API, you can filter the resources you want to get, if the endpoint allows it. See [https://restdocs.e-conomic.com/#endpoints](https://restdocs.e-conomic.com/#endpoints) for more information about which filters every resource support.
+The SDK has a simple way to filter resources, using af query builder like syntax.
+
+A simple example could be:
+```php
+use Morningtrain\Economic\Resources\Customer;
+
+$customer = Customer::where('email', 'ms@morningtrain.dk')
+                ->orWhere('name', 'Morningtrain')
+                ->first();
+```
+
+### Sorting
+Is not yet implemented.
+
 ## Usage
+
+### Get multiple resources
+
+### Get a single resource
+
+### Creating a resource
 
 ### Updating a resource
 Some resources can be updated after creation. This can be done as follows:
@@ -38,10 +98,42 @@ $customer = new \Morningtrain\Economic\Resources\Customer([
 $customer->save();
 ```
 
-## Testing
+## Examples
 
-```bash
-composer test
+### Get all customers
+
+```php
+use Morningtrain\Economic\Resources\Customer;
+
+$customers = Customer::all();
+
+foreach ($customers as $customer) {
+    echo $customer->name;
+}
+```
+
+### Get a single customer
+
+```php
+use Morningtrain\Economic\Resources\Customer;
+
+$customer = Customer::find(1); // Where one is the customer number
+
+if(!empty($customer)) {
+    echo $customer->name;
+}
+```
+
+### Get a customer by email
+
+```php
+use Morningtrain\Economic\Resources\Customer;
+
+$customer = Customer::where('email', 'ms@morningtrain.dk');
+
+if(!empty($customer)) {
+    echo $customer->name;
+}
 ```
 
 ## Changelog
