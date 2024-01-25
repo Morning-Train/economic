@@ -114,3 +114,66 @@ it('can update a customer', function () {
         ->customerNumber->toBe(1)
         ->name->toBe('John Doe Renamed');
 });
+
+it('filters null values', function () {
+    $this->driver->expects()->post()
+        ->withArgs(function (string $url, array $body) {
+            return $url === 'https://restapi.e-conomic.com/customers'
+                && $body === [
+                    'name' => 'John Doe',
+                    'customerGroup' => [
+                        'customerGroupNumber' => 1,
+                    ],
+                    'currency' => 'DKK',
+                    'vatZone' => [
+                        'vatZoneNumber' => 1,
+                    ],
+                    'paymentTerms' => [
+                        'paymentTermsNumber' => 1,
+                    ],
+                ];
+        })
+        ->once()
+        ->andReturn(new EconomicResponse(201, fixture('Customers/create')));
+
+    Customer::create(
+        name: 'John Doe',
+        customerGroup: 1,
+        currency: 'DKK',
+        vatZone: 1,
+        paymentTerms: 1,
+        email: null // Should not be present in request
+    );
+});
+
+it('does not filter falsy values', function () {
+    $this->driver->expects()->post()
+        ->withArgs(function (string $url, array $body) {
+            return $url === 'https://restapi.e-conomic.com/customers'
+                && $body === [
+                    'name' => 'John Doe',
+                    'customerGroup' => [
+                        'customerGroupNumber' => 1,
+                    ],
+                    'currency' => 'DKK',
+                    'vatZone' => [
+                        'vatZoneNumber' => 1,
+                    ],
+                    'paymentTerms' => [
+                        'paymentTermsNumber' => 1,
+                    ],
+                    'customerNumber' => 0, // Should be present in request
+                ];
+        })
+        ->once()
+        ->andReturn(new EconomicResponse(201, fixture('Customers/create')));
+
+    Customer::create(
+        name: 'John Doe',
+        customerGroup: 1,
+        currency: 'DKK',
+        vatZone: 1,
+        paymentTerms: 1,
+        customerNumber: 0,
+    );
+});

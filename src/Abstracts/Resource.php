@@ -171,7 +171,7 @@ abstract class Resource
                 $values[$key] = static::filterEmpty($value);
             }
 
-            if (empty($values[$key])) {
+            if ($values[$key] === null) {
                 unset($values[$key]);
             }
         }
