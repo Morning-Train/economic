@@ -115,7 +115,6 @@ it('can update a customer', function () {
         ->name->toBe('John Doe Renamed');
 });
 
-
 it('filters null values', function () {
     $this->driver->expects()->post()
         ->withArgs(function (string $url, array $body) {
