@@ -1,8 +1,8 @@
 # PHP SDK for E-conomic
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/morning-train/e-conomic.svg?style=flat-square)](https://packagist.org/packages/morningtrain/economic)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/morningtrain/economic.svg?style=flat-square)](https://packagist.org/packages/morningtrain/economic)
 [![Tests](https://img.shields.io/github/actions/workflow/status/morning-train/e-conomic/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/morning-train/economic/actions/workflows/run-tests.yml)
-[![Total Downloads](https://img.shields.io/packagist/dt/morning-train/e-conomic.svg?style=flat-square)](https://packagist.org/packages/morningtrain/economic)
+[![Total Downloads](https://img.shields.io/packagist/dt/morningtrain/economic.svg?style=flat-square)](https://packagist.org/packages/morningtrain/economic)
 
 ## Installation
 
