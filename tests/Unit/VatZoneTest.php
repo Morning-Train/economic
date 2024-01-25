@@ -9,7 +9,7 @@ it('gets all vat zones', function () {
         'https://restapi.e-conomic.com/vat-zones',
         [
             'pageSize' => 20,
-            'skipPages' => 0
+            'skipPages' => 0,
         ]
     )
         ->andReturn(new EconomicResponse(200, [
@@ -19,14 +19,14 @@ it('gets all vat zones', function () {
                     'vatZoneNumber' => 1,
                     'enabledForCustomer' => true,
                     'enabledForSupplier' => true,
-                    'self' => 'https://restapi.e-conomic.com/vat-zones/1'
+                    'self' => 'https://restapi.e-conomic.com/vat-zones/1',
                 ],
                 [
                     'name' => 'EU',
                     'vatZoneNumber' => 2,
                     'enabledForCustomer' => true,
                     'enabledForSupplier' => true,
-                    'self' => 'https://restapi.e-conomic.com/vat-zones/2'
+                    'self' => 'https://restapi.e-conomic.com/vat-zones/2',
                 ],
             ],
             'pagination' => [
@@ -35,7 +35,6 @@ it('gets all vat zones', function () {
                 'results' => 2,
             ],
         ]));
-
 
     $vatZones = VatZone::all();
 
@@ -62,7 +61,7 @@ it('gets a specific vatZone', function () {
             'vatZoneNumber' => 1,
             'enabledForCustomer' => true,
             'enabledForSupplier' => true,
-            'self' => 'https://restapi.e-conomic.com/vat-zones/1'
+            'self' => 'https://restapi.e-conomic.com/vat-zones/1',
         ]));
 
     $vatZone = VatZone::find(1);
