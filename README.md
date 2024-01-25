@@ -14,7 +14,7 @@ composer require morningtrain/economic
 
 ## Basic Concepts
 This SDK is built to make it simple to handle and use the e-conomic REST API.
-You can read the e-conomic REST API documentation here: [https://restdocs.e-conomic.com/](https://restdocs.e-conomic.com/).
+You can read the e-conomic REST API documentation here: [https://restdocs.e-conomic.com/](https://restdocs.e-conomic.com/)
 
 ### Driver
 The SDK uses a driver to handle the communication with the e-conomic REST API.
@@ -117,7 +117,7 @@ foreach ($customers as $customer) {
 ```php
 use Morningtrain\Economic\Resources\Customer;
 
-$customer = Customer::find(1); // Where one is the customer number
+$customer = Customer::find(1); // Where 1 is the customer number
 
 if(!empty($customer)) {
     echo $customer->name;
