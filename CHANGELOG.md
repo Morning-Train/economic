@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.2.5 - Add ability to add notes to invoice - 2024-01-29
+
+### What's Changed
+
+* Feature/notes by @SimonJnsson in https://github.com/Morning-Train/economic/pull/7
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v0.2.4...v0.2.5
+
 ## v0.2.4 - Keep falsy values - 2024-01-25
 
 ### What's Changed
