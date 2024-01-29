@@ -4,6 +4,7 @@ namespace Morningtrain\Economic\Resources\Invoice;
 
 use DateTime;
 use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\DTOs\Note;
 use Morningtrain\Economic\DTOs\Recipient;
 use Morningtrain\Economic\Resources\Currency;
 use Morningtrain\Economic\Resources\Customer;
@@ -33,6 +34,8 @@ class Invoice extends Resource
 
     public Recipient $recipient;
 
+    public ?Note $notes;
+
     public static function new(
         Customer|int $customer,
         Layout|int $layout,
@@ -40,6 +43,7 @@ class Invoice extends Resource
         PaymentTerm|int $paymentTerms,
         DateTime $date,
         Recipient $recipient,
+        ?Note $notes = null,
     ): static {
         return new static([
             'customer' => $customer,
@@ -48,6 +52,7 @@ class Invoice extends Resource
             'paymentTerms' => $paymentTerms,
             'date' => $date,
             'recipient' => $recipient,
+            'notes' => $notes,
         ]);
     }
 }

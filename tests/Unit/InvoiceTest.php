@@ -1,6 +1,7 @@
 <?php
 
 use Morningtrain\Economic\Classes\EconomicResponse;
+use Morningtrain\Economic\DTOs\Note;
 use Morningtrain\Economic\DTOs\Recipient;
 use Morningtrain\Economic\Enums\PaymentTermsType;
 use Morningtrain\Economic\Resources\Invoice\BookedInvoice;
@@ -43,6 +44,11 @@ it('creates draft invoice', function () {
                             'unitNetPrice' => 500,
                         ],
                     ],
+                    'notes' => [
+                        'heading' => 'Heading',
+                        'textLine1' => 'Text line 1',
+                        'textLine2' => 'Text line 2',
+                    ],
                 ];
         })
         ->once()
@@ -68,6 +74,11 @@ it('creates draft invoice', function () {
         Recipient::new(
             'John Doe',
             new VatZone(1),
+        ),
+        Note::new(
+            heading: 'Heading',
+            textLine1: 'Text line 1',
+            textLine2: 'Text line 2'
         )
     )
         ->addLine(ProductLine::new(
@@ -220,4 +231,29 @@ it('handles populating resource with enum value', function () {
         )
     )
         ->create();
+});
+
+it('can add notes', function () {
+    $invoice = DraftInvoice::new(
+        1,
+        1,
+        'DKK',
+        1,
+        DateTime::createFromFormat('Y-m-d', '2021-01-01'),
+        new Recipient(
+            'John Doe',
+            new VatZone(1),
+        ),
+        Note::new(
+            heading: 'Heading',
+            textLine1: 'Text line 1',
+            textLine2: 'Text line 2'
+        )
+    );
+
+    expect($invoice->notes)
+        ->toBeInstanceOf(Note::class)
+        ->heading->toBe('Heading')
+        ->textLine1->toBe('Text line 1')
+        ->textLine2->toBe('Text line 2');
 });
