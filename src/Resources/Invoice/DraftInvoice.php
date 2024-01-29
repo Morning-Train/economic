@@ -23,6 +23,7 @@ class DraftInvoice extends Invoice
             'date' => $this->date->format('Y-m-d'),
             'recipient' => $this->recipient,
             'lines' => $this->lines ?? null,
+            'notes' => $this->notes ?? null,
         ]);
     }
 
