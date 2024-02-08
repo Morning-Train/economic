@@ -13,6 +13,9 @@ use Morningtrain\Economic\Traits\Resources\GetSingleable;
 #[GetSingle('product-groups/:productGroupNumber', ':productGroupNumber')] // https://restdocs.e-conomic.com/#get-product-groups-productgroupnumber
 class ProductGroup extends Resource
 {
+    /**
+     * @use GetCollectionable<ProductGroup>
+     */
     use GetCollectionable, GetSingleable;
 
     // public ?object $accrual; // TODO: implement
