@@ -91,7 +91,7 @@ abstract class Resource
     {
         $primaryKeyPropertyName = $this->getPrimaryKeyPropertyName();
 
-        if (! empty($primaryKeyPropertyName) && ! empty($this->{$primaryKeyPropertyName})) {
+        if (! empty($primaryKeyPropertyName) && isset($this->{$primaryKeyPropertyName})) {
             return $this->{$primaryKeyPropertyName};
         }
 

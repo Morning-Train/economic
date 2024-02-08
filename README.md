@@ -67,20 +67,75 @@ $customer = Customer::where('email', 'ms@morningtrain.dk')
 Is not yet implemented.
 
 ## Usage
+Every resource in the e-conomic REST API is represented by a class in this SDK. And every class is implementing function corresponding to the endpoints in the API.
+
 
 ### Get multiple resources
+When fetching multiple resources from the e-conomic REST API, you will get a collection of the resources. The collection is an implementation of the Laravel lazy collection, so you can use all the methods from the Laravel collection class on the collection.
+
+To get multiple resources from the e-conomic REST API, you can use the `all` method on the resource class.
+
+```php
+use Morningtrain\Economic\Resources\Customer;
+
+$customers = Customer::all();
+```
+
+#### Filtering
+You can filter the resources you want to get, if the endpoint allows it. See [https://restdocs.e-conomic.com/#endpoints](https://restdocs.e-conomic.com/#endpoints) for more information about which filters every resource support. This will return af collection of resources matching the filter.
+
+```php
+use Morningtrain\Economic\Resources\Customer;
+
+$customers = Customer::where('email', 'ms@morningtrain.dk');
+```
 
 ### Get a single resource
+When fetching a single resource from the e-conomic REST API, you will get an instance of the resource class you are asking for.
+
+To get a single resource from the e-conomic REST API, you can use the `find` method on the resource class. The find method is using the primary key to find the resource. The primary key is different from resource to resource, so you need to look in the e-conomic REST API documentation to find the primary key for the resource you want to get.
+The type of primary key is mixed, so you can use a string or an integer to find the resource. 
+
+```php
+use Morningtrain\Economic\Resources\Customer;
+use Morningtrain\Economic\Resources\Product;
+
+$customer = Customer::find(1); // Where 1 is the customer number
+
+$product = Product::find('proudct-1'); // Where 'product-1' is the product number
+```
 
 ### Creating a resource
+Some resources can be created in E-conomic. When created succesfully you will get the resource you just created. 
+We have implemented a `create` method on the resource class, so you can create a resource like this:
+
+The parameters you need to provide when creating a resource is different from resource to resource, so you need to look in the implementation of the resource class to see which parameters you need to provide.
+Some parameter is required and some is optional. You can see which parameters are required and optional in the implementation of the resource class.
+To just use some of the optional parameters, you can use named parameters in PHP.
+
+```php
+use Morningtrain\Economic\Resources\Product;
+
+$product = Product::create(
+    'Product 1', // product name
+    1, // product group number
+    'p-1', // product number
+    barCode: '1234567890', 
+    costPrice: 100.0, 
+    recommendedPrice: 150.0, 
+    salesPrice: 199.95, 
+    description: 'test', 
+    unit: 1 // unit number
+);
+```
 
 ### Updating a resource
 Some resources can be updated after creation. This can be done as follows:
 
 ```php
-$customer = new \Morningtrain\Economic\Resources\Customer([
-    'customerNumber' => 1,
-]);
+use Morningtrain\Economic\Resources\Customer;
+
+$customer = new Customer::find(1); // Where 1 is the customer number
 
 $customer->name = 'New name';
 
@@ -90,12 +145,35 @@ $customer->save();
 This will update the customer name in E-conomic. You can also simply provide all the new values when instantiating the customer.
 
 ```php
-$customer = new \Morningtrain\Economic\Resources\Customer([
+use Morningtrain\Economic\Resources\Customer;
+
+$customer = new Customer([
     'customerNumber' => 1,
     'name' => 'New Name',
 ]);
 
 $customer->save();
+```
+
+### Deleting a resource
+Some resources can be deleted in E-conomic. This can be done using the `delete` method on the resource class.
+
+```php
+use Morningtrain\Economic\Resources\Customer;
+
+$customer = new Customer::find(1); // Where 1 is the customer number
+
+$customer->delete();
+```
+
+This will delete the customer in E-conomic.
+
+You can also delete a resource by calling the static method `deleteByPrimaryKey`.
+
+```php
+use Morningtrain\Economic\Resources\Customer;
+
+Customer::deleteByPrimaryKey(1); // Where 1 is the customer number
 ```
 
 ## Examples
@@ -134,6 +212,12 @@ $customer = Customer::where('email', 'ms@morningtrain.dk');
 if(!empty($customer)) {
     echo $customer->name;
 }
+```
+
+## Testing
+
+```bash
+composer test
 ```
 
 ## Changelog

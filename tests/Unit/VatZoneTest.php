@@ -51,7 +51,7 @@ it('gets all vat zones', function () {
     expect($vatZones->all())->toHaveCount(2);
 });
 
-it('gets a specific vatZone', function () {
+it('gets a specific vat zone', function () {
     $this->driver->expects()->get(
         'https://restapi.e-conomic.com/vat-zones/1',
         []

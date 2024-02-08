@@ -5,29 +5,28 @@ namespace Morningtrain\Economic\Resources;
 use DateTime;
 use Morningtrain\Economic\Abstracts\Resource;
 use Morningtrain\Economic\Attributes\Resources\Create;
+use Morningtrain\Economic\Attributes\Resources\Delete;
 use Morningtrain\Economic\Attributes\Resources\GetCollection;
 use Morningtrain\Economic\Attributes\Resources\GetSingle;
 use Morningtrain\Economic\Attributes\Resources\Properties\Filterable;
-use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
-use Morningtrain\Economic\Attributes\Resources\Properties\ResourceType;
 use Morningtrain\Economic\Attributes\Resources\Properties\Sortable;
-use Morningtrain\Economic\Classes\EconomicCollection;
-use Morningtrain\Economic\Resources\AccountingYear\Entry;
-use Morningtrain\Economic\Resources\AccountingYear\Period;
-use Morningtrain\Economic\Resources\AccountingYear\Total;
-use Morningtrain\Economic\Resources\AccountingYear\Voucher;
+use Morningtrain\Economic\Attributes\Resources\Update;
 use Morningtrain\Economic\Traits\Resources\Creatable;
+use Morningtrain\Economic\Traits\Resources\Deletable;
 use Morningtrain\Economic\Traits\Resources\GetCollectionable;
 use Morningtrain\Economic\Traits\Resources\GetSingleable;
 
-#[GetCollection('products')]
-#[GetSingle('products/:product', ':product')]
+#[GetCollection('products')] // https://restdocs.e-conomic.com/#get-products
+#[GetSingle('products/:productNumber', ':productNumber')]
 #[Create('products')]
+#[Update('products/:productNumber', ':productNumber')]
+#[Delete('products/:productNumber', ':productNumber')]
 class Product extends Resource
 {
-    use Creatable, GetCollectionable, GetSingleable;
-
-    public ?string $name;
+    /**
+     * @use GetCollectionable<Product>
+     */
+    use Creatable, Deletable, GetCollectionable, GetSingleable;
 
     #[Filterable]
     #[Sortable]
@@ -41,6 +40,22 @@ class Product extends Resource
     #[Sortable]
     public ?float $costPrice;
 
+    //public ?DepartmentalDistribution $departmentalDistribution; // TODO: implement
+
+    public ?string $description;
+
+    //public ?object $inventory; // TODO: implement
+
+    public ?array $invoices;
+
+    public ?DateTime $lastUpdated;
+
+    public ?string $name;
+
+    public ?ProductGroup $productGroup;
+
+    public ?string $productNumber;
+
     #[Filterable]
     #[Sortable]
     public ?float $recommendedPrice;
@@ -49,81 +64,43 @@ class Product extends Resource
     #[Sortable]
     public ?float $salesPrice;
 
-    /**
-     * @var EconomicCollection<Entry>|null
-     */
-    #[ResourceType(Entry::class)]
-    public ?EconomicCollection $entries;
+    public ?Unit $unit;
 
-    #[Filterable]
-    #[Sortable]
-    public ?DateTime $fromDate;
-
-    /**
-     * @var EconomicCollection<Period>|null
-     */
-    #[ResourceType(Period::class)]
-    public ?EconomicCollection $periods;
-
-    #[Filterable]
-    #[Sortable]
-    public ?DateTime $toDate;
-
-    /**
-     * @var EconomicCollection<Total>|null
-     */
-    #[ResourceType(Total::class)]
-    public ?EconomicCollection $totals;
-
-    /**
-     * @var EconomicCollection<Voucher>|null
-     */
-    #[ResourceType(Voucher::class)]
-    public ?EconomicCollection $vouchers;
-
-    #[Filterable]
-    #[Sortable]
-    public ?string $year;
-
-    #[PrimaryKey]
-    public string $productNumber;
-
-    public static function create(DateTime $fromDate, DateTime $toDate): static
-    {
-        return static::createRequest(compact('fromDate', 'toDate'));
-    }
-
-    public static function new(
+    public static function create(
+        string $name,
+        ProductGroup|int $productGroup,
         string $productNumber,
-        ?string $name = null,
         ?string $barCode = null,
         ?bool $barred = null,
         ?float $costPrice = null,
+        ?DepartmentalDistribution $departmentalDistribution = null,
+        ?string $description = null,
+        ?object $inventory = null,
         ?float $recommendedPrice = null,
         ?float $salesPrice = null,
-        ?EconomicCollection $entries = null,
-        DateTime|string|null $fromDate = null,
-        ?EconomicCollection $periods = null,
-        DateTime|string|null $toDate = null,
-        ?EconomicCollection $totals = null,
-        ?EconomicCollection $vouchers = null,
-        ?string $year = null,
+        Unit|int|null $unit = null,
     ): static {
-        return new static([
-            'productNumber' => $productNumber,
-            'name' => $name,
-            'barCode' => $barCode,
-            'barred' => $barred,
-            'costPrice' => $costPrice,
-            'recommendedPrice' => $recommendedPrice,
-            'salesPrice' => $salesPrice,
-            'entries' => $entries,
-            'fromDate' => $fromDate,
-            'periods' => $periods,
-            'toDate' => $toDate,
-            'totals' => $totals,
-            'vouchers' => $vouchers,
-            'year' => $year,
-        ]);
+        if (is_int($productGroup)) {
+            $productGroup = new ProductGroup(['productGroupNumber' => $productGroup]);
+        }
+
+        if (is_int($unit)) {
+            $unit = new Unit(['unitNumber' => $unit]);
+        }
+
+        return static::createRequest(compact(
+            'name',
+            'productGroup',
+            'productNumber',
+            'barCode',
+            'barred',
+            'costPrice',
+            'departmentalDistribution',
+            'description',
+            'inventory',
+            'recommendedPrice',
+            'salesPrice',
+            'unit',
+        ));
     }
 }
