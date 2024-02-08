@@ -6,7 +6,7 @@ use Morningtrain\Economic\Resources\Product;
 use Morningtrain\Economic\Resources\ProductGroup;
 use Morningtrain\Economic\Resources\Unit;
 
-it('gets all products', function() {
+it('gets all products', function () {
     $this->driver->expects()->get(
         'https://restapi.e-conomic.com/products',
         [
@@ -35,7 +35,7 @@ it('gets all products', function() {
                         'self' => 'https://restapi.e-conomic.com/products/p-1/invoices',
                     ],
                     'pricing' => [
-                        'currencySpecificSalesPrices' => 'https://restapi.e-conomic.com/products/p-1/pricing/currency-specific-sales-prices'
+                        'currencySpecificSalesPrices' => 'https://restapi.e-conomic.com/products/p-1/pricing/currency-specific-sales-prices',
                     ],
                     'self' => 'https://restapi.e-conomic.com/products/p-1',
                 ],
@@ -58,7 +58,7 @@ it('gets all products', function() {
                         'self' => 'https://restapi.e-conomic.com/products/2/invoices',
                     ],
                     'pricing' => [
-                        'currencySpecificSalesPrices' => 'https://restapi.e-conomic.com/products/2/pricing/currency-specific-sales-prices'
+                        'currencySpecificSalesPrices' => 'https://restapi.e-conomic.com/products/2/pricing/currency-specific-sales-prices',
                     ],
                     'self' => 'https://restapi.e-conomic.com/products/2',
                 ],
@@ -115,7 +115,7 @@ it('gets a specific product', function () {
                 'self' => 'https://restapi.e-conomic.com/products/p-1/invoices',
             ],
             'pricing' => [
-                'currencySpecificSalesPrices' => 'https://restapi.e-conomic.com/products/p-1/pricing/currency-specific-sales-prices'
+                'currencySpecificSalesPrices' => 'https://restapi.e-conomic.com/products/p-1/pricing/currency-specific-sales-prices',
             ],
             'self' => 'https://restapi.e-conomic.com/products/p-1',
         ]));
@@ -140,7 +140,7 @@ it('gets a specific product', function () {
 
 // it('gets a product using filters'); // TODO: setup test
 
-it('creates a product', function() {
+it('creates a product', function () {
     $this->driver->expects()->post()
         ->with('https://restapi.e-conomic.com/products', [
             'name' => 'Product 1',
@@ -183,7 +183,7 @@ it('creates a product', function() {
                 'self' => 'https://restapi.e-conomic.com/products/p-1/invoices',
             ],
             'pricing' => [
-                'currencySpecificSalesPrices' => 'https://restapi.e-conomic.com/products/p-1/pricing/currency-specific-sales-prices'
+                'currencySpecificSalesPrices' => 'https://restapi.e-conomic.com/products/p-1/pricing/currency-specific-sales-prices',
             ],
             'self' => 'https://restapi.e-conomic.com/products/p-1',
         ]));
@@ -214,5 +214,3 @@ it('creates a product', function() {
 // it('updates a product'); // TODO: setup test
 
 // it('deletes a product'); // TODO: setup test
-
-

@@ -16,17 +16,17 @@ it('gets all product groups', function () {
             'collection' => [
                 [
                     'productGroupNumber' => 1,
-                    'name' => "Product Group 1",
-                    "salesAccounts" =>  "https://restapi.e-conomic.com/product-groups/1/sales-accounts",
-                    "products" => "https://restapi.e-conomic.com/product-groups/1/products",
-                    "self" => "https://restapi.e-conomic.com/product-groups/1",
+                    'name' => 'Product Group 1',
+                    'salesAccounts' => 'https://restapi.e-conomic.com/product-groups/1/sales-accounts',
+                    'products' => 'https://restapi.e-conomic.com/product-groups/1/products',
+                    'self' => 'https://restapi.e-conomic.com/product-groups/1',
                 ],
                 [
                     'productGroupNumber' => 2,
-                    'name' => "Product Group 2",
-                    "salesAccounts" =>  "https://restapi.e-conomic.com/product-groups/2/sales-accounts",
-                    "products" => "https://restapi.e-conomic.com/product-groups/2/products",
-                    "self" => "https://restapi.e-conomic.com/product-groups/2",
+                    'name' => 'Product Group 2',
+                    'salesAccounts' => 'https://restapi.e-conomic.com/product-groups/2/sales-accounts',
+                    'products' => 'https://restapi.e-conomic.com/product-groups/2/products',
+                    'self' => 'https://restapi.e-conomic.com/product-groups/2',
                 ],
             ],
             'pagination' => [
@@ -57,9 +57,9 @@ it('gets a specific product group', function () {
         ->andReturn(new EconomicResponse(200, [
             'productGroupNumber' => 1,
             'name' => 'Product Group 1',
-            "salesAccounts" =>  "https://restapi.e-conomic.com/product-groups/1/sales-accounts",
-            "products" => "https://restapi.e-conomic.com/product-groups/1/products",
-            "self" => "https://restapi.e-conomic.com/product-groups/1",
+            'salesAccounts' => 'https://restapi.e-conomic.com/product-groups/1/sales-accounts',
+            'products' => 'https://restapi.e-conomic.com/product-groups/1/products',
+            'self' => 'https://restapi.e-conomic.com/product-groups/1',
         ]));
 
     $vatZone = ProductGroup::find(1);

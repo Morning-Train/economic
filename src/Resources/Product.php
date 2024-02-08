@@ -26,7 +26,7 @@ class Product extends Resource
     /**
      * @use GetCollectionable<Product>
      */
-    use GetCollectionable, GetSingleable, Creatable, Deletable;
+    use Creatable, Deletable, GetCollectionable, GetSingleable;
 
     #[Filterable]
     #[Sortable]
@@ -79,13 +79,12 @@ class Product extends Resource
         ?float $recommendedPrice = null,
         ?float $salesPrice = null,
         Unit|int|null $unit = null,
-    ): static
-    {
-        if(is_int($productGroup)) {
+    ): static {
+        if (is_int($productGroup)) {
             $productGroup = new ProductGroup(['productGroupNumber' => $productGroup]);
         }
 
-        if(is_int($unit)) {
+        if (is_int($unit)) {
             $unit = new Unit(['unitNumber' => $unit]);
         }
 
