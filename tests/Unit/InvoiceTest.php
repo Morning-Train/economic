@@ -83,9 +83,9 @@ it('creates draft invoice', function () {
     )
         ->addLine(ProductLine::new(
             description: 'T-shirt - Size L',
-            product: Product::new(
-                productNumber: 1,
-            ),
+            product: new Product([
+                'productNumber' => 1,
+            ]),
             quantity: 1,
             unitNetPrice: 500
         ))
