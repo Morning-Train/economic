@@ -22,7 +22,7 @@ trait Deletable
         return true;
     }
 
-    public static function deleteByPrimaryKey($primaryKey): bool
+    public static function deleteByPrimaryKey(int|string $primaryKey): bool
     {
         $response = EconomicApiService::delete(static::getEndpoint(Delete::class, $primaryKey));
 
