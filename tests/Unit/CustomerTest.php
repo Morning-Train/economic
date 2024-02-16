@@ -96,7 +96,7 @@ it('can update a customer', function () {
                 && $body === [
                     'customerNumber' => 1,
                     'name' => 'John Doe Renamed',
-                    'self' => 'customers/1',
+                    'self' => 'https://restapi.e-conomic.com/customers/1',
                 ];
         })
         ->once()

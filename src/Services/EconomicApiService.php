@@ -30,7 +30,7 @@ class EconomicApiService
         return static::$driver;
     }
 
-    protected static function createURL(string $endpoint): string
+    public static function createURL(string $endpoint): string
     {
         $endpoint = str_replace(static::$url, '', $endpoint);
 

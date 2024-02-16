@@ -8,6 +8,7 @@ use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use Morningtrain\Economic\Attributes\Resources\Properties\ResourceType;
 use Morningtrain\Economic\Classes\EconomicCollection;
 use Morningtrain\Economic\Classes\EconomicCollectionIterator;
+use Morningtrain\Economic\Services\EconomicApiService;
 use Morningtrain\Economic\Services\EconomicLoggerService;
 use ReflectionClass;
 use ReflectionMethod;
@@ -128,7 +129,7 @@ abstract class Resource
                 ! empty($this->getPrimaryKey())
             ) {
                 try {
-                    $self = $this->getEndpoint(GetSingle::class, $this->getPrimaryKey());
+                    $self = EconomicApiService::createURL($this->getEndpoint(GetSingle::class, $this->getPrimaryKey()));
 
                     $this->self = $self;
                 } catch (Exception $e) {
