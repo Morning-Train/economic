@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.3.1 - 2024-02-16
+
+### What's Changed
+
+* Use full URL for self links in resources by @SimonJnsson in https://github.com/Morning-Train/economic/pull/10
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v0.3.0...v0.3.1
+
 ## v0.3.0 - 2024-02-08
 
 ### What's Changed
