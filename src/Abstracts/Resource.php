@@ -2,7 +2,9 @@
 
 namespace Morningtrain\Economic\Abstracts;
 
+use DateTime;
 use Exception;
+use Illuminate\Support\Collection;
 use Morningtrain\Economic\Attributes\Resources\GetSingle;
 use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use Morningtrain\Economic\Attributes\Resources\Properties\ResourceType;
@@ -60,6 +62,23 @@ abstract class Resource
                 $resourceType = $attribute[0]->newInstance();
 
                 return new EconomicCollection(new EconomicCollectionIterator($value, $resourceType->getTypeClass()));
+            }
+        }
+
+        // If is Collection
+        if (is_a($reflectionTypeName, Collection::class, true)) {
+            $attribute = $propertyReflection->getAttributes(ResourceType::class);
+
+            if (! empty($attribute[0]) && ! empty($value) && is_array($value)) {
+                $resourceType = $attribute[0]->newInstance();
+
+                $collection = new Collection();
+
+                foreach($value as $item) {
+                    $collection->add(new ($resourceType->getTypeClass())($item));
+                }
+
+                return $collection;
             }
         }
 
@@ -152,6 +171,11 @@ abstract class Resource
             // If is Resource then get the array representation
             if (is_a($value, Resource::class)) {
                 $value = $value->toArray();
+            }
+
+            // If is DateTime then format
+            if (is_a($value, DateTime::class)) {
+                $value = $value->format(DateTime::ATOM);
             }
 
             $properties[$property->getName()] = $value;
