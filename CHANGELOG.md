@@ -2,6 +2,16 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.4.0 - 2024-02-20
+
+Updated the Invoice endpoint
+
+OBS: Breaking changes in invoice creation from v0.3.x:
+
+- Moved some DTOs releated to Invoice Creation in to a subfolder
+- Moved ProductLine in to DTO subfolder
+- Replaced non static create method with a save method and created a static create method
+
 ## v0.3.1 - 2024-02-16
 
 ### What's Changed
