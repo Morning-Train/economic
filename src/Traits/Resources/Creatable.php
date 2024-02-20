@@ -2,6 +2,7 @@
 
 namespace Morningtrain\Economic\Traits\Resources;
 
+use DateTime;
 use Exception;
 use Morningtrain\Economic\Attributes\Resources\Create;
 use Morningtrain\Economic\Services\EconomicApiService;
@@ -16,7 +17,13 @@ trait Creatable
     {
         // TODO: add validation method to check if required properties are set and primary key is not set - throw exception if not
 
-        $args = json_decode(json_encode($args), true);
+        foreach($args as &$arg) {
+            if(is_a($arg, DateTime::class)) {
+                $arg = $arg->format(DateTime::ATOM);
+            }
+        }
+
+        $args = json_decode(json_encode($args), true); // We need to convert objects to an array to avoid issues with the API
 
         if (method_exists(static::class, 'filterEmpty')) {
             $args = static::filterEmpty($args);
