@@ -4,9 +4,9 @@ namespace Morningtrain\Economic\Resources\Invoice;
 
 use DateTime;
 use Morningtrain\Economic\Abstracts\Resource;
-use Morningtrain\Economic\DTOs\Note;
-use Morningtrain\Economic\DTOs\Recipient;
-use Morningtrain\Economic\Resources\Currency;
+use Morningtrain\Economic\DTOs\Invoice\Note;
+use Morningtrain\Economic\DTOs\Invoice\Recipient;
+use Morningtrain\Economic\DTOs\Invoice\Reference;
 use Morningtrain\Economic\Resources\Customer;
 use Morningtrain\Economic\Resources\Layout;
 use Morningtrain\Economic\Resources\PaymentTerm;
@@ -22,37 +22,51 @@ class Invoice extends Resource
     use GetSingleable;
     use HasLines;
 
-    public Customer $customer;
+    public ?string $currency = null;
 
-    public Layout $layout;
+    public ?Customer $customer = null;
 
-    public Currency $currency;
+    public ?DateTime $date = null;
 
-    public PaymentTerm $paymentTerms;
+    // public ?array $delivery; // TODO: Implement
 
-    public DateTime $date;
+    public ?string $externalId = null;
 
-    public Recipient $recipient;
+    public ?Layout $layout = null;
 
-    public ?Note $notes;
+    public ?DateTime $dueDate = null;
 
-    public static function new(
-        Customer|int $customer,
-        Layout|int $layout,
-        Currency|string $currency,
-        PaymentTerm|int $paymentTerms,
-        DateTime $date,
-        Recipient $recipient,
-        ?Note $notes = null,
-    ): static {
-        return new static([
-            'customer' => $customer,
-            'layout' => $layout,
-            'currency' => $currency,
-            'paymentTerms' => $paymentTerms,
-            'date' => $date,
-            'recipient' => $recipient,
-            'notes' => $notes,
-        ]);
-    }
+    public ?float $exchangeRate = null;
+
+    public ?float $grossAmount = null;
+
+    public ?float $grossAmountInBaseCurrency = null;
+
+    public ?DateTime $lastUpdated = null;
+
+    public ?float $marginInBaseCurrency = null;
+
+    public ?float $marginPercentage = null;
+
+    public ?float $netAmount = null;
+
+    public ?float $netAmountInBaseCurrency = null;
+
+    public ?Note $notes = null;
+
+    public ?PaymentTerm $paymentTerms = null;
+
+    public ?array $pdf = null;
+
+    // public ?Project $project; // TODO: Implement
+
+    public ?Recipient $recipient = null;
+
+    public ?Reference $references = null;
+
+    public ?float $roundingAmount = null;
+
+    //public ?Template $templates; // TODO: Implement
+
+    public ?float $vatAmount = null;
 }

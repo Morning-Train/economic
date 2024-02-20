@@ -44,6 +44,12 @@ You can register a PSR logger by calling the `registerLogger` method on the `Mor
 Every resource in the e-conomic REST API is represented by a class in this SDK. 
 The resources are located in the `src/Resources` folder.
 
+Some resources are divided into sub resources based on the REST API.
+
+Every resource class is implementing function corresponding to the endpoints in the API.
+
+Some resources are just a DTO (Data Transfer Object) that is not represented with endpoints in the REST API. These resources are used to make it easy to work with objects represented in other Resources.
+
 ### Collections
 Collections are used to fetch multiple resources from the e-conomic REST API.
 We make use of Laravels lazy collections to make it easy to work with the collection.
@@ -127,6 +133,43 @@ $product = Product::create(
     description: 'test', 
     unit: 1 // unit number
 );
+```
+
+Some resources can be created in an alternative way with the `new` method. 
+This will create a new instance of the resource class with the required properties. 
+Some of these resources can then use the `save` method to create the resource in E-conomic.
+
+```php
+use Morningtrain\Economic\Resources\Invoice\DraftInvoice;
+
+$draftInvoice = DraftInvoice::new(
+    'DKK',
+    1,
+    new DateTime('2024-02-13T12:20:18+00:00'),
+    14,
+    1,
+    Recipient::new(
+        'John Doe',
+        new VatZone(1),
+    ),
+    [
+        ProductLine::new(
+            description: 'T-shirt - Size L',
+            product: new Product([
+                'productNumber' => 1,
+            ]),
+            quantity: 1,
+            unitNetPrice: 500
+        )
+    ]
+    notes: Note::new(
+        heading: 'Heading',
+        textLine1: 'Text line 1',
+        textLine2: 'Text line 2'
+    )
+);
+
+$draftInvoice->save();
 ```
 
 ### Updating a resource

@@ -1,0 +1,34 @@
+{
+  "currency": "DKK",
+  "customer": {
+    "customerNumber": 1
+  },
+  "date": "2024-02-13T12:20:18+00:00",
+  "layout": {
+    "layoutNumber": 14
+  },
+  "paymentTerms": {
+    "paymentTermsNumber": 1
+  },
+  "recipient": {
+    "name": "John Doe",
+    "vatZone": {
+      "vatZoneNumber": 1
+    }
+  },
+  "lines": [
+    {
+      "description": "T-shirt - Size L",
+      "product": {
+        "productNumber": "1"
+      },
+      "quantity": 1,
+      "unitNetPrice": 500
+    }
+  ],
+  "notes": {
+    "heading": "Heading",
+    "textLine1": "Text line 1",
+    "textLine2": "Text line 2"
+  }
+}

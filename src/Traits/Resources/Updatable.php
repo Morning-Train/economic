@@ -11,7 +11,7 @@ trait Updatable
 {
     use EndpointResolvable;
 
-    public function save()
+    public function save(): static
     {
         // TODO: add validation method to check if required properties are set and primary key is set - throw exception if not
 
@@ -28,6 +28,8 @@ trait Updatable
             throw new Exception('Economic API Service returned a non 200 status code when updating a resource');
         }
 
-        return new static($response->getBody());
+        $this->populate($response->getBody());
+
+        return $this;
     }
 }

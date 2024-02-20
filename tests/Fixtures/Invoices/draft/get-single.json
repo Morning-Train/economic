@@ -1,0 +1,133 @@
+{
+  "draftInvoiceNumber": 422,
+  "externalId": "123456",
+  "soap": {
+    "currentInvoiceHandle": {
+      "id": 131
+    }
+  },
+  "templates": {
+    "bookingInstructions": "https://restapi.e-conomic.com/invoices/drafts/422/templates/booking-instructions",
+    "self": "https://restapi.e-conomic.com/invoices/drafts/422/templates"
+  },
+  "attachment": "https://restapi.e-conomic.com/invoices/drafts/422/attachment",
+  "lines": [
+    {
+      "lineNumber": 1,
+      "sortKey": 1,
+      "description": "Test Vare 1",
+      "unit": {
+        "unitNumber": 2,
+        "name": "Stk.",
+        "products": "https://restapi.e-conomic.com/units/2/products",
+        "self": "https://restapi.e-conomic.com/units/2"
+      },
+      "product": {
+        "productNumber": "1",
+        "self": "https://restapi.e-conomic.com/products/1"
+      },
+      "quantity": 1.00,
+      "unitNetPrice": 1000.00,
+      "discountPercentage": 0.00,
+      "unitCostPrice": 800.00,
+      "totalNetAmount": 1000.00,
+      "marginInBaseCurrency": 200.00,
+      "marginPercentage": 20.00
+    },
+    {
+      "lineNumber": 2,
+      "sortKey": 2,
+      "description": "Test Vare 2",
+      "unit": {
+        "unitNumber": 2,
+        "name": "Stk.",
+        "products": "https://restapi.e-conomic.com/units/2/products",
+        "self": "https://restapi.e-conomic.com/units/2"
+      },
+      "product": {
+        "productNumber": "2",
+        "self": "https://restapi.e-conomic.com/products/2"
+      },
+      "quantity": 2.00,
+      "unitNetPrice": 850.00,
+      "discountPercentage": 10.00,
+      "unitCostPrice": 0.00,
+      "totalNetAmount": 1530.00,
+      "marginInBaseCurrency": 1530.00,
+      "marginPercentage": 100.00
+    }
+  ],
+  "date": "2023-12-07",
+  "currency": "DKK",
+  "exchangeRate": 100.000000,
+  "netAmount": 2530.000000,
+  "netAmountInBaseCurrency": 2530.00,
+  "grossAmount": 3162.500000,
+  "grossAmountInBaseCurrency": 3162.50,
+  "marginInBaseCurrency": 1730.0000,
+  "marginPercentage": 68.38,
+  "vatAmount": 632.500000,
+  "roundingAmount": 0.00,
+  "costPriceInBaseCurrency": 800.0000,
+  "dueDate": "2023-12-15",
+  "paymentTerms": {
+    "paymentTermsNumber": 1,
+    "daysOfCredit": 8,
+    "name": "Netto 8 dage",
+    "paymentTermsType": "net",
+    "self": "https://restapi.e-conomic.com/payment-terms/1"
+  },
+  "customer": {
+    "customerNumber": 500000011,
+    "self": "https://restapi.e-conomic.com/customers/500000011"
+  },
+  "recipient": {
+    "name": "John Doe",
+    "address": "Teststreet 1",
+    "zip": "5000",
+    "city": "Odense C",
+    "country": "Denmark",
+    "vatZone": {
+      "name": "Domestic",
+      "vatZoneNumber": 1,
+      "enabledForCustomer": true,
+      "enabledForSupplier": true,
+      "self": "https://restapi.e-conomic.com/vat-zones/1"
+    },
+    "nemHandelType": "corporateIdentificationNumber",
+    "cvr": "33362749"
+  },
+  "notes": {
+    "heading": "Test Headline",
+    "textLine1": "Test Note 1",
+    "textLine2": "Test Note 2"
+  },
+  "references": {
+    "customerContact": {
+      "customerContactNumber": 132,
+      "customer": {
+        "customerNumber": 500000011,
+        "self": "https://restapi.e-conomic.com/customers/500000011"
+      },
+      "self": "https://restapi.e-conomic.com/customers/500000011/contacts/132"
+    },
+    "salesPerson": {
+      "employeeNumber": 1001,
+      "self": "https://restapi.e-conomic.com/employees/1001"
+    },
+    "vendorReference": {
+      "employeeNumber": 100,
+      "self": "https://restapi.e-conomic.com/employees/100"
+    },
+    "other": "Test Other reference"
+  },
+  "layout": {
+    "layoutNumber": 14,
+    "self": "https://restapi.e-conomic.com/layouts/14"
+  },
+  "pdf": {
+    "download": "https://restapi.e-conomic.com/invoices/drafts/422/pdf"
+  },
+  "lastUpdated": "2024-02-13T10:44:00Z",
+  "self": "https://restapi.e-conomic.com/invoices/drafts/422"
+}
