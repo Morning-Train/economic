@@ -1,0 +1,79 @@
+{
+  "draftInvoiceNumber": 424,
+  "soap": {
+    "currentInvoiceHandle": {
+      "id": 133
+    }
+  },
+  "templates": {
+    "bookingInstructions": "https://restapi.e-conomic.com/invoices/drafts/424/templates/booking-instructions",
+    "self": "https://restapi.e-conomic.com/invoices/drafts/424/templates"
+  },
+  "attachment": "https://restapi.e-conomic.com/invoices/drafts/424/attachment",
+  "lines": [
+    {
+      "lineNumber": 1,
+      "sortKey": 1,
+      "description": "T-shirt - Size L",
+      "product": {
+        "productNumber": "1",
+        "self": "https://restapi.e-conomic.com/products/1"
+      },
+      "quantity": 1.00,
+      "unitNetPrice": 500.00,
+      "discountPercentage": 0.00,
+      "unitCostPrice": 800.00,
+      "totalNetAmount": 500.00,
+      "marginInBaseCurrency": -300.00,
+      "marginPercentage": -60.00
+    }
+  ],
+  "date": "2024-02-13",
+  "currency": "DKK",
+  "exchangeRate": 100.000000,
+  "netAmount": 500.000000,
+  "netAmountInBaseCurrency": 500.00,
+  "grossAmount": 625.000000,
+  "grossAmountInBaseCurrency": 625.00,
+  "marginInBaseCurrency": -300.0000,
+  "marginPercentage": -60.00,
+  "vatAmount": 125.000000,
+  "roundingAmount": 0.00,
+  "costPriceInBaseCurrency": 800.0000,
+  "dueDate": "2024-02-21",
+  "paymentTerms": {
+    "paymentTermsNumber": 1,
+    "daysOfCredit": 8,
+    "name": "Netto 8 dage",
+    "paymentTermsType": "net",
+    "self": "https://restapi.e-conomic.com/payment-terms/1"
+  },
+  "customer": {
+    "customerNumber": 1,
+    "self": "https://restapi.e-conomic.com/customers/1"
+  },
+  "recipient": {
+    "name": "John Doe",
+    "vatZone": {
+      "name": "Domestic",
+      "vatZoneNumber": 1,
+      "enabledForCustomer": true,
+      "enabledForSupplier": true,
+      "self": "https://restapi.e-conomic.com/vat-zones/1"
+    }
+  },
+  "notes": {
+    "heading": "Heading",
+    "textLine1": "Text line 1",
+    "textLine2": "Text line 2"
+  },
+  "layout": {
+    "layoutNumber": 14,
+    "self": "https://restapi.e-conomic.com/layouts/14"
+  },
+  "pdf": {
+    "download": "https://restapi.e-conomic.com/invoices/drafts/424/pdf"
+  },
+  "lastUpdated": "2024-02-13T12:20:00Z",
+  "self": "https://restapi.e-conomic.com/invoices/drafts/424"
+}

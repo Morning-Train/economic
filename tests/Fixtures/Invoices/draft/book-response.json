@@ -1,0 +1,69 @@
+{
+  "bookedInvoiceNumber": 300,
+  "orderNumber": 424,
+  "date": "2024-02-13",
+  "currency": "DKK",
+  "exchangeRate": 100.000000,
+  "netAmount": 500.00,
+  "netAmountInBaseCurrency": 500.00,
+  "grossAmount": 625.00,
+  "grossAmountInBaseCurrency": 625.00,
+  "vatAmount": 125.00,
+  "roundingAmount": 0.00,
+  "remainder": 625.00,
+  "remainderInBaseCurrency": 625.00,
+  "dueDate": "2024-02-21",
+  "paymentTerms": {
+    "paymentTermsNumber": 1,
+    "daysOfCredit": 8,
+    "name": "Netto 8 dage",
+    "paymentTermsType": "net",
+    "self": "https://restapi.e-conomic.com/payment-terms/1"
+  },
+  "customer": {
+    "customerNumber": 1,
+    "self": "https://restapi.e-conomic.com/customers/1"
+  },
+  "recipient": {
+    "name": "John Doe",
+    "vatZone": {
+      "name": "Domestic",
+      "vatZoneNumber": 1,
+      "enabledForCustomer": true,
+      "enabledForSupplier": true,
+      "self": "https://restapi.e-conomic.com/vat-zones/1"
+    }
+  },
+  "notes": {
+    "heading": "Heading",
+    "textLine1": "Text line 1",
+    "textLine2": "Text line 2"
+  },
+  "layout": {
+    "layoutNumber": 14,
+    "self": "https://restapi.e-conomic.com/layouts/14"
+  },
+  "pdf": {
+    "download": "https://restapi.e-conomic.com/invoices/booked/300/pdf"
+  },
+  "lines": [
+    {
+      "lineNumber": 1,
+      "sortKey": 1,
+      "description": "T-shirt - Size L",
+      "quantity": 1.00,
+      "unitNetPrice": 500.00,
+      "discountPercentage": 0.00,
+      "unitCostPrice": 800.00,
+      "vatRate": 25.00000000,
+      "vatAmount": 125.0000,
+      "totalNetAmount": 500.00,
+      "product": {
+        "productNumber": "1",
+        "self": "https://restapi.e-conomic.com/products/1"
+      }
+    }
+  ],
+  "sent": "https://restapi.e-conomic.com/invoices/booked/300/sent",
+  "self": "https://restapi.e-conomic.com/invoices/booked/300"
+}
