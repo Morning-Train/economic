@@ -1,6 +1,6 @@
 <?php
 
-namespace Morningtrain\Economic\Resources\Invoice;
+namespace Morningtrain\Economic\DTOs\Invoice;
 
 use Morningtrain\Economic\Abstracts\Resource;
 use Morningtrain\Economic\Resources\Product;
