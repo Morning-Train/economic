@@ -10,7 +10,6 @@ use Morningtrain\Economic\Attributes\Resources\GetSingle;
 use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use Morningtrain\Economic\Attributes\Resources\Update;
 use Morningtrain\Economic\DTOs\Invoice\Note;
-use Morningtrain\Economic\DTOs\Invoice\ProductLine;
 use Morningtrain\Economic\DTOs\Invoice\Recipient;
 use Morningtrain\Economic\DTOs\Invoice\Reference;
 use Morningtrain\Economic\Resources\Currency;
@@ -49,19 +48,19 @@ class DraftInvoice extends Invoice
         // ?Project|int $project = null, // TODO: Implement
         ?Reference $references = null
     ): ?static {
-        if(is_a($currency, Currency::class)) {
+        if (is_a($currency, Currency::class)) {
             $currency = $currency->isoNumber;
         }
 
-        if(is_int($customer)) {
+        if (is_int($customer)) {
             $customer = new Customer(['customerNumber' => $customer]);
         }
 
-        if(is_int($layout)) {
+        if (is_int($layout)) {
             $layout = new Layout(['layoutNumber' => $layout]);
         }
 
-        if(is_int($paymentTerms)) {
+        if (is_int($paymentTerms)) {
             $paymentTerms = new PaymentTerm(['paymentTermsNumber' => $paymentTerms]);
         }
 
@@ -94,21 +93,20 @@ class DraftInvoice extends Invoice
         ?Note $notes = null,
         // ?Project|int $project = null, // TODO: Implement
         ?Reference $references = null
-    ): ?static
-    {
-        if(is_a($currency, Currency::class)) {
+    ): ?static {
+        if (is_a($currency, Currency::class)) {
             $currency = $currency->isoNumber;
         }
 
-        if(is_int($customer)) {
+        if (is_int($customer)) {
             $customer = new Customer(['customerNumber' => $customer]);
         }
 
-        if(is_int($layout)) {
+        if (is_int($layout)) {
             $layout = new Layout(['layoutNumber' => $layout]);
         }
 
-        if(is_int($paymentTerms)) {
+        if (is_int($paymentTerms)) {
             $paymentTerms = new PaymentTerm(['paymentTermsNumber' => $paymentTerms]);
         }
 
@@ -129,7 +127,7 @@ class DraftInvoice extends Invoice
 
     public function save(): ?static
     {
-        if(empty($this->draftInvoiceNumber)) {
+        if (empty($this->draftInvoiceNumber)) {
             $new = static::create(
                 currency: $this->currency,
                 customer: $this->customer,

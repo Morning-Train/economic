@@ -16,7 +16,7 @@ trait HasLines
 
     public function addLine(ProductLine $line): static
     {
-        if(is_null($this->lines)) {
+        if (is_null($this->lines)) {
             $this->lines = new Collection();
         }
 
@@ -28,7 +28,7 @@ trait HasLines
     public function addLines(array|Collection $lines): static
     {
         foreach ($lines as $line) {
-            if(!is_a($line, ProductLine::class)) {
+            if (! is_a($line, ProductLine::class)) {
                 $line = new ProductLine($line);
             }
 

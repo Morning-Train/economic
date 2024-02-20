@@ -1,13 +1,12 @@
 <?php
 
 use Illuminate\Support\Collection;
-use Morningtrain\Economic\Classes\EconomicResponse;
 use Morningtrain\Economic\Classes\EconomicCollection;
+use Morningtrain\Economic\Classes\EconomicResponse;
 use Morningtrain\Economic\DTOs\Invoice\Note;
 use Morningtrain\Economic\DTOs\Invoice\ProductLine;
 use Morningtrain\Economic\DTOs\Invoice\Recipient;
 use Morningtrain\Economic\DTOs\Invoice\Reference;
-use Morningtrain\Economic\Enums\PaymentTermsType;
 use Morningtrain\Economic\Resources\Customer;
 use Morningtrain\Economic\Resources\Invoice\BookedInvoice;
 use Morningtrain\Economic\Resources\Invoice\DraftInvoice;
@@ -16,11 +15,11 @@ use Morningtrain\Economic\Resources\PaymentTerm;
 use Morningtrain\Economic\Resources\Product;
 use Morningtrain\Economic\Resources\VatZone;
 
-it('gets a drafted invoice', function() {
-   $this->driver->expects()->get(
-       'https://restapi.e-conomic.com/invoices/drafts/422',
-       []
-   )->andReturn(new EconomicResponse(200, fixture('Invoices/draft/get-single')));
+it('gets a drafted invoice', function () {
+    $this->driver->expects()->get(
+        'https://restapi.e-conomic.com/invoices/drafts/422',
+        []
+    )->andReturn(new EconomicResponse(200, fixture('Invoices/draft/get-single')));
 
     $invoice = DraftInvoice::find(422);
 
@@ -51,7 +50,7 @@ it('gets a drafted invoice', function() {
         ->lines->first()->toBeInstanceOf(ProductLine::class);
 });
 
-it('gets all drafted invoices', function() {
+it('gets all drafted invoices', function () {
     $this->driver->expects()->get(
         'https://restapi.e-conomic.com/invoices/drafts',
         [
@@ -67,12 +66,11 @@ it('gets all drafted invoices', function() {
     expect($invoices->all())->toHaveCount(2);
 });
 
-it('creates a draft invoice using create', function() {
+it('creates a draft invoice using create', function () {
     $this->driver->expects()->post()->with(
         'https://restapi.e-conomic.com/invoices/drafts',
         fixture('Invoices/draft/create-request')
     )->andReturn(new EconomicResponse(201, fixture('Invoices/draft/create-response')));
-
 
     $invoice = DraftInvoice::create(
         'DKK',
@@ -92,7 +90,7 @@ it('creates a draft invoice using create', function() {
                 ]),
                 quantity: 1,
                 unitNetPrice: 500
-            )
+            ),
         ],
         notes: Note::new(
             heading: 'Heading',
@@ -106,7 +104,7 @@ it('creates a draft invoice using create', function() {
         ->draftInvoiceNumber->toBe(424);
 });
 
-it('creates a draft invoice using new and save', function() {
+it('creates a draft invoice using new and save', function () {
     $this->driver->expects()->post()->with(
         'https://restapi.e-conomic.com/invoices/drafts',
         fixture('Invoices/draft/create-request')
@@ -180,22 +178,22 @@ it('can add lines', function () {
     );
 
     $invoice->addLine(ProductLine::new(
-            product: new Product(1),
-            quantity: 1,
-            unitNetPrice: 500
+        product: new Product(1),
+        quantity: 1,
+        unitNetPrice: 500
     ))->addLines([
         [
             'product' => new Product(2),
             'quantity' => 2,
             'unitNetPrice' => 100,
-            'description' => 'Some description'
+            'description' => 'Some description',
         ],
         ProductLine::new(
             product: new Product(3),
             quantity: 3,
             unitNetPrice: 200,
             description: 'Some description',
-        )
+        ),
     ]);
 
     expect($invoice->lines)

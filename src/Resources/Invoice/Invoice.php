@@ -7,7 +7,6 @@ use Morningtrain\Economic\Abstracts\Resource;
 use Morningtrain\Economic\DTOs\Invoice\Note;
 use Morningtrain\Economic\DTOs\Invoice\Recipient;
 use Morningtrain\Economic\DTOs\Invoice\Reference;
-use Morningtrain\Economic\Resources\Currency;
 use Morningtrain\Economic\Resources\Customer;
 use Morningtrain\Economic\Resources\Layout;
 use Morningtrain\Economic\Resources\PaymentTerm;

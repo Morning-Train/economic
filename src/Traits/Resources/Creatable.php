@@ -17,8 +17,8 @@ trait Creatable
     {
         // TODO: add validation method to check if required properties are set and primary key is not set - throw exception if not
 
-        foreach($args as &$arg) {
-            if(is_a($arg, DateTime::class)) {
+        foreach ($args as &$arg) {
+            if (is_a($arg, DateTime::class)) {
                 $arg = $arg->format(DateTime::ATOM);
             }
         }

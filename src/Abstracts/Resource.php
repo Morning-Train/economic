@@ -74,7 +74,7 @@ abstract class Resource
 
                 $collection = new Collection();
 
-                foreach($value as $item) {
+                foreach ($value as $item) {
                     $collection->add(new ($resourceType->getTypeClass())($item));
                 }
 
