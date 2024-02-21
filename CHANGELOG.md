@@ -2,6 +2,11 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.4.1 - 2024-02-21
+
+* Allow int as VatZone in Recipient
+* Removed unnessesary code
+
 ## v0.4.0 - 2024-02-20
 
 Updated the Invoice endpoint
