@@ -30,7 +30,7 @@ class Recipient extends Resource
 
     public static function new(
         string $name,
-        VatZone $vatZone,
+        VatZone|int $vatZone,
         ?string $address = null,
         ?string $zip = null,
         ?string $city = null,
