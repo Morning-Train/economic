@@ -98,18 +98,6 @@ class DraftInvoice extends Invoice
             $currency = $currency->isoNumber;
         }
 
-        if (is_int($customer)) {
-            $customer = new Customer(['customerNumber' => $customer]);
-        }
-
-        if (is_int($layout)) {
-            $layout = new Layout(['layoutNumber' => $layout]);
-        }
-
-        if (is_int($paymentTerms)) {
-            $paymentTerms = new PaymentTerm(['paymentTermsNumber' => $paymentTerms]);
-        }
-
         return new static(array_filter(compact(
             'currency',
             'customer',
