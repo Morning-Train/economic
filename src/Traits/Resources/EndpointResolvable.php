@@ -4,6 +4,7 @@ namespace Morningtrain\Economic\Traits\Resources;
 
 use Exception;
 use Morningtrain\Economic\Abstracts\Endpoint;
+use Morningtrain\Economic\Abstracts\Resource;
 use ReflectionClass;
 
 trait EndpointResolvable
@@ -22,7 +23,33 @@ trait EndpointResolvable
             throw new Exception('Endpoint attribute does not implement Endpoint');
         }
 
+        if(isset($references[0]) && is_a($references[0], Resource::class)) {
+            $references = static::getEndpointReferences($instance, $references[0]);
+        }
+
         return $instance->getEndpoint(...$references);
+    }
+
+    private static function getEndpointReferences(Endpoint $endpoint, Resource $resource): array
+    {
+        $references = [];
+
+        foreach($endpoint->getEndpointReferences() as $name => $variable) {
+            $var = $resource;
+
+            foreach(explode('->', $variable) as $key) {
+                if(isset($var->$key)) {
+                    $var = $var->$key;
+                } else {
+                    $var = null;
+                    break;
+                }
+            }
+
+            $references[$name] = $var;
+        }
+
+        return $references;
     }
 
     /**
