@@ -1,0 +1,64 @@
+{
+  "collection": [
+    {
+      "customerContactNumber": 136,
+      "name": "Test 1",
+      "customer": {
+        "customerNumber": 1,
+        "self": "https://restapi.e-conomic.com/customers/1"
+      },
+      "sortKey": 1,
+      "self": "https://restapi.e-conomic.com/customers/1/contacts/136"
+    },
+    {
+      "customerContactNumber": 137,
+      "name": "Test 2",
+      "customer": {
+        "customerNumber": 1,
+        "self": "https://restapi.e-conomic.com/customers/1"
+      },
+      "sortKey": 2,
+      "self": "https://restapi.e-conomic.com/customers/1/contacts/137"
+    },
+    {
+      "customerContactNumber": 138,
+      "name": "Test 3",
+      "customer": {
+        "customerNumber": 1,
+        "self": "https://restapi.e-conomic.com/customers/1"
+      },
+      "sortKey": 3,
+      "self": "https://restapi.e-conomic.com/customers/1/contacts/138"
+    },
+    {
+      "customerContactNumber": 139,
+      "name": "Test 4",
+      "customer": {
+        "customerNumber": 1,
+        "self": "https://restapi.e-conomic.com/customers/1"
+      },
+      "sortKey": 4,
+      "self": "https://restapi.e-conomic.com/customers/1/contacts/139"
+    },
+    {
+      "customerContactNumber": 140,
+      "name": "Test 5",
+      "customer": {
+        "customerNumber": 1,
+        "self": "https://restapi.e-conomic.com/customers/1"
+      },
+      "sortKey": 5,
+      "self": "https://restapi.e-conomic.com/customers/1/contacts/140"
+    }
+  ],
+  "pagination": {
+    "skipPages": 0,
+    "pageSize": 20,
+    "maxPageSizeAllowed": 1000,
+    "results": 5,
+    "resultsWithoutFilter": 5,
+    "firstPage": "https://restapi.e-conomic.com/customers/1/contacts?skipPages=0&pageSize=20",
+    "lastPage": "https://restapi.e-conomic.com/customers/1/contacts?skipPages=0&pageSize=20"
+  },
+  "self": "https://restapi.e-conomic.com/customers/1/contacts?skipPages=0&pageSize=20"
+}

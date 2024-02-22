@@ -1,0 +1,9 @@
+{
+  "customer": {
+    "customerNumber": 1
+  },
+  "name": "John Doe",
+  "email": "ms@morningtrain.dk",
+  "phone": "12345678",
+  "notes": "Test"
+}
