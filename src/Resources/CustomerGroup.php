@@ -20,8 +20,8 @@ use Morningtrain\Economic\Traits\Resources\Updatable;
 #[GetCollection('customer-groups')]
 #[GetSingle('customer-groups/:customerGroupNumber')]
 #[Create('customer-groups')]
-#[Update('customer-groups/:customerGroupNumber')]
-#[Delete('customer-groups/:customerGroupNumber')]
+#[Update('customer-groups/:customerGroupNumber', [':customerGroupNumber' => 'customerGroupNumber'])]
+#[Delete('customer-groups/:customerGroupNumber', [':customerGroupNumber' => 'customerGroupNumber'])]
 class CustomerGroup extends Resource
 {
     use Creatable, Deletable, GetCollectionable, GetSingleable, Updatable;

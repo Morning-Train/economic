@@ -22,9 +22,8 @@ use Morningtrain\Economic\Traits\Resources\Updatable;
 #[GetCollection('units')]
 #[GetSingle('units/:unitNumber')]
 #[Create('units')]
-#[Update('units/:unitNumber')]
-#[Delete('units/:unitNumber')]
-#[GetCollection('units/:unitNumber/products', 'products')]
+#[Update('units/:unitNumber', [':unitNumber' => 'unitNumber'])]
+#[Delete('units/:unitNumber', [':unitNumber' => 'unitNumber'])]
 class Unit extends Resource
 {
     use Creatable, Deletable, GetCollectionable, GetSingleable, Updatable;

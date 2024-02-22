@@ -19,9 +19,9 @@ use Morningtrain\Economic\Resources\PaymentTerm;
 use Morningtrain\Economic\Traits\Resources\Updatable;
 
 #[GetCollection('invoices/drafts')]
-#[GetSingle('invoices/drafts/:draftInvoiceNumber', ':draftInvoiceNumber')]
+#[GetSingle('invoices/drafts/:draftInvoiceNumber')]
 #[Create('invoices/drafts')]
-#[Update('invoices/drafts/:draftInvoiceNumber', ':draftInvoiceNumber')]
+#[Update('invoices/drafts/:draftInvoiceNumber', [':draftInvoiceNumber' => 'draftInvoiceNumber'])]
 class DraftInvoice extends Invoice
 {
     use Updatable {
