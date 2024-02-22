@@ -7,40 +7,47 @@ use Morningtrain\Economic\Attributes\Resources\Create;
 use Morningtrain\Economic\Attributes\Resources\Delete;
 use Morningtrain\Economic\Attributes\Resources\GetCollection;
 use Morningtrain\Economic\Attributes\Resources\GetSingle;
+use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use Morningtrain\Economic\Attributes\Resources\Update;
 use Morningtrain\Economic\Classes\EconomicRelatedResource;
 use Morningtrain\Economic\Resources\Customer;
+use Morningtrain\Economic\Services\EconomicApiService;
 use Morningtrain\Economic\Traits\Resources\Creatable;
+use Morningtrain\Economic\Traits\Resources\Deletable;
 use Morningtrain\Economic\Traits\Resources\EndpointResolvable;
+use Morningtrain\Economic\Traits\Resources\GetCollectionable;
+use Morningtrain\Economic\Traits\Resources\GetSingleable;
+use Morningtrain\Economic\Traits\Resources\Updatable;
 
 #[GetCollection('customers/:customerNumber/contacts')]
 #[GetSingle('customers/:customerNumber/contacts/:contactNumber')]
 #[Create('customers/:customerNumber/contacts')]
-#[Update('customers/:customerNumber/contacts/:contactNumber')]
-#[Delete('customers/:customerNumber/contacts/:contactNumber')]
+#[Update('customers/:customerNumber/contacts/:contactNumber', [':customerNumber' => 'customer->customerNumber', ':contactNumber' => 'customerContactNumber'])]
+#[Delete('customers/:customerNumber/contacts/:contactNumber', [':customerNumber' => 'customer->customerNumber', ':contactNumber' => 'customerContactNumber'])]
 class Contact extends Resource
 {
-    use Creatable, EndpointResolvable;
+    use Creatable, Updatable, Deletable, GetCollectionable, GetSingleable, EndpointResolvable;
 
     public Customer $customer;
 
-    public float $customerContactNumber;
+    #[PrimaryKey]
+    public int $customerContactNumber;
 
-    public bool $deleted;
+    public ?bool $deleted = null;
 
-    public string $eInvoiceId;
+    public ?string $eInvoiceId = null;
 
-    public string $email;
+    public ?string $email = null;
 
-    public array $emailNotifications;
+    public array $emailNotifications = [];
 
-    public string $name;
+    public ?string $name = null;
 
-    public string $notes;
+    public ?string $notes = null;
 
-    public string $phone;
+    public ?string $phone = null;
 
-    public int $sortKey;
+    public ?int $sortKey = null;
 
     public static function fromCustomer(Customer|int $customer)
     {
@@ -53,7 +60,7 @@ class Contact extends Resource
     }
 
     public static function create(
-        Customer $customer,
+        Customer|int $customer,
         string $name,
         ?string $email = null,
         ?string $phone = null,
@@ -61,7 +68,11 @@ class Contact extends Resource
         ?string $eInvoiceId = null,
         ?array $emailNotifications = null
     ) {
-        return static::createRequest(array_filter(compact(
+        if(!is_a($customer,Customer::class)) {
+            $customer = new Customer($customer);
+        }
+
+        return static::createRequest(compact(
             'customer',
             'name',
             'email',
@@ -69,6 +80,19 @@ class Contact extends Resource
             'notes',
             'eInvoiceId',
             'emailNotifications'
-        )), [$customer->customerNumber]);
+        ), [$customer->customerNumber]);
+    }
+
+    public static function deleteByPrimaryKey(int|string $customerNumber, int|string $customerContactNumber): bool
+    {
+        $response = EconomicApiService::delete(static::getEndpoint(Delete::class, $customerNumber, $customerContactNumber));
+
+        if ($response->getStatusCode() !== 204) {
+            // TODO: Log error and throw exception
+
+            return false;
+        }
+
+        return true;
     }
 }
