@@ -20,7 +20,7 @@ use Morningtrain\Economic\Traits\Resources\Updatable;
 #[GetCollection('customers')]
 #[GetSingle('customers/:customerNumber')]
 #[Create('customers')]
-#[Update('customers/:customerNumber')]
+#[Update('customers/:customerNumber', [':customerNumber' => 'customerNumber'])]
 class Customer extends Resource
 {
     /**

@@ -1,0 +1,11 @@
+{
+  "customer": {
+    "customerNumber": 1,
+    "self": "https:\/\/restapi.e-conomic.com\/customers\/1"
+  },
+  "customerContactNumber": 140,
+  "emailNotifications": [],
+  "name": "Martin",
+  "sortKey": 5,
+  "self": "https:\/\/restapi.e-conomic.com\/customers\/1\/contacts\/140"
+}

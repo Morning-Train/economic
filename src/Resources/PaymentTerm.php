@@ -19,8 +19,8 @@ use Morningtrain\Economic\Traits\Resources\Updatable;
 #[GetCollection('payment-terms')]
 #[GetSingle('payment-terms/:paymentTermsNumber')]
 #[Create('payment-terms')]
-#[Update('payment-terms/:paymentTermsNumber')]
-#[Delete('payment-terms/:paymentTermsNumber')]
+#[Update('payment-terms/:paymentTermsNumber', [':paymentTermsNumber' => 'paymentTermsNumber'])]
+#[Delete('payment-terms/:paymentTermsNumber', [':paymentTermsNumber' => 'paymentTermsNumber'])]
 class PaymentTerm extends Resource
 {
     use Creatable, Deletable, GetCollectionable, GetSingleable, Updatable;

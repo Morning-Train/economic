@@ -7,7 +7,7 @@ use Morningtrain\Economic\Attributes\Resources\GetCollection;
 use Morningtrain\Economic\Attributes\Resources\GetSingle;
 
 #[GetCollection('invoices/booked')]
-#[GetSingle('invoices/booked/:bookedInvoiceNumber', ':bookedInvoiceNumber')]
+#[GetSingle('invoices/booked/:bookedInvoiceNumber')]
 #[Create('invoices/booked')]
 class BookedInvoice extends Invoice
 {

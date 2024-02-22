@@ -11,7 +11,7 @@ trait Deletable
 
     public function delete(): bool
     {
-        $response = EconomicApiService::delete(static::getEndpoint(Delete::class, $this->getPrimaryKey()));
+        $response = EconomicApiService::delete(static::getEndpoint(Delete::class, $this));
 
         if ($response->getStatusCode() !== 204) {
             // TODO: Log error and throw exception

@@ -1,0 +1,13 @@
+{
+  "customerContactNumber": 140,
+  "email": "ms@morningtrain.dk",
+  "name": "John Doe",
+  "phone": "12345678",
+  "notes": "Test",
+  "customer": {
+    "customerNumber": 1,
+    "self": "https://restapi.e-conomic.com/customers/1"
+  },
+  "sortKey": 7,
+  "self": "https://restapi.e-conomic.com/customers/1/contacts/142"
+}

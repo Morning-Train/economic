@@ -15,7 +15,7 @@ trait Updatable
     {
         // TODO: add validation method to check if required properties are set and primary key is set - throw exception if not
 
-        $response = EconomicApiService::put(static::getEndpoint(Update::class, $this->getPrimaryKey()), $this->toArray());
+        $response = EconomicApiService::put(static::getEndpoint(Update::class, $this), $this->toArray());
 
         if ($response->getStatusCode() !== 200) {
             EconomicLoggerService::error('Economic API Service returned a non 200 status code when updating a resource', [

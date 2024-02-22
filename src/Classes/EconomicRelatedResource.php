@@ -45,7 +45,7 @@ class EconomicRelatedResource
 
     }
 
-    public function first(): static
+    public function first(): Resource
     {
         return (new EconomicQueryBuilder($this->resourceClass))->setEndpoint($this->endpointCollection->getEndpoint($this->references))->first();
     }
