@@ -2,6 +2,10 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.4.2 - 2024-02-22
+
+* Added Customer Contact Resource Endpoints
+
 ## v0.4.1 - 2024-02-21
 
 * Allow int as VatZone in Recipient
