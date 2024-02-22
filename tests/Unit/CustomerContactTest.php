@@ -66,13 +66,13 @@ it('updates a customer contact', function () {
     $contact = new Contact([
         'customer' => [
             'customerNumber' => 1,
-            'self' => 'https://restapi.e-conomic.com/customers/1'
+            'self' => 'https://restapi.e-conomic.com/customers/1',
         ],
         'customerContactNumber' => 140,
-        'emailNotifications' =>  [],
+        'emailNotifications' => [],
         'name' => 'Test 5',
         'sortKey' => 5,
-        'self' => 'https://restapi.e-conomic.com/customers/1/contacts/140'
+        'self' => 'https://restapi.e-conomic.com/customers/1/contacts/140',
     ]);
 
     $contact->name = 'Martin';
@@ -89,13 +89,13 @@ it('deletes a customer contact with delete', function () {
     $contact = new Contact([
         'customer' => [
             'customerNumber' => 1,
-            'self' => 'https://restapi.e-conomic.com/customers/1'
+            'self' => 'https://restapi.e-conomic.com/customers/1',
         ],
         'customerContactNumber' => 140,
-        'emailNotifications' =>  [],
+        'emailNotifications' => [],
         'name' => 'Test 5',
         'sortKey' => 5,
-        'self' => 'https://restapi.e-conomic.com/customers/1/contacts/140'
+        'self' => 'https://restapi.e-conomic.com/customers/1/contacts/140',
     ]);
 
     $deleted = $contact->delete();
@@ -112,5 +112,3 @@ it('deletes a customer contact with deleteByPrimaryKey', function () {
 
     expect($deleted)->toBeTrue();
 });
-
-

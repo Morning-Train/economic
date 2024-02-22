@@ -23,7 +23,7 @@ trait EndpointResolvable
             throw new Exception('Endpoint attribute does not implement Endpoint');
         }
 
-        if(isset($references[0]) && is_a($references[0], Resource::class)) {
+        if (isset($references[0]) && is_a($references[0], Resource::class)) {
             $references = static::getEndpointReferences($instance, $references[0]);
         }
 
@@ -34,11 +34,11 @@ trait EndpointResolvable
     {
         $references = [];
 
-        foreach($endpoint->getEndpointReferences() as $name => $variable) {
+        foreach ($endpoint->getEndpointReferences() as $name => $variable) {
             $var = $resource;
 
-            foreach(explode('->', $variable) as $key) {
-                if(isset($var->$key)) {
+            foreach (explode('->', $variable) as $key) {
+                if (isset($var->$key)) {
                     $var = $var->$key;
                 } else {
                     $var = null;

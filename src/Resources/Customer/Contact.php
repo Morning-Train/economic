@@ -26,7 +26,7 @@ use Morningtrain\Economic\Traits\Resources\Updatable;
 #[Delete('customers/:customerNumber/contacts/:contactNumber', [':customerNumber' => 'customer->customerNumber', ':contactNumber' => 'customerContactNumber'])]
 class Contact extends Resource
 {
-    use Creatable, Updatable, Deletable, GetCollectionable, GetSingleable, EndpointResolvable;
+    use Creatable, Deletable, EndpointResolvable, GetCollectionable, GetSingleable, Updatable;
 
     public Customer $customer;
 
@@ -68,7 +68,7 @@ class Contact extends Resource
         ?string $eInvoiceId = null,
         ?array $emailNotifications = null
     ) {
-        if(!is_a($customer,Customer::class)) {
+        if (! is_a($customer, Customer::class)) {
             $customer = new Customer($customer);
         }
 
