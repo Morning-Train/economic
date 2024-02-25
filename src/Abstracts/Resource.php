@@ -10,12 +10,15 @@ use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use Morningtrain\Economic\Attributes\Resources\Properties\ResourceType;
 use Morningtrain\Economic\Classes\EconomicCollection;
 use Morningtrain\Economic\Classes\EconomicCollectionIterator;
+use Morningtrain\Economic\Interfaces\ApiFormatter;
 use Morningtrain\Economic\Services\EconomicApiService;
 use Morningtrain\Economic\Services\EconomicLoggerService;
+use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionMethod;
+use JsonSerializable;
 
-abstract class Resource
+abstract class Resource implements JsonSerializable
 {
     public string $self;
 
@@ -129,47 +132,63 @@ abstract class Resource
         return $this;
     }
 
-    public function toArray(): array
+    protected static function resolveArgs(array $args, bool $forApiRequest = false)
     {
-        $reflection = new ReflectionClass(static::class);
+        foreach($args as $key => &$value) {
+            if($value === null) {
+                if($forApiRequest) {
+                    unset($args[$key]); // We don't want to send null values to the API
+                }
 
-        $properties = [];
-
-        foreach ($reflection->getProperties() as $property) {
-            // If not public then skip
-            if (! $property->isPublic()) {
-                continue;
+                continue; // We don't want to format null values
             }
 
-            // Set self if not set
-            if (
-                $property->getName() == 'self' &&
-                empty($this->{$property->getName()}) &&
-                ! empty($this->getPrimaryKey())
-            ) {
-                try {
-                    $self = EconomicApiService::createURL($this->getEndpoint(GetSingle::class, $this->getPrimaryKey()));
+            // Try to convert to resource
+            try {
+                $reflection = new ReflectionClass(static::class);
 
-                    $this->self = $self;
+                $propertyReflection = $reflection->getProperty($key);
+
+                $reflectionTypeName = $propertyReflection->getType()->getName();
+
+                // If is a class
+                if(
+                    is_a($reflectionTypeName, Resource::class, true) &&
+                    !is_a($value, Resource::class)
+                ) {
+                    $value = new ($propertyReflection->getType()->getName())($value);
+                }
+            } catch (Exception $e) {
+                // Do nothing, since we can't format the value
+            }
+
+            // If is for API request then we have some special format cases
+            if($forApiRequest) {
+                // Format the value if it has a special case defined
+                try {
+                    $reflection = new ReflectionClass(static::class);
+
+                    $propertyReflection = $reflection->getProperty($key);
+
+                    $attribute = $propertyReflection->getAttributes(ApiFormatter::class, ReflectionAttribute::IS_INSTANCEOF);
+
+                    if (! empty($attribute[0]) && ! empty($value)) {
+                        $apiFormatter = $attribute[0]->newInstance();
+
+                        $value = $apiFormatter->format($value);
+                    }
                 } catch (Exception $e) {
-                    // Do nothing, since we can't get the self
+                    // Do nothing, since we can't format the value
                 }
             }
 
-            // If property is not set then skip
-            if (! isset($this->{$property->getName()})) {
-                continue;
-            }
-
-            $value = $this->{$property->getName()};
-
             // If is EconomicCollection then only get the self property
-            if ($property->getType() == EconomicCollection::class) {
+            if (is_a($value, EconomicCollection::class)) {
                 $value = $value->getSelf();
             }
 
-            // If is Resource then get the array representation
-            if (is_a($value, Resource::class)) {
+            // If is Collection
+            if (is_a($value, Collection::class)) {
                 $value = $value->toArray();
             }
 
@@ -178,10 +197,33 @@ abstract class Resource
                 $value = $value->format(DateTime::ATOM);
             }
 
-            $properties[$property->getName()] = $value;
+            // If is array (NOTE: need to be before converting to Resource to ensure we follow the Resource formatting)
+            if(is_array($value)) {
+                $value = static::resolveArgs($value, $forApiRequest);
+            }
+
+            // If is Resource then get the array representation
+            if (is_a($value, Resource::class)) {
+                $value = $value->toArray($forApiRequest);
+            }
         }
 
-        return $properties;
+        return $args;
+    }
+
+    public function toArray(bool $forApiRequest = false): array
+    {
+        $vars = get_object_vars($this);
+
+        if(empty($vars['self']) && ! empty($this->getPrimaryKey())) {
+            try {
+                $vars['self'] = EconomicApiService::createURL($this->getEndpoint(GetSingle::class, $this->getPrimaryKey()));
+            } catch (Exception $e) {
+                // Do nothing, since we can't get the self
+            }
+        }
+
+        return static::resolveArgs($vars, $forApiRequest);
     }
 
     public function __toString(): string
@@ -189,42 +231,8 @@ abstract class Resource
         return json_encode($this->toArray());
     }
 
-    protected static function filterEmpty(array $values): array
+    public function jsonSerialize(): array
     {
-        foreach ($values as $key => $value) {
-            if (is_array($value)) {
-                $values[$key] = static::filterEmpty($value);
-            }
-
-            if ($values[$key] === null) {
-                unset($values[$key]);
-            }
-        }
-
-        return $values;
-    }
-
-    protected static function getMethodArgs(string $function, array $arguments): array
-    {
-        $reflection = new ReflectionMethod(...explode('::', $function));
-
-        $assoc = [];
-
-        foreach ($reflection->getParameters() as $i => $parameter) {
-            $assoc[$parameter->getName()] = $arguments[$i] ?? null;
-        }
-
-        return $assoc;
-    }
-
-    protected static function resolveArguments(array $arguments): array
-    {
-        $creationParameters = [];
-
-        foreach ($arguments as $name => $value) {
-            $creationParameters[$name] = static::resolvePropertyValue($name, $value);
-        }
-
-        return $creationParameters;
+        return $this->toArray();
     }
 }
