@@ -4,9 +4,12 @@ namespace Morningtrain\Economic\Resources\Invoice;
 
 use DateTime;
 use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Attributes\Resources\Properties\ApiFormatting\ResourceToArray;
+use Morningtrain\Economic\Attributes\Resources\Properties\ApiFormatting\ResourceToPrimaryKey;
 use Morningtrain\Economic\DTOs\Invoice\Note;
 use Morningtrain\Economic\DTOs\Invoice\Recipient;
 use Morningtrain\Economic\DTOs\Invoice\Reference;
+use Morningtrain\Economic\Resources\Currency;
 use Morningtrain\Economic\Resources\Customer;
 use Morningtrain\Economic\Resources\Layout;
 use Morningtrain\Economic\Resources\PaymentTerm;
@@ -22,8 +25,10 @@ class Invoice extends Resource
     use GetSingleable;
     use HasLines;
 
-    public ?string $currency = null;
+    #[ResourceToPrimaryKey()]
+    public ?Currency $currency = null;
 
+    #[ResourceToArray('customerNumber', 'self')]
     public ?Customer $customer = null;
 
     public ?DateTime $date = null;

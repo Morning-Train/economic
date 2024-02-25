@@ -34,7 +34,7 @@ class Customer extends Resource
 
     public float $balance;
 
-    public bool $barred;
+    public ?bool $barred;
 
     public ?string $city;
 
@@ -67,7 +67,7 @@ class Customer extends Resource
 
     public ?string $ean;
 
-    public bool $eInvoicingDisabledByDefault;
+    public ?bool $eInvoicingDisabledByDefault;
 
     public ?string $email;
 
@@ -131,9 +131,32 @@ class Customer extends Resource
         Layout|int|null $layout = null,
         Employee|int|null $salesPerson = null,
     ): static {
-        $creationParameters = static::resolveArguments(static::getMethodArgs(__METHOD__, func_get_args()));
-
-        return static::createRequest($creationParameters);
+         return static::createRequest(compact(
+            'name',
+            'customerGroup',
+            'currency',
+            'vatZone',
+            'paymentTerms',
+            'email',
+            'address',
+            'zip',
+            'city',
+            'country',
+            'corporateIdentificationNumber',
+            'pNumber',
+            'vatNumber',
+            'ean',
+            'publicEntryNumber',
+            'website',
+            'mobilePhone',
+            'telephoneAndFaxNumber',
+            'barred',
+            'eInvoicingDisabledByDefault',
+            'creditLimit',
+            'customerNumber',
+            'layout',
+            'salesPerson'
+        ));
     }
 
     public static function new(

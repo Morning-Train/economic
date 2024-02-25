@@ -7,6 +7,7 @@ use Morningtrain\Economic\Attributes\Resources\Create;
 use Morningtrain\Economic\Attributes\Resources\Delete;
 use Morningtrain\Economic\Attributes\Resources\GetCollection;
 use Morningtrain\Economic\Attributes\Resources\GetSingle;
+use Morningtrain\Economic\Attributes\Resources\Properties\ApiFormatting\ResourceToArray;
 use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use Morningtrain\Economic\Attributes\Resources\Update;
 use Morningtrain\Economic\Classes\EconomicRelatedResource;
@@ -28,6 +29,7 @@ class Contact extends Resource
 {
     use Creatable, Deletable, EndpointResolvable, GetCollectionable, GetSingleable, Updatable;
 
+    #[ResourceToArray('customerNumber', 'self')]
     public Customer $customer;
 
     #[PrimaryKey]
@@ -73,7 +75,6 @@ class Contact extends Resource
         }
 
         return static::createRequest(compact(
-            'customer',
             'name',
             'email',
             'phone',
