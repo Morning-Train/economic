@@ -17,7 +17,7 @@ use Morningtrain\Economic\Traits\Resources\GetCollectionable;
 use Morningtrain\Economic\Traits\Resources\GetSingleable;
 
 #[GetCollection('products')] // https://restdocs.e-conomic.com/#get-products
-#[GetSingle('products/:productNumber', ':productNumber')]
+#[GetSingle('products/:productNumber')]
 #[Create('products')]
 #[Update('products/:productNumber', [':productNumber' => 'productNumber'])]
 #[Delete('products/:productNumber', [':productNumber' => 'productNumber'])]

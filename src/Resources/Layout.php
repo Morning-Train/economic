@@ -10,7 +10,7 @@ use Morningtrain\Economic\Traits\Resources\GetCollectionable;
 use Morningtrain\Economic\Traits\Resources\GetSingleable;
 
 #[GetCollection('layouts')]
-#[GetSingle('/layouts/:layoutNumber', ':layoutNumber')]
+#[GetSingle('layouts/:layoutNumber')]
 class Layout extends Resource
 {
     use GetCollectionable;
