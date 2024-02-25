@@ -75,6 +75,7 @@ class Contact extends Resource
         }
 
         return static::createRequest(compact(
+            'customer',
             'name',
             'email',
             'phone',
