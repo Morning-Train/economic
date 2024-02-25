@@ -156,7 +156,7 @@ it('creates a draft invoice with full customer and currency object', function ()
         new Currency([
             'code' => 'DKK',
             'isoNumber' => 'DKK',
-            'name' => 'Danish Krone'
+            'name' => 'Danish Krone',
         ]),
         Customer::new(
             name: 'John Doe',

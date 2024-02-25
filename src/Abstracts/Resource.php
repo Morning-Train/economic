@@ -5,6 +5,7 @@ namespace Morningtrain\Economic\Abstracts;
 use DateTime;
 use Exception;
 use Illuminate\Support\Collection;
+use JsonSerializable;
 use Morningtrain\Economic\Attributes\Resources\GetSingle;
 use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use Morningtrain\Economic\Attributes\Resources\Properties\ResourceType;
@@ -15,8 +16,6 @@ use Morningtrain\Economic\Services\EconomicApiService;
 use Morningtrain\Economic\Services\EconomicLoggerService;
 use ReflectionAttribute;
 use ReflectionClass;
-use ReflectionMethod;
-use JsonSerializable;
 
 abstract class Resource implements JsonSerializable
 {
@@ -134,9 +133,9 @@ abstract class Resource implements JsonSerializable
 
     protected static function resolveArgs(array $args, bool $forApiRequest = false)
     {
-        foreach($args as $key => &$value) {
-            if($value === null) {
-                if($forApiRequest) {
+        foreach ($args as $key => &$value) {
+            if ($value === null) {
+                if ($forApiRequest) {
                     unset($args[$key]); // We don't want to send null values to the API
                 }
 
@@ -152,9 +151,9 @@ abstract class Resource implements JsonSerializable
                 $reflectionTypeName = $propertyReflection->getType()->getName();
 
                 // If is a class
-                if(
+                if (
                     is_a($reflectionTypeName, Resource::class, true) &&
-                    !is_a($value, Resource::class)
+                    ! is_a($value, Resource::class)
                 ) {
                     $value = new ($propertyReflection->getType()->getName())($value);
                 }
@@ -163,7 +162,7 @@ abstract class Resource implements JsonSerializable
             }
 
             // If is for API request then we have some special format cases
-            if($forApiRequest) {
+            if ($forApiRequest) {
                 // Format the value if it has a special case defined
                 try {
                     $reflection = new ReflectionClass(static::class);
@@ -198,7 +197,7 @@ abstract class Resource implements JsonSerializable
             }
 
             // If is array (NOTE: need to be before converting to Resource to ensure we follow the Resource formatting)
-            if(is_array($value)) {
+            if (is_array($value)) {
                 $value = static::resolveArgs($value, $forApiRequest);
             }
 
@@ -215,7 +214,7 @@ abstract class Resource implements JsonSerializable
     {
         $vars = get_object_vars($this);
 
-        if(empty($vars['self']) && ! empty($this->getPrimaryKey())) {
+        if (empty($vars['self']) && ! empty($this->getPrimaryKey())) {
             try {
                 $vars['self'] = EconomicApiService::createURL($this->getEndpoint(GetSingle::class, $this->getPrimaryKey()));
             } catch (Exception $e) {

@@ -17,7 +17,7 @@ use Morningtrain\Economic\Interfaces\ApiFormatter;
 
     public function format($value): array
     {
-        if(!is_a($value, Resource::class)) {
+        if (! is_a($value, Resource::class)) {
             throw new \InvalidArgumentException('ResourceToArray can only be used on properties of type Resource');
         }
 
@@ -25,8 +25,8 @@ use Morningtrain\Economic\Interfaces\ApiFormatter;
 
         $returnArray = [];
 
-        foreach($this->properties as $key) {
-            if(isset($resourceAsArray[$key])) {
+        foreach ($this->properties as $key) {
+            if (isset($resourceAsArray[$key])) {
                 $returnArray[$key] = $resourceAsArray[$key];
             }
         }

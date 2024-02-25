@@ -14,7 +14,7 @@ use Morningtrain\Economic\Interfaces\ApiFormatter;
 
     public function format($value): mixed
     {
-        if(!is_a($value, Resource::class)) {
+        if (! is_a($value, Resource::class)) {
             throw new \InvalidArgumentException('ResourceToArray can only be used on properties of type Resource');
         }
 

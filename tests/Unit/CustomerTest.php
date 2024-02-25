@@ -124,7 +124,7 @@ it('does not filter falsy values', function () {
     $this->driver->expects()->post(
         'https://restapi.e-conomic.com/customers',
         fixture('Customers/create-request-with-falsy-values')
-        )
+    )
         ->once()
         ->andReturn(new EconomicResponse(201, fixture('Customers/create-request')));
 

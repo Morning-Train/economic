@@ -131,7 +131,7 @@ class Customer extends Resource
         Layout|int|null $layout = null,
         Employee|int|null $salesPerson = null,
     ): static {
-         return static::createRequest(compact(
+        return static::createRequest(compact(
             'name',
             'customerGroup',
             'currency',

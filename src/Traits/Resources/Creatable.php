@@ -2,7 +2,6 @@
 
 namespace Morningtrain\Economic\Traits\Resources;
 
-use DateTime;
 use Exception;
 use Morningtrain\Economic\Attributes\Resources\Create;
 use Morningtrain\Economic\Services\EconomicApiService;
