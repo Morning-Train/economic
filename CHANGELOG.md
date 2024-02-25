@@ -2,6 +2,12 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.5.0 - 2024-02-25
+
+* Changed how the Resources is formatted for the API requests.
+
+Note Breaking Changes: Changed "currency" in the Product resource from string to Currency resource.
+
 ## v0.4.2 - 2024-02-22
 
 * Added Customer Contact Resource Endpoints
