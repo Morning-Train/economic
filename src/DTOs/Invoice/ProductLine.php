@@ -60,7 +60,7 @@ class ProductLine extends Resource
             'sortKey' => $sortKey,
             'unitCostPrice' => $unitCostPrice,
             'departmentalDistribution' => $departmentalDistribution,
-            'unit' => $unit
+            'unit' => $unit,
         ]);
     }
 }
