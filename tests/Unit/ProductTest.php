@@ -142,51 +142,8 @@ it('gets a specific product', function () {
 
 it('creates a product', function () {
     $this->driver->expects()->post()
-        ->with('https://restapi.e-conomic.com/products', [
-            'name' => 'Product 1',
-            'productGroup' => [
-                'productGroupNumber' => 1,
-            ],
-            'productNumber' => 'p-1',
-            'barCode' => '1234567890',
-            'costPrice' => 100,
-            'description' => 'test',
-            'recommendedPrice' => 150,
-            'salesPrice' => 199.95,
-            'unit' => [
-                'unitNumber' => 1,
-            ],
-        ])
-        ->andReturn(new EconomicResponse(201, [
-            'productNumber' => 'p-1',
-            'description' => 'test',
-            'name' => 'Product 1',
-            'costPrice' => 100.0,
-            'recommendedPrice' => 150.0,
-            'salesPrice' => 199.95,
-            'barCode' => '1234567890',
-            'barred' => false,
-            'lastUpdated' => '2022-01-13T12:43:00Z',
-            'productGroup' => [
-                'productGroupNumber' => 1,
-                'name' => 'Product Group 1',
-                'self' => 'https://restapi.e-conomic.com/product-groups/1',
-            ],
-            'unit' => [
-                'unitNumber' => 1,
-                'name' => 'Piece',
-                'self' => 'https://restapi.e-conomic.com/units/1',
-            ],
-            'invoices' => [
-                'drafts' => 'https://restapi.e-conomic.com/products/p-1/invoices/drafts',
-                'booked' => 'https://restapi.e-conomic.com/products/p-1/invoices/booked',
-                'self' => 'https://restapi.e-conomic.com/products/p-1/invoices',
-            ],
-            'pricing' => [
-                'currencySpecificSalesPrices' => 'https://restapi.e-conomic.com/products/p-1/pricing/currency-specific-sales-prices',
-            ],
-            'self' => 'https://restapi.e-conomic.com/products/p-1',
-        ]));
+        ->with('https://restapi.e-conomic.com/products', fixture('Products/create-request'))
+        ->andReturn(new EconomicResponse(201, fixture('Products/create-response')));
 
     $product = Product::create('Product 1', 1, 'p-1', barCode: '1234567890', costPrice: 100.0, recommendedPrice: 150.0, salesPrice: 199.95, description: 'test', unit: 1);
 

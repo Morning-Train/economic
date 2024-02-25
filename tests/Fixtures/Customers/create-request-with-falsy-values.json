@@ -1,0 +1,17 @@
+{
+  "name": "John Doe",
+  "customerGroup": {
+    "customerGroupNumber": 1,
+    "self": "https:\/\/restapi.e-conomic.com\/customer-groups\/1"
+  },
+  "currency": "DKK",
+  "vatZone": {
+    "vatZoneNumber": 1,
+    "self": "https:\/\/restapi.e-conomic.com\/vat-zones\/1"
+  },
+  "paymentTerms": {
+    "paymentTermsNumber": 1,
+    "self": "https:\/\/restapi.e-conomic.com\/payment-terms\/1"
+  },
+  "customerNumber": 0
+}

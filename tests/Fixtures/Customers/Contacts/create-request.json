@@ -1,6 +1,7 @@
 {
-  "customer": {
-    "customerNumber": 1
+  "customer":{
+    "customerNumber": "1",
+    "self": "https://restapi.e-conomic.com/customers/1"
   },
   "name": "John Doe",
   "email": "ms@morningtrain.dk",

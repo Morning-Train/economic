@@ -1,0 +1,17 @@
+{
+  "name": "Product 1",
+  "productGroup": {
+    "productGroupNumber": 1,
+    "self": "https:\/\/restapi.e-conomic.com\/product-groups\/1"
+  },
+  "productNumber": "p-1",
+  "barCode": "1234567890",
+  "costPrice": 100,
+  "description": "test",
+  "recommendedPrice": 150,
+  "salesPrice": 199.95,
+  "unit": {
+    "unitNumber": 1,
+    "self": "https:\/\/restapi.e-conomic.com\/units\/1"
+  }
+}

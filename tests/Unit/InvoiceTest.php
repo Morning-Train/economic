@@ -7,6 +7,7 @@ use Morningtrain\Economic\DTOs\Invoice\Note;
 use Morningtrain\Economic\DTOs\Invoice\ProductLine;
 use Morningtrain\Economic\DTOs\Invoice\Recipient;
 use Morningtrain\Economic\DTOs\Invoice\Reference;
+use Morningtrain\Economic\Resources\Currency;
 use Morningtrain\Economic\Resources\Customer;
 use Morningtrain\Economic\Resources\Invoice\BookedInvoice;
 use Morningtrain\Economic\Resources\Invoice\DraftInvoice;
@@ -28,7 +29,7 @@ it('gets a drafted invoice', function () {
         ->draftInvoiceNumber->toBe(422)
         ->externalId->toBe('123456')
         ->date->toBeInstanceOf(DateTime::class)
-        ->currency->toBe('DKK')
+        ->currency->toBeInstanceOf(Currency::class)
         ->exchangeRate->toBeFloat()
         ->netAmount->toBeFloat()
         ->grossAmount->toBeFloat()
@@ -113,6 +114,60 @@ it('creates a draft invoice using new and save', function () {
     $invoice = DraftInvoice::new(
         'DKK',
         1,
+        new DateTime('2024-02-13T12:20:18+00:00'),
+        14,
+        1,
+        Recipient::new(
+            'John Doe',
+            new VatZone(1),
+        ),
+        notes: Note::new(
+            heading: 'Heading',
+            textLine1: 'Text line 1',
+            textLine2: 'Text line 2'
+        )
+    );
+
+    $invoice->addLine(
+        ProductLine::new(
+            description: 'T-shirt - Size L',
+            product: new Product([
+                'productNumber' => 1,
+            ]),
+            quantity: 1,
+            unitNetPrice: 500
+        )
+    );
+
+    $invoice->save();
+
+    expect($invoice)
+        ->toBeInstanceOf(DraftInvoice::class)
+        ->draftInvoiceNumber->toBe(424);
+});
+
+it('creates a draft invoice with full customer and currency object', function () {
+    $this->driver->expects()->post()->with(
+        'https://restapi.e-conomic.com/invoices/drafts',
+        fixture('Invoices/draft/create-request')
+    )->andReturn(new EconomicResponse(201, fixture('Invoices/draft/create-response')));
+
+    $invoice = DraftInvoice::new(
+        new Currency([
+            'code' => 'DKK',
+            'isoNumber' => 'DKK',
+            'name' => 'Danish Krone'
+        ]),
+        Customer::new(
+            name: 'John Doe',
+            customerNumber: 1,
+            currency: 'DKK',
+            email: 'ms@morningtrain.dk',
+            address: 'Test Street 1',
+            vatZone: 1,
+            customerGroup: 1,
+            paymentTerms: 1,
+        ),
         new DateTime('2024-02-13T12:20:18+00:00'),
         14,
         1,
