@@ -15,10 +15,10 @@ class Currency extends Resource
 {
     use GetCollectionable, GetSingleable;
 
-    public string $code;
+    public ?string $code = null;
 
     #[PrimaryKey]
-    public string $isoNumber;
+    public ?string $isoNumber = null;
 
-    public string $name;
+    public ?string $name = null;
 }

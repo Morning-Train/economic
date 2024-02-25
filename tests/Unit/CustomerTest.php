@@ -48,32 +48,19 @@ it('Handles OR filters', function () {
 });
 
 it('creates customer', function () {
-    $this->driver->expects()->post()
-        ->withArgs(function (string $url, array $body) {
-            return $url === 'https://restapi.e-conomic.com/customers'
-                && $body === [
-                    'name' => 'John Doe',
-                    'customerGroup' => [
-                        'customerGroupNumber' => 1,
-                    ],
-                    'currency' => 'DKK',
-                    'vatZone' => [
-                        'vatZoneNumber' => 1,
-                    ],
-                    'paymentTerms' => [
-                        'paymentTermsNumber' => 1,
-                    ],
-                ];
-        })
+    $this->driver->expects()->post(
+        'https://restapi.e-conomic.com/customers',
+        fixture('Customers/create-request')
+    )
         ->once()
-        ->andReturn(new EconomicResponse(201, fixture('Customers/create')));
+        ->andReturn(new EconomicResponse(201, fixture('Customers/create-response')));
 
     $customer = Customer::create(
         name: 'John Doe',
         customerGroup: 1,
         currency: 'DKK',
         vatZone: 1,
-        paymentTerms: 1,
+        paymentTerms: 1
     );
 
     expect($customer)
@@ -116,25 +103,12 @@ it('can update a customer', function () {
 });
 
 it('filters null values', function () {
-    $this->driver->expects()->post()
-        ->withArgs(function (string $url, array $body) {
-            return $url === 'https://restapi.e-conomic.com/customers'
-                && $body === [
-                    'name' => 'John Doe',
-                    'customerGroup' => [
-                        'customerGroupNumber' => 1,
-                    ],
-                    'currency' => 'DKK',
-                    'vatZone' => [
-                        'vatZoneNumber' => 1,
-                    ],
-                    'paymentTerms' => [
-                        'paymentTermsNumber' => 1,
-                    ],
-                ];
-        })
+    $this->driver->expects()->post(
+        'https://restapi.e-conomic.com/customers',
+        fixture('Customers/create-request')
+    )
         ->once()
-        ->andReturn(new EconomicResponse(201, fixture('Customers/create')));
+        ->andReturn(new EconomicResponse(201, fixture('Customers/create-response')));
 
     Customer::create(
         name: 'John Doe',
@@ -147,26 +121,12 @@ it('filters null values', function () {
 });
 
 it('does not filter falsy values', function () {
-    $this->driver->expects()->post()
-        ->withArgs(function (string $url, array $body) {
-            return $url === 'https://restapi.e-conomic.com/customers'
-                && $body === [
-                    'name' => 'John Doe',
-                    'customerGroup' => [
-                        'customerGroupNumber' => 1,
-                    ],
-                    'currency' => 'DKK',
-                    'vatZone' => [
-                        'vatZoneNumber' => 1,
-                    ],
-                    'paymentTerms' => [
-                        'paymentTermsNumber' => 1,
-                    ],
-                    'customerNumber' => 0, // Should be present in request
-                ];
-        })
+    $this->driver->expects()->post(
+        'https://restapi.e-conomic.com/customers',
+        fixture('Customers/create-request-with-falsy-values')
+    )
         ->once()
-        ->andReturn(new EconomicResponse(201, fixture('Customers/create')));
+        ->andReturn(new EconomicResponse(201, fixture('Customers/create-request')));
 
     Customer::create(
         name: 'John Doe',

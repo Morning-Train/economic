@@ -1,0 +1,45 @@
+{
+  "productNumber": "p-1",
+  "description": "test",
+  "name": "Product 1",
+  "costPrice": 100.00,
+  "recommendedPrice": 150.00,
+  "salesPrice": 199.95,
+  "barCode": "1234567890",
+  "barred": false,
+  "lastUpdated": "2024-02-25T10:46:00Z",
+  "productGroup": {
+    "productGroupNumber": 1,
+    "name": "Product Group 1",
+    "salesAccounts": "https://restapi.e-conomic.com/product-groups/1/sales-accounts",
+    "products": "https://restapi.e-conomic.com/product-groups/1/products",
+    "self": "https://restapi.e-conomic.com/product-groups/1"
+  },
+  "unit": {
+    "unitNumber": 1,
+    "name": "Piece",
+    "products": "https://restapi.e-conomic.com/units/1/products",
+    "self": "https://restapi.e-conomic.com/units/1"
+  },
+  "invoices": {
+    "drafts": "https://restapi.e-conomic.com/products/p-1/invoices/drafts",
+    "booked": "https://restapi.e-conomic.com/products/p-1/invoices/booked",
+    "self": "https://restapi.e-conomic.com/products/p-1/invoices"
+  },
+  "pricing": {
+    "currencySpecificSalesPrices": "https://restapi.e-conomic.com/products/p-1/pricing/currency-specific-sales-prices"
+  },
+  "metaData": {
+    "delete": {
+      "description": "Delete this product.",
+      "href": "https://restapi.e-conomic.com/products/p-1",
+      "httpMethod": "delete"
+    },
+    "replace": {
+      "description": "Replace this product.",
+      "href": "https://restapi.e-conomic.com/products/p-1",
+      "httpMethod": "put"
+    }
+  },
+  "self": "https://restapi.e-conomic.com/products/p-1"
+}

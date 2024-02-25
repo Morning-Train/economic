@@ -48,22 +48,6 @@ class DraftInvoice extends Invoice
         // ?Project|int $project = null, // TODO: Implement
         ?Reference $references = null
     ): ?static {
-        if (is_a($currency, Currency::class)) {
-            $currency = $currency->isoNumber;
-        }
-
-        if (is_int($customer)) {
-            $customer = new Customer(['customerNumber' => $customer]);
-        }
-
-        if (is_int($layout)) {
-            $layout = new Layout(['layoutNumber' => $layout]);
-        }
-
-        if (is_int($paymentTerms)) {
-            $paymentTerms = new PaymentTerm(['paymentTermsNumber' => $paymentTerms]);
-        }
-
         return static::createRequest(compact(
             'currency',
             'customer',
@@ -94,10 +78,6 @@ class DraftInvoice extends Invoice
         // ?Project|int $project = null, // TODO: Implement
         ?Reference $references = null
     ): ?static {
-        if (is_a($currency, Currency::class)) {
-            $currency = $currency->isoNumber;
-        }
-
         return new static(array_filter(compact(
             'currency',
             'customer',

@@ -1,19 +1,23 @@
 {
   "currency": "DKK",
   "customer": {
-    "customerNumber": 1
+    "customerNumber": 1,
+    "self": "https://restapi.e-conomic.com/customers/1"
   },
   "date": "2024-02-13T12:20:18+00:00",
   "layout": {
-    "layoutNumber": 14
+    "layoutNumber": 14,
+    "self": "https://restapi.e-conomic.com/layouts/14"
   },
   "paymentTerms": {
-    "paymentTermsNumber": 1
+    "paymentTermsNumber": 1,
+    "self": "https://restapi.e-conomic.com/payment-terms/1"
   },
   "recipient": {
     "name": "John Doe",
     "vatZone": {
-      "vatZoneNumber": 1
+      "vatZoneNumber": 1,
+      "self": "https://restapi.e-conomic.com/vat-zones/1"
     }
   },
   "lines": [
