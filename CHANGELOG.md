@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.5.1 - 2024-02-25
+
+### What's Changed
+
+* ✨ Add Unit and DepartementalDistribution to ProductLine by @mschadegg in https://github.com/Morning-Train/economic/pull/15
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v0.5.0...v0.5.1
+
 ## v0.5.0 - 2024-02-25
 
 * Changed how the Resources is formatted for the API requests.
