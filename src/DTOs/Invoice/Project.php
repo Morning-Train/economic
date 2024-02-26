@@ -10,7 +10,7 @@ class Project extends Resource
     #[PrimaryKey()]
     public ?int $projectNumber;
 
-    public static function new(int $projectNumber)
+    public static function new(int $projectNumber): static
     {
         return new static([
             'projectNumber' => $projectNumber,
