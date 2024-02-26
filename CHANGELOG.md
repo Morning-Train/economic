@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.5.4 - 2024-02-26
+
+### What's Changed
+
+* 🐛 Us Throwable instead of Exception when trying to set selv by @mschadegg in https://github.com/Morning-Train/economic/pull/18
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v0.5.3...v0.5.4
+
 ## v0.5.3 - 2024-02-26
 
 ### What's Changed
