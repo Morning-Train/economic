@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.5.2 - 2024-02-26
+
+### What's Changed
+
+* Project in invoice by @mschadegg in https://github.com/Morning-Train/economic/pull/16
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v0.5.1...v0.5.2
+
 ## v0.5.1 - 2024-02-25
 
 ### What's Changed
