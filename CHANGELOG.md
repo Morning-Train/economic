@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.5.3 - 2024-02-26
+
+### What's Changed
+
+* 🐛 Add project in create request by @mschadegg in https://github.com/Morning-Train/economic/pull/17
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v0.5.2...v0.5.3
+
 ## v0.5.2 - 2024-02-26
 
 ### What's Changed
