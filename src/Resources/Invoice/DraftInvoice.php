@@ -10,6 +10,7 @@ use Morningtrain\Economic\Attributes\Resources\GetSingle;
 use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use Morningtrain\Economic\Attributes\Resources\Update;
 use Morningtrain\Economic\DTOs\Invoice\Note;
+use Morningtrain\Economic\DTOs\Invoice\Project;
 use Morningtrain\Economic\DTOs\Invoice\Recipient;
 use Morningtrain\Economic\DTOs\Invoice\Reference;
 use Morningtrain\Economic\Resources\Currency;
@@ -45,7 +46,7 @@ class DraftInvoice extends Invoice
         ?DateTime $dueDate = null,
         ?float $exchangeRate = null,
         ?Note $notes = null,
-        // ?Project|int $project = null, // TODO: Implement
+        Project|int|null $project = null,
         ?Reference $references = null
     ): ?static {
         return static::createRequest(compact(
@@ -75,7 +76,7 @@ class DraftInvoice extends Invoice
         ?DateTime $dueDate = null,
         ?float $exchangeRate = null,
         ?Note $notes = null,
-        // ?Project|int $project = null, // TODO: Implement
+        Project|int|null $project = null,
         ?Reference $references = null
     ): ?static {
         return new static(array_filter(compact(
@@ -90,6 +91,7 @@ class DraftInvoice extends Invoice
             'exchangeRate',
             'notes',
             'references',
+            'project'
         )));
     }
 
@@ -107,7 +109,8 @@ class DraftInvoice extends Invoice
                 dueDate: $this->dueDate,
                 exchangeRate: $this->exchangeRate,
                 notes: $this->notes,
-                references: $this->references,
+                project: $this->project,
+                references: $this->references
             );
 
             $this->populate($new->toArray());
