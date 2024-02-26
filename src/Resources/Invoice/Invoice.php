@@ -63,7 +63,7 @@ class Invoice extends Resource
 
     public ?array $pdf = null;
 
-    // public ?Project $project; // TODO: Implement
+    public ?Project $project;
 
     public ?Recipient $recipient = null;
 
