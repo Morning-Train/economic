@@ -16,6 +16,7 @@ use Morningtrain\Economic\Services\EconomicApiService;
 use Morningtrain\Economic\Services\EconomicLoggerService;
 use ReflectionAttribute;
 use ReflectionClass;
+use Throwable;
 
 abstract class Resource implements JsonSerializable
 {
@@ -217,7 +218,7 @@ abstract class Resource implements JsonSerializable
         if (empty($vars['self']) && ! empty($this->getPrimaryKey())) {
             try {
                 $vars['self'] = EconomicApiService::createURL($this->getEndpoint(GetSingle::class, $this->getPrimaryKey()));
-            } catch (Exception $e) {
+            } catch (Throwable $e) {
                 // Do nothing, since we can't get the self
             }
         }
