@@ -60,6 +60,7 @@ class DraftInvoice extends Invoice
             'dueDate',
             'exchangeRate',
             'notes',
+            'project',
             'references',
         ));
     }
@@ -90,8 +91,8 @@ class DraftInvoice extends Invoice
             'dueDate',
             'exchangeRate',
             'notes',
-            'references',
-            'project'
+            'project',
+            'references'
         )));
     }
 
