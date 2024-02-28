@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.6.0 - 2024-02-28
+
+### What's Changed
+
+* Use DTO for invoice pdf property @SimonJnsson in https://github.com/Morning-Train/economic/pull/19
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v0.5.4...v0.6.0
+
 ## v0.5.4 - 2024-02-26
 
 ### What's Changed
