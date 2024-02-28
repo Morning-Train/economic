@@ -4,6 +4,7 @@ use Illuminate\Support\Collection;
 use Morningtrain\Economic\Classes\EconomicCollection;
 use Morningtrain\Economic\Classes\EconomicResponse;
 use Morningtrain\Economic\DTOs\Invoice\Note;
+use Morningtrain\Economic\DTOs\Invoice\Pdf;
 use Morningtrain\Economic\DTOs\Invoice\ProductLine;
 use Morningtrain\Economic\DTOs\Invoice\Recipient;
 use Morningtrain\Economic\DTOs\Invoice\Reference;
@@ -217,6 +218,7 @@ it('books draft invoice', function () {
 
     expect($bookedInvoice)
         ->toBeInstanceOf(BookedInvoice::class)
+        ->pdf->toBeInstanceOf(Pdf::class)
         ->bookedInvoiceNumber->toBe(300);
 });
 
