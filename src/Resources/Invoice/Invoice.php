@@ -7,6 +7,7 @@ use Morningtrain\Economic\Abstracts\Resource;
 use Morningtrain\Economic\Attributes\Resources\Properties\ApiFormatting\ResourceToArray;
 use Morningtrain\Economic\Attributes\Resources\Properties\ApiFormatting\ResourceToPrimaryKey;
 use Morningtrain\Economic\DTOs\Invoice\Note;
+use Morningtrain\Economic\DTOs\Invoice\Pdf;
 use Morningtrain\Economic\DTOs\Invoice\Project;
 use Morningtrain\Economic\DTOs\Invoice\Recipient;
 use Morningtrain\Economic\DTOs\Invoice\Reference;
@@ -62,7 +63,7 @@ class Invoice extends Resource
 
     public ?PaymentTerm $paymentTerms = null;
 
-    public ?array $pdf = null;
+    public ?Pdf $pdf = null;
 
     public ?Project $project = null;
 
