@@ -116,22 +116,22 @@ class EconomicQueryFilterBuilder
             return $this->whereNested($propertyName);
         }
 
-        $operator = !static::isOperator($operatorOrValue) ? static::FILTER_OPERATOR_EQUAL : $operatorOrValue;
-        $value = is_null($value) && !static::isOperator($operatorOrValue) ? $operatorOrValue : $value;
+        $operator = ! static::isOperator($operatorOrValue) ? static::FILTER_OPERATOR_EQUAL : $operatorOrValue;
+        $value = is_null($value) && ! static::isOperator($operatorOrValue) ? $operatorOrValue : $value;
 
-        if(is_string($value)) {
+        if (is_string($value)) {
             $value = str_replace(array_keys(static::ESCAPES), array_values(static::ESCAPES), $value);
         }
 
-        if($value === null) {
+        if ($value === null) {
             $value = static::FILTER_VALUE_NULL;
         }
 
-        if($value === true) {
+        if ($value === true) {
             $value = 'true';
         }
 
-        if($value === false) {
+        if ($value === false) {
             $value = 'false';
         }
 
@@ -172,7 +172,7 @@ class EconomicQueryFilterBuilder
                 $string .= static::FILTER_RELATION_AND;
             }
 
-            $string .= $filter['property'] . $filter['operator'] . $filter['value'];
+            $string .= $filter['property'].$filter['operator'].$filter['value'];
 
             $strings[] = $string;
         }
