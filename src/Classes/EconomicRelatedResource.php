@@ -39,7 +39,7 @@ class EconomicRelatedResource
     /**
      * @return EconomicQueryBuilder<R>
      */
-    public function where(int|string $propertyName, string $operatorOrValue, mixed $value = null): EconomicQueryBuilder
+    public function where(int|string $propertyName, mixed $operatorOrValue = null, mixed $value = null): EconomicQueryBuilder
     {
         return (new EconomicQueryBuilder($this->resourceClass))->setEndpoint($this->endpointCollection->getEndpoint($this->references))->where($propertyName, $operatorOrValue, $value);
 
