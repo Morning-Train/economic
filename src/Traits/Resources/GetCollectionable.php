@@ -15,7 +15,7 @@ trait GetCollectionable
     /**
      * @return EconomicQueryBuilder<ResourceClass>
      */
-    public static function where(int|string $propertyName, string $operatorOrValue, mixed $value = null): EconomicQueryBuilder
+    public static function where(int|string $propertyName, mixed $operatorOrValue = null, mixed $value = null): EconomicQueryBuilder
     {
         return (new EconomicQueryBuilder(static::class))->where($propertyName, $operatorOrValue, $value);
     }
