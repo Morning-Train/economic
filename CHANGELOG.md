@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.7.0 - 2024-02-29
+
+### What's Changed
+
+* ♻️ Filters by @mschadegg in https://github.com/Morning-Train/economic/pull/20
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v0.6.0...v0.7.0
+
 ## v0.6.0 - 2024-02-28
 
 ### What's Changed
