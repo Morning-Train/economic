@@ -102,6 +102,32 @@ it('can update a customer', function () {
         ->name->toBe('John Doe Renamed');
 });
 
+it('can create a customer through update', function () {
+    $this->driver->expects()->put()
+        ->withArgs(function (string $url, array $body) {
+            return $url === 'https://restapi.e-conomic.com/customers/1'
+                && $body === [
+                    'customerNumber' => 1,
+                    'name' => 'John Doe Renamed',
+                    'self' => 'https://restapi.e-conomic.com/customers/1',
+                ];
+        })
+        ->once()
+        ->andReturn(new EconomicResponse(201, fixture('Customers/update')));
+
+    $customer = new Customer([
+        'customerNumber' => 1,
+        'name' => 'John Doe Renamed',
+    ]);
+
+    $updatedCustomer = $customer->save();
+
+    expect($updatedCustomer)
+        ->toBeInstanceOf(Customer::class)
+        ->customerNumber->toBe(1)
+        ->name->toBe('John Doe Renamed');
+});
+
 it('filters null values', function () {
     $this->driver->expects()->post(
         'https://restapi.e-conomic.com/customers',

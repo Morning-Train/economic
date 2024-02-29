@@ -30,6 +30,16 @@ class EconomicQueryFilterBuilder
 
     const FILTER_VALUE_NULL = '$null:';
 
+    const ESCAPES = [
+        '$' => '$$',
+        '(' => '$(',
+        ')' => '$)',
+        '*' => '$*',
+        ',' => '$,',
+        '[' => '$[',
+        ']' => '$]',
+    ];
+
     protected array $filters = [];
 
     public function __construct(protected string $relation)
@@ -65,6 +75,33 @@ class EconomicQueryFilterBuilder
         return $operator;
     }
 
+    protected static function isOperator(string $operator): bool
+    {
+        return in_array($operator, [
+            '=',
+            '!=',
+            '>',
+            '>=',
+            '<',
+            '<=',
+            'LIKE',
+            'like',
+            'IN',
+            'in',
+            'NOT IN',
+            'not in',
+            static::FILTER_OPERATOR_EQUAL,
+            static::FILTER_OPERATOR_NOT_EQUAL,
+            static::FILTER_OPERATOR_GREATER_THAN,
+            static::FILTER_OPERATOR_GREATER_THAN_OR_EQUAL,
+            static::FILTER_OPERATOR_LESS_THAN,
+            static::FILTER_OPERATOR_LESS_THAN_OR_EQUAL,
+            static::FILTER_OPERATOR_LIKE,
+            static::FILTER_OPERATOR_IN,
+            static::FILTER_OPERATOR_NOT_IN,
+        ]);
+    }
+
     protected function whereNested(Closure $closure)
     {
 
@@ -79,12 +116,28 @@ class EconomicQueryFilterBuilder
             return $this->whereNested($propertyName);
         }
 
-        $operator = is_null($value) ? static::FILTER_OPERATOR_EQUAL : $operatorOrValue;
-        $value = is_null($value) ? $operatorOrValue : $value;
+        $operator = ! static::isOperator($operatorOrValue) ? static::FILTER_OPERATOR_EQUAL : $operatorOrValue;
+        $value = is_null($value) && ! static::isOperator($operatorOrValue) ? $operatorOrValue : $value;
+
+        if (is_string($value)) {
+            $value = str_replace(array_keys(static::ESCAPES), array_values(static::ESCAPES), $value);
+        }
+
+        if ($value === null) {
+            $value = static::FILTER_VALUE_NULL;
+        }
+
+        if ($value === true) {
+            $value = 'true';
+        }
+
+        if ($value === false) {
+            $value = 'false';
+        }
 
         $this->filters[] = [
             'property' => $propertyName,
-            'operator' => $operator,
+            'operator' => $this->convertOperator($operator),
             'value' => $value,
         ];
 
@@ -119,7 +172,7 @@ class EconomicQueryFilterBuilder
                 $string .= static::FILTER_RELATION_AND;
             }
 
-            $string .= $filter['property'].$this->convertOperator($filter['operator']).$filter['value'];
+            $string .= $filter['property'].$filter['operator'].$filter['value'];
 
             $strings[] = $string;
         }
