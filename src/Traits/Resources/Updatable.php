@@ -17,8 +17,8 @@ trait Updatable
 
         $response = EconomicApiService::put(static::getEndpoint(Update::class, $this), $this->toArray(true));
 
-        if ($response->getStatusCode() !== 200) {
-            EconomicLoggerService::error('Economic API Service returned a non 200 status code when updating a resource', [
+        if ($response->getStatusCode() !== 200 && $response->getStatusCode() !== 201) { // 201 is for created, 200 is for updated -> both are valid here
+            EconomicLoggerService::error('Economic API Service returned a non 200 or 201 status code when updating a resource', [
                 'status_code' => $response->getStatusCode(),
                 'response_body' => $response->getBody(),
                 'resource' => static::class,
