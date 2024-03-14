@@ -54,6 +54,7 @@ class Product extends Resource
     public ?string $name;
 
     public ?ProductGroup $productGroup;
+
     #[PrimaryKey]
     public ?string $productNumber;
 
