@@ -6,7 +6,7 @@ class EconomicResponse
 {
     protected int $statusCode;
 
-    protected mixed $body;
+    protected array|string $body;
 
     public function __construct(int $statusCode, mixed $body)
     {
