@@ -10,10 +10,8 @@ class Pdf extends Resource
 {
     public ?string $download;
 
-    public function getPdfContentResponse(): EconomicResponse
+    public function getPdfContent(): EconomicResponse
     {
-        $url = $this->download;
-
-        return EconomicApiService::get($url);
+        return EconomicApiService::get($this->download)->getBody();
     }
 }
