@@ -6,9 +6,9 @@ class EconomicResponse
 {
     protected int $statusCode;
 
-    protected array $body;
+    protected array|string $body;
 
-    public function __construct(int $statusCode, array $body)
+    public function __construct(int $statusCode, mixed $body)
     {
         $this->statusCode = $statusCode;
         $this->body = $body;
@@ -19,7 +19,7 @@ class EconomicResponse
         return $this->statusCode;
     }
 
-    public function getBody(): array
+    public function getBody(): mixed
     {
         return $this->body;
     }
