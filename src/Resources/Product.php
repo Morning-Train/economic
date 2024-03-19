@@ -9,6 +9,7 @@ use Morningtrain\Economic\Attributes\Resources\Delete;
 use Morningtrain\Economic\Attributes\Resources\GetCollection;
 use Morningtrain\Economic\Attributes\Resources\GetSingle;
 use Morningtrain\Economic\Attributes\Resources\Properties\Filterable;
+use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use Morningtrain\Economic\Attributes\Resources\Properties\Sortable;
 use Morningtrain\Economic\Attributes\Resources\Update;
 use Morningtrain\Economic\Traits\Resources\Creatable;
@@ -54,6 +55,7 @@ class Product extends Resource
 
     public ?ProductGroup $productGroup;
 
+    #[PrimaryKey]
     public ?string $productNumber;
 
     #[Filterable]
