@@ -6,10 +6,10 @@
     }
   },
   "templates": {
-    "bookingInstructions": "https://restapi.e-conomic.com/invoices/drafts/424/templates/booking-instructions",
-    "self": "https://restapi.e-conomic.com/invoices/drafts/424/templates"
+    "bookingInstructions": "https:\/\/restapi.e-conomic.com\/invoices\/drafts\/424\/templates\/booking-instructions",
+    "self": "https:\/\/restapi.e-conomic.com\/invoices\/drafts\/424\/templates"
   },
-  "attachment": "https://restapi.e-conomic.com/invoices/drafts/424/attachment",
+  "attachment": "https:\/\/restapi.e-conomic.com\/invoices\/drafts\/424\/attachment",
   "lines": [
     {
       "lineNumber": 1,
@@ -17,7 +17,7 @@
       "description": "T-shirt - Size L",
       "product": {
         "productNumber": "1",
-        "self": "https://restapi.e-conomic.com/products/1"
+        "self": "https:\/\/restapi.e-conomic.com\/products\/1"
       },
       "quantity": 1.00,
       "unitNetPrice": 500.00,
@@ -46,11 +46,11 @@
     "daysOfCredit": 8,
     "name": "Netto 8 dage",
     "paymentTermsType": "net",
-    "self": "https://restapi.e-conomic.com/payment-terms/1"
+    "self": "https:\/\/restapi.e-conomic.com\/payment-terms\/1"
   },
   "customer": {
     "customerNumber": 1,
-    "self": "https://restapi.e-conomic.com/customers/1"
+    "self": "https:\/\/restapi.e-conomic.com\/customers\/1"
   },
   "recipient": {
     "name": "John Doe",
@@ -59,7 +59,7 @@
       "vatZoneNumber": 1,
       "enabledForCustomer": true,
       "enabledForSupplier": true,
-      "self": "https://restapi.e-conomic.com/vat-zones/1"
+      "self": "https:\/\/restapi.e-conomic.com\/vat-zones\/1"
     }
   },
   "notes": {
@@ -69,11 +69,11 @@
   },
   "layout": {
     "layoutNumber": 14,
-    "self": "https://restapi.e-conomic.com/layouts/14"
+    "self": "https:\/\/restapi.e-conomic.com\/layouts\/14"
   },
   "pdf": {
-    "download": "https://restapi.e-conomic.com/invoices/drafts/424/pdf"
+    "download": "https:\/\/restapi.e-conomic.com\/invoices\/drafts\/424\/pdf"
   },
   "lastUpdated": "2024-02-13T12:20:00Z",
-  "self": "https://restapi.e-conomic.com/invoices/drafts/424"
+  "self": "https:\/\/restapi.e-conomic.com\/invoices\/drafts\/424"
 }
