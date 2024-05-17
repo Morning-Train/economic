@@ -2,6 +2,21 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.7.2 - 2024-05-17
+
+### What's Changed
+
+* Hotfix/product by @larasmorningtrain in https://github.com/Morning-Train/economic/pull/23
+* Feature/pdf response by @larasmorningtrain in https://github.com/Morning-Train/economic/pull/22
+* Bump aglipanci/laravel-pint-action from 2.3.1 to 2.4 by @dependabot in https://github.com/Morning-Train/economic/pull/26
+* ♻️ Set typehint for body to array or string by @larasmorningtrain in https://github.com/Morning-Train/economic/pull/24
+
+### New Contributors
+
+* @larasmorningtrain made their first contribution in https://github.com/Morning-Train/economic/pull/23
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v0.7.1...v0.7.2
+
 ## v0.7.1 - 2024-02-29
 
 ### What's Changed
