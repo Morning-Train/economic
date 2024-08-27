@@ -12,9 +12,7 @@ use Morningtrain\Economic\Services\EconomicApiService;
  */
 class EconomicRelatedResource
 {
-    public function __construct(protected Endpoint $endpointCollection, protected Endpoint $endpointSingle, protected string $resourceClass, protected array $references)
-    {
-    }
+    public function __construct(protected Endpoint $endpointCollection, protected Endpoint $endpointSingle, protected string $resourceClass, protected array $references) {}
 
     /**
      * @return R|null

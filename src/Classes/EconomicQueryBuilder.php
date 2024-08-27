@@ -18,9 +18,7 @@ class EconomicQueryBuilder
 
     protected string|Endpoint $endpoint;
 
-    public function __construct(protected string $resourceClass)
-    {
-    }
+    public function __construct(protected string $resourceClass) {}
 
     public function setEndpoint(string|Endpoint $endpoint): static
     {

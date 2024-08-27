@@ -4,9 +4,7 @@ namespace Morningtrain\Economic\Abstracts;
 
 abstract class Endpoint
 {
-    public function __construct(protected string $endpoint, protected ?array $references = null)
-    {
-    }
+    public function __construct(protected string $endpoint, protected ?array $references = null) {}
 
     public function getEndpoint(...$references): string
     {

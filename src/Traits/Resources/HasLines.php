@@ -17,7 +17,7 @@ trait HasLines
     public function addLine(ProductLine $line): static
     {
         if (is_null($this->lines)) {
-            $this->lines = new Collection();
+            $this->lines = new Collection;
         }
 
         $this->lines->add($line);

@@ -6,6 +6,4 @@ use Morningtrain\Economic\Abstracts\Resource;
 use Morningtrain\Economic\Attributes\Resources\GetCollection;
 
 #[GetCollection()]
-class Department extends Resource
-{
-}
+class Department extends Resource {}

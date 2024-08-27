@@ -7,9 +7,7 @@ use Attribute;
 #[Attribute(Attribute::TARGET_PROPERTY)]
 class ResourceType
 {
-    public function __construct(public string $typeClass)
-    {
-    }
+    public function __construct(public string $typeClass) {}
 
     public function getTypeClass(): string
     {

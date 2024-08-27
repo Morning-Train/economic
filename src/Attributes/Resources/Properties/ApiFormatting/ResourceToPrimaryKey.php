@@ -8,9 +8,7 @@ use Morningtrain\Economic\Interfaces\ApiFormatter;
 
 #[Attribute(Attribute::TARGET_PROPERTY)] class ResourceToPrimaryKey implements ApiFormatter
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function format($value): mixed
     {
