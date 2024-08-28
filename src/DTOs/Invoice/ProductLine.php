@@ -37,7 +37,7 @@ class ProductLine extends Resource
     public ?float $unitNetPrice;
 
     public static function new(
-        Product|int $product,
+        Product|int|string $product,
         float $quantity,
         float $unitNetPrice,
         ?string $description = null,

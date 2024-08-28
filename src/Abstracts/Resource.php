@@ -75,7 +75,7 @@ abstract class Resource implements JsonSerializable
             if (! empty($attribute[0]) && ! empty($value) && is_array($value)) {
                 $resourceType = $attribute[0]->newInstance();
 
-                $collection = new Collection();
+                $collection = new Collection;
 
                 foreach ($value as $item) {
                     $collection->add(new ($resourceType->getTypeClass())($item));

@@ -42,9 +42,7 @@ class EconomicQueryFilterBuilder
 
     protected array $filters = [];
 
-    public function __construct(protected string $relation)
-    {
-    }
+    public function __construct(protected string $relation) {}
 
     protected function convertOperator(string $operator): string
     {

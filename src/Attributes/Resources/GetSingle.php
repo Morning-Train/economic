@@ -7,7 +7,5 @@ use Morningtrain\Economic\Abstracts\Endpoint;
 
 #[Attribute(Attribute::TARGET_CLASS)] class GetSingle extends Endpoint
 {
-    public function __construct(protected string $endpoint)
-    {
-    }
+    public function __construct(protected string $endpoint) {}
 }

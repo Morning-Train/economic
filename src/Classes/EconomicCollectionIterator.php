@@ -18,9 +18,7 @@ class EconomicCollectionIterator implements ArrayAccess, Countable, SeekableIter
 
     protected int $currentPosition = 0;
 
-    public function __construct(protected string $self, protected string $resourceClass)
-    {
-    }
+    public function __construct(protected string $self, protected string $resourceClass) {}
 
     protected function getItem(int $position): ?Resource
     {
