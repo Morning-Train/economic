@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.7.3 - 2024-08-28
+
+### What's Changed
+
+* Allow parsing productNumber as string when creating ProductLine with ::new function by @SimonJnsson in https://github.com/Morning-Train/economic/pull/33
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v0.7.2...v0.7.3
+
 ## v0.7.2 - 2024-05-17
 
 ### What's Changed
