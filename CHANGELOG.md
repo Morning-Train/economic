@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v0.8.0 - 2024-08-29
+
+### What's Changed
+
+* Support illuminate/support 11 by @SimonJnsson in https://github.com/Morning-Train/economic/pull/35
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v1.0.0...v0.8.0
+
 ## v1.0.0 - 2024-08-29
 
 ### What's Changed
