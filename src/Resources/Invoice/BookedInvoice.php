@@ -13,12 +13,12 @@ class BookedInvoice extends Invoice
 {
     public ?int $bookedInvoiceNumber = null;
 
-    public static function createFromDraft(int|DraftInvoice $draft)
+    public static function createFromDraft(int|DraftInvoice $draft, ?string $idempotencyKey = null)
     {
         return static::createRequest([
             'draftInvoice' => [
                 'draftInvoiceNumber' => is_int($draft) ? $draft : $draft->draftInvoiceNumber,
             ],
-        ]);
+        ], [], $idempotencyKey);
     }
 }

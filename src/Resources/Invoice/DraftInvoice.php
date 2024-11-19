@@ -47,7 +47,8 @@ class DraftInvoice extends Invoice
         ?float $exchangeRate = null,
         ?Note $notes = null,
         Project|int|null $project = null,
-        ?Reference $references = null
+        ?Reference $references = null,
+        ?string $idempotencyKey = null,
     ): ?static {
         return static::createRequest(compact(
             'currency',
@@ -62,7 +63,7 @@ class DraftInvoice extends Invoice
             'notes',
             'project',
             'references',
-        ));
+        ), [], $idempotencyKey);
     }
 
     public static function new(
@@ -96,7 +97,7 @@ class DraftInvoice extends Invoice
         )));
     }
 
-    public function save(): ?static
+    public function save(?string $idempotencyKey = null): ?static
     {
         if (empty($this->draftInvoiceNumber)) {
             $new = static::create(
@@ -111,7 +112,8 @@ class DraftInvoice extends Invoice
                 exchangeRate: $this->exchangeRate,
                 notes: $this->notes,
                 project: $this->project,
-                references: $this->references
+                references: $this->references,
+                idempotencyKey: $idempotencyKey
             );
 
             $this->populate($new->toArray());
@@ -122,8 +124,8 @@ class DraftInvoice extends Invoice
         return $this->saveRequest();
     }
 
-    public function book(): ?BookedInvoice
+    public function book(?string $idempotencyKey = null): ?BookedInvoice
     {
-        return BookedInvoice::createFromDraft($this);
+        return BookedInvoice::createFromDraft($this, $idempotencyKey);
     }
 }
