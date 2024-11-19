@@ -305,7 +305,7 @@ it('can add notes', function () {
         ->textLine2->toBe('Text line 2');
 });
 
-it('can set idempotency key when creating a draft', function() {
+it('can set idempotency key when creating a draft', function () {
     $this->driver->expects()->post()->with(
         'https://restapi.e-conomic.com/invoices/drafts',
         fixture('Invoices/draft/create-request'),
