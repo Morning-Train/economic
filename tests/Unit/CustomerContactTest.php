@@ -38,7 +38,8 @@ it('gets a customer contact', function () {
 it('creates a customer contact', function () {
     $this->driver->expects()->post(
         'https://restapi.e-conomic.com/customers/1/contacts',
-        fixture('Customers/Contacts/create-request')
+        fixture('Customers/Contacts/create-request'),
+        null
     )->andReturn(new EconomicResponse(201, fixture('Customers/Contacts/create-response')));
 
     $contact = Contact::create(
@@ -60,7 +61,8 @@ it('creates a customer contact', function () {
 it('updates a customer contact', function () {
     $this->driver->expects()->put(
         'https://restapi.e-conomic.com/customers/1/contacts/140',
-        fixture('Customers/Contacts/update-request')
+        fixture('Customers/Contacts/update-request'),
+        null
     )->andReturn(new EconomicResponse(200, fixture('Customers/Contacts/update-response')));
 
     $contact = new Contact([
