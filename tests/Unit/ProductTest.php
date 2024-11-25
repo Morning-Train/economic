@@ -142,7 +142,7 @@ it('gets a specific product', function () {
 
 it('creates a product', function () {
     $this->driver->expects()->post()
-        ->with('https://restapi.e-conomic.com/products', fixture('Products/create-request'))
+        ->with('https://restapi.e-conomic.com/products', fixture('Products/create-request'), null)
         ->andReturn(new EconomicResponse(201, fixture('Products/create-response')));
 
     $product = Product::create('Product 1', 1, 'p-1', barCode: '1234567890', costPrice: 100.0, recommendedPrice: 150.0, salesPrice: 199.95, description: 'test', unit: 1);

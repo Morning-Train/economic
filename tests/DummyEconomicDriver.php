@@ -23,13 +23,13 @@ class DummyEconomicDriver implements EconomicDriver
         ray('GET', func_get_args());
     }
 
-    public function post(string $url, array $body = []): EconomicResponse
+    public function post(string $url, array $body = [], ?string $idempotencyKey = null): EconomicResponse
     {
         // TODO: Implement post() method.
         ray('POST', func_get_args());
     }
 
-    public function put(string $url, array $body = []): EconomicResponse
+    public function put(string $url, array $body = [], ?string $idempotencyKey = null): EconomicResponse
     {
         // TODO: Implement put() method.
         ray('PUT', func_get_args());

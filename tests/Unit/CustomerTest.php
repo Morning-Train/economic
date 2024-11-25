@@ -50,7 +50,8 @@ it('Handles OR filters', function () {
 it('creates customer', function () {
     $this->driver->expects()->post(
         'https://restapi.e-conomic.com/customers',
-        fixture('Customers/create-request')
+        fixture('Customers/create-request'),
+        null
     )
         ->once()
         ->andReturn(new EconomicResponse(201, fixture('Customers/create-response')));
@@ -131,7 +132,8 @@ it('can create a customer through update', function () {
 it('filters null values', function () {
     $this->driver->expects()->post(
         'https://restapi.e-conomic.com/customers',
-        fixture('Customers/create-request')
+        fixture('Customers/create-request'),
+        null
     )
         ->once()
         ->andReturn(new EconomicResponse(201, fixture('Customers/create-response')));
@@ -149,7 +151,8 @@ it('filters null values', function () {
 it('does not filter falsy values', function () {
     $this->driver->expects()->post(
         'https://restapi.e-conomic.com/customers',
-        fixture('Customers/create-request-with-falsy-values')
+        fixture('Customers/create-request-with-falsy-values'),
+        null
     )
         ->once()
         ->andReturn(new EconomicResponse(201, fixture('Customers/create-request')));

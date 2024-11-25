@@ -12,13 +12,17 @@ trait Creatable
     /**
      * @param  static|array  $args
      */
-    public static function createRequest($args, array $endpointReferences = []): ?static
+    public static function createRequest($args, array $endpointReferences = [], ?string $idempotencyKey = null): ?static
     {
         // TODO: add validation method to check if required properties are set and primary key is not set - throw exception if not
 
         $args = static::resolveArgs($args, true); // We need to convert objects to an array to avoid issues with the API
 
-        $response = EconomicApiService::post(static::getEndpoint(Create::class, ...$endpointReferences), $args);
+        $response = EconomicApiService::post(
+            static::getEndpoint(Create::class, ...$endpointReferences),
+            $args,
+            $idempotencyKey
+        );
 
         if ($response->getStatusCode() !== 201) {
             EconomicLoggerService::error('Economic API Service returned a non 201 status code when creating a resource',

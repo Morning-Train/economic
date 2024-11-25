@@ -42,14 +42,14 @@ class EconomicApiService
         return static::getDriver()->get(static::createURL($endpoint), $queryArgs);
     }
 
-    public static function post(string $endpoint, array $body = []): EconomicResponse
+    public static function post(string $endpoint, array $body = [], ?string $idempotencyKey = null): EconomicResponse
     {
-        return static::getDriver()->post(static::createURL($endpoint), static::castParameters($body));
+        return static::getDriver()->post(static::createURL($endpoint), static::castParameters($body), $idempotencyKey);
     }
 
-    public static function put(string $endpoint, array $body = []): EconomicResponse
+    public static function put(string $endpoint, array $body = [], ?string $idempotencyKey = null): EconomicResponse
     {
-        return static::getDriver()->put(static::createURL($endpoint), static::castParameters($body));
+        return static::getDriver()->put(static::createURL($endpoint), static::castParameters($body), $idempotencyKey);
     }
 
     public static function delete(string $endpoint): EconomicResponse

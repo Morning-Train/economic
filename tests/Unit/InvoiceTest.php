@@ -71,7 +71,8 @@ it('gets all drafted invoices', function () {
 it('creates a draft invoice using create', function () {
     $this->driver->expects()->post()->with(
         'https://restapi.e-conomic.com/invoices/drafts',
-        fixture('Invoices/draft/create-request')
+        fixture('Invoices/draft/create-request'),
+        null
     )->andReturn(new EconomicResponse(201, fixture('Invoices/draft/create-response')));
 
     $invoice = DraftInvoice::create(
@@ -109,7 +110,8 @@ it('creates a draft invoice using create', function () {
 it('creates a draft invoice using new and save', function () {
     $this->driver->expects()->post()->with(
         'https://restapi.e-conomic.com/invoices/drafts',
-        fixture('Invoices/draft/create-request')
+        fixture('Invoices/draft/create-request'),
+        null
     )->andReturn(new EconomicResponse(201, fixture('Invoices/draft/create-response')));
 
     $invoice = DraftInvoice::new(
@@ -150,7 +152,8 @@ it('creates a draft invoice using new and save', function () {
 it('creates a draft invoice with full customer and currency object', function () {
     $this->driver->expects()->post()->with(
         'https://restapi.e-conomic.com/invoices/drafts',
-        fixture('Invoices/draft/create-request')
+        fixture('Invoices/draft/create-request'),
+        null
     )->andReturn(new EconomicResponse(201, fixture('Invoices/draft/create-response')));
 
     $invoice = DraftInvoice::new(
@@ -204,7 +207,8 @@ it('creates a draft invoice with full customer and currency object', function ()
 it('books draft invoice', function () {
     $this->driver->expects()->post(
         'https://restapi.e-conomic.com/invoices/booked',
-        fixture('Invoices/draft/book-request')
+        fixture('Invoices/draft/book-request'),
+        null
     )
         ->once()
         ->andReturn(new EconomicResponse(
@@ -299,4 +303,72 @@ it('can add notes', function () {
         ->heading->toBe('Heading')
         ->textLine1->toBe('Text line 1')
         ->textLine2->toBe('Text line 2');
+});
+
+it('can set idempotency key when creating a draft', function () {
+    $this->driver->expects()->post()->with(
+        'https://restapi.e-conomic.com/invoices/drafts',
+        fixture('Invoices/draft/create-request'),
+        'test-idempotency-key'
+    )->andReturn(new EconomicResponse(201, fixture('Invoices/draft/create-response')));
+
+    $invoice = DraftInvoice::new(
+        new Currency([
+            'code' => 'DKK',
+            'isoNumber' => 'DKK',
+            'name' => 'Danish Krone',
+        ]),
+        Customer::new(
+            name: 'John Doe',
+            customerNumber: 1,
+            currency: 'DKK',
+            email: 'ms@morningtrain.dk',
+            address: 'Test Street 1',
+            vatZone: 1,
+            customerGroup: 1,
+            paymentTerms: 1,
+        ),
+        new DateTime('2024-02-13T12:20:18+00:00'),
+        14,
+        1,
+        Recipient::new(
+            'John Doe',
+            new VatZone(1),
+        ),
+        notes: Note::new(
+            heading: 'Heading',
+            textLine1: 'Text line 1',
+            textLine2: 'Text line 2'
+        )
+    );
+
+    $invoice->addLine(
+        ProductLine::new(
+            description: 'T-shirt - Size L',
+            product: new Product([
+                'productNumber' => 1,
+            ]),
+            quantity: 1,
+            unitNetPrice: 500
+        )
+    );
+
+    $invoice->save('test-idempotency-key');
+});
+
+it('books draft invoice with idempotency key', function () {
+    $this->driver->expects()->post(
+        'https://restapi.e-conomic.com/invoices/booked',
+        fixture('Invoices/draft/book-request'),
+        'test-idempotency-key'
+    )
+        ->once()
+        ->andReturn(new EconomicResponse(
+            201,
+            fixture('Invoices/draft/book-response')
+        ));
+
+    $invoice = new DraftInvoice(424);
+
+    $bookedInvoice = $invoice->book('test-idempotency-key');
 });
