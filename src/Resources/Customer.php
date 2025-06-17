@@ -11,6 +11,7 @@ use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use Morningtrain\Economic\Attributes\Resources\Properties\ResourceType;
 use Morningtrain\Economic\Attributes\Resources\Update;
 use Morningtrain\Economic\Classes\EconomicCollection;
+use Morningtrain\Economic\DTOs\Invoice\Attention;
 use Morningtrain\Economic\Resources\Customer\Contact;
 use Morningtrain\Economic\Traits\Resources\Creatable;
 use Morningtrain\Economic\Traits\Resources\GetCollectionable;
@@ -30,7 +31,7 @@ class Customer extends Resource
 
     public ?string $address;
 
-    public Contact $attention;
+    public Attention $attention;
 
     public float $balance;
 
