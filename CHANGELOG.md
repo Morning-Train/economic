@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v1.1.1 - 2025-06-18
+
+### What's Changed
+
+* Set attention to instance of Attention, and not Contact by @SimonJnsson in https://github.com/Morning-Train/economic/pull/44
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v1.1.0...v1.1.1
+
 ## v1.1.0 - 2025-05-19
 
 ### What's Changed
