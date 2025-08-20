@@ -11,7 +11,7 @@ use Morningtrain\Economic\Interfaces\ApiFormatter;
         protected int $precision
     ) {}
 
-    public function format($value): float
+    public function format($value): mixed
     {
         if (! is_numeric($value)) {
             return $value;
