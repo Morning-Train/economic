@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v1.2.0 - 2025-08-20
+
+### What's Changed
+
+* Hotfix/discounts by @mschadegg in https://github.com/Morning-Train/economic/pull/45
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v1.1.1...v1.2.0
+
 ## v1.1.1 - 2025-06-18
 
 ### What's Changed
