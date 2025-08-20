@@ -3,6 +3,7 @@
 namespace Morningtrain\Economic\DTOs\Invoice;
 
 use Morningtrain\Economic\Abstracts\Resource;
+use Morningtrain\Economic\Attributes\Resources\Properties\ApiFormatting\FloatPrecision;
 use Morningtrain\Economic\Attributes\Resources\Properties\ApiFormatting\ResourceToArray;
 use Morningtrain\Economic\Resources\DepartmentalDistribution;
 use Morningtrain\Economic\Resources\Product;
@@ -16,6 +17,7 @@ class ProductLine extends Resource
 
     public ?string $description;
 
+    #[FloatPrecision(2)]
     public ?float $discountPercentage;
 
     public ?float $marginInBaseCurrency;
