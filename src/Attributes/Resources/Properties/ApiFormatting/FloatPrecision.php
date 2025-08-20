@@ -6,7 +6,8 @@ use Attribute;
 use Morningtrain\Economic\Interfaces\ApiFormatter;
 
 #[Attribute(Attribute::TARGET_PROPERTY)] class FloatPrecision implements ApiFormatter
-{
+#[Attribute(Attribute::TARGET_PROPERTY)]
+class FloatPrecision implements ApiFormatter
     public function __construct(
         protected int $precision
     ) {}
