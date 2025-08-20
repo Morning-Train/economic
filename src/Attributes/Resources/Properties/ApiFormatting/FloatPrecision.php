@@ -9,12 +9,11 @@ use Morningtrain\Economic\Interfaces\ApiFormatter;
 {
     public function __construct(
         protected int $precision
-    ) {
-    }
+    ) {}
 
     public function format($value): float
     {
-        if(!is_numeric($value)) {
+        if (! is_numeric($value)) {
             return $value;
         }
 
