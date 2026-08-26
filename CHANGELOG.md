@@ -2,6 +2,18 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v1.3.0 - 2026-08-26
+
+### What's Changed
+
+* Allow Laravel 13, require PHP 8.2+, test on PHP 8.4 by @larzraz in https://github.com/Morning-Train/economic/pull/46
+
+### New Contributors
+
+* @larzraz made their first contribution in https://github.com/Morning-Train/economic/pull/46
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v1.2.0...v1.3.0
+
 ## v1.2.0 - 2025-08-20
 
 ### What's Changed
