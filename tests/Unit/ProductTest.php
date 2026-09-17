@@ -2,7 +2,9 @@
 
 use Morningtrain\Economic\Classes\EconomicCollection;
 use Morningtrain\Economic\Classes\EconomicResponse;
+use Morningtrain\Economic\Resources\DepartmentalDistribution;
 use Morningtrain\Economic\Resources\Product;
+use Morningtrain\Economic\Resources\Product\Inventory;
 use Morningtrain\Economic\Resources\ProductGroup;
 use Morningtrain\Economic\Resources\Unit;
 
@@ -104,6 +106,17 @@ it('gets a specific product', function () {
             'salesPrice' => 199.95,
             'barred' => false,
             'lastUpdated' => '2022-01-13T12:43:00Z',
+            'departmentalDistribution' => [
+                'departmentalDistributionNumber' => 1,
+                'distributionType' => 'department',
+                'self' => 'https://restapi.e-conomic.com/departmental-distributions/1',
+            ],
+            'inventory' => [
+                'available' => 10.0,
+                'inStock' => 12.0,
+                'inventoryLastUpdated' => '2022-01-13T12:43:00Z',
+                'recommendedCostPrice' => 75.0,
+            ],
             'productGroup' => [
                 'productGroupNumber' => 1,
                 'name' => 'Product Group 1',
@@ -121,6 +134,16 @@ it('gets a specific product', function () {
         ]));
 
     $product = Product::find('p-1');
+
+    expect($product)
+        ->departmentalDistribution->toBeInstanceOf(DepartmentalDistribution::class)
+        ->departmentalDistribution->departmentalDistributionNumber->toBe(1)
+        ->departmentalDistribution->distributionType->toBe('department')
+        ->inventory->toBeInstanceOf(Inventory::class)
+        ->inventory->available->toBe(10.0)
+        ->inventory->inStock->toBe(12.0)
+        ->inventory->recommendedCostPrice->toBe(75.0)
+        ->inventory->inventoryLastUpdated->toBeInstanceOf(DateTime::class);
 
     expect($product)->toBeInstanceOf(Product::class)
         ->productNumber->toBe('p-1')
@@ -165,9 +188,83 @@ it('creates a product', function () {
         ->productGroup->self->toBe('https://restapi.e-conomic.com/product-groups/1')
         ->unit->unitNumber->toBe(1)
         ->unit->name->toBe('Piece')
-        ->unit->self->toBe('https://restapi.e-conomic.com/units/1');
+        ->unit->self->toBe('https://restapi.e-conomic.com/units/1')
+        ->departmentalDistribution->toBeInstanceOf(DepartmentalDistribution::class)
+        ->departmentalDistribution->departmentalDistributionNumber->toBe(1)
+        ->inventory->toBeInstanceOf(Inventory::class)
+        ->inventory->inStock->toBe(12.0)
+        ->inventory->packageVolume->toBe(1.5)
+        ->pricing->toBeArray()
+        ->metaData->toBeArray()
+        ->productGroup->products->toBe('https://restapi.e-conomic.com/product-groups/1/products')
+        ->productGroup->salesAccounts->toBe('https://restapi.e-conomic.com/product-groups/1/sales-accounts');
 });
 
 // it('updates a product'); // TODO: setup test
 
 // it('deletes a product'); // TODO: setup test
+
+it('does not log about unknown properties when e-conomic returns a full product', function () {
+    $this->driver->expects()->get(
+        'https://restapi.e-conomic.com/products/p-1',
+        []
+    )
+        ->andReturn(new EconomicResponse(200, fixture('Products/create-response')));
+
+    $logs = economicLogs(function () {
+        Product::find('p-1');
+    });
+
+    expect($logs)->toBeEmpty();
+});
+
+it('hydrates a product that has no optional objects', function () {
+    $this->driver->expects()->get(
+        'https://restapi.e-conomic.com/products/p-1',
+        []
+    )
+        ->andReturn(new EconomicResponse(200, [
+            'productNumber' => 'p-1',
+            'name' => 'Product 1',
+            'self' => 'https://restapi.e-conomic.com/products/p-1',
+        ]));
+
+    $logs = economicLogs(function () use (&$product) {
+        $product = Product::find('p-1');
+    });
+
+    expect($logs)->toBeEmpty();
+
+    // Unset typed properties must not break serialisation - they are simply left out
+    expect($product->toArray())
+        ->not->toHaveKey('departmentalDistribution')
+        ->not->toHaveKey('inventory')
+        ->not->toHaveKey('pricing')
+        ->not->toHaveKey('metaData')
+        ->toHaveKey('productNumber', 'p-1');
+
+    expect(fn () => json_encode($product))->not->toThrow(Throwable::class);
+});
+
+it('sends the inventory when creating a product', function () {
+    $this->driver->expects()->post()
+        ->with(
+            'https://restapi.e-conomic.com/products',
+            fixture('Products/create-request-with-inventory'),
+            null
+        )
+        ->andReturn(new EconomicResponse(201, fixture('Products/create-response')));
+
+    $product = Product::create(
+        'Product 1',
+        1,
+        'p-1',
+        inventory: new Inventory([
+            'packageVolume' => 1.5,
+            'recommendedCostPrice' => 75.0,
+        ]),
+    );
+
+    expect($product)->toBeInstanceOf(Product::class)
+        ->inventory->toBeInstanceOf(Inventory::class);
+});

@@ -12,6 +12,7 @@ use Morningtrain\Economic\Attributes\Resources\Properties\Filterable;
 use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
 use Morningtrain\Economic\Attributes\Resources\Properties\Sortable;
 use Morningtrain\Economic\Attributes\Resources\Update;
+use Morningtrain\Economic\Resources\Product\Inventory;
 use Morningtrain\Economic\Traits\Resources\Creatable;
 use Morningtrain\Economic\Traits\Resources\Deletable;
 use Morningtrain\Economic\Traits\Resources\GetCollectionable;
@@ -41,17 +42,21 @@ class Product extends Resource
     #[Sortable]
     public ?float $costPrice;
 
-    // public ?DepartmentalDistribution $departmentalDistribution; // TODO: implement
+    public ?DepartmentalDistribution $departmentalDistribution;
 
     public ?string $description;
 
-    // public ?object $inventory; // TODO: implement
+    public ?Inventory $inventory;
 
     public ?array $invoices;
 
     public ?DateTime $lastUpdated;
 
+    public ?array $metaData;
+
     public ?string $name;
+
+    public ?array $pricing;
 
     public ?ProductGroup $productGroup;
 
@@ -77,7 +82,7 @@ class Product extends Resource
         ?float $costPrice = null,
         ?DepartmentalDistribution $departmentalDistribution = null,
         ?string $description = null,
-        ?object $inventory = null,
+        Inventory|array|null $inventory = null,
         ?float $recommendedPrice = null,
         ?float $salesPrice = null,
         Unit|int|null $unit = null,
