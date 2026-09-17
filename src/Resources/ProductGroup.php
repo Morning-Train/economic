@@ -18,7 +18,7 @@ class ProductGroup extends Resource
      */
     use GetCollectionable, GetSingleable;
 
-    // public ?object $accrual; // TODO: implement
+    public ?Account $accrual;
 
     public ?bool $inventoryEnabled;
 

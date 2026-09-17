@@ -13,6 +13,7 @@ use Morningtrain\Economic\Attributes\Resources\Update;
 use Morningtrain\Economic\Classes\EconomicCollection;
 use Morningtrain\Economic\DTOs\Invoice\Attention;
 use Morningtrain\Economic\Resources\Customer\Contact;
+use Morningtrain\Economic\Resources\Customer\DeliveryLocation;
 use Morningtrain\Economic\Traits\Resources\Creatable;
 use Morningtrain\Economic\Traits\Resources\GetCollectionable;
 use Morningtrain\Economic\Traits\Resources\GetSingleable;
@@ -60,9 +61,10 @@ class Customer extends Resource
     #[PrimaryKey]
     public int $customerNumber;
 
-    // TODO: implement $defaultDeliveryLocation
+    public ?DeliveryLocation $defaultDeliveryLocation;
 
-    // TODO: implement $deliveryLocations
+    /** Link to the delivery locations of this customer */
+    public ?string $deliveryLocations;
 
     public float $dueAmount;
 
@@ -72,11 +74,14 @@ class Customer extends Resource
 
     public ?string $email;
 
-    // TODO: implement $invoices (Invoice)
+    /** Links to the drafted and booked invoices of this customer */
+    public ?array $invoices;
 
     public DateTime $lastUpdated;
 
     public ?Layout $layout;
+
+    public ?array $metaData;
 
     public ?string $mobilePhone;
 
@@ -88,11 +93,12 @@ class Customer extends Resource
 
     public ?string $publicEntryNumber;
 
-    // TODO: implement $salesPerson (Employee)
+    public ?Employee $salesPerson;
 
     public ?string $telephoneAndFaxNumber;
 
-    // TODO: impelement $tempaltes
+    /** Links to the invoice and invoice line templates of this customer */
+    public ?array $templates;
 
     public array $totals;
 
@@ -103,8 +109,6 @@ class Customer extends Resource
     public ?string $website;
 
     public ?string $zip;
-
-    public ?Employee $salesPerson;
 
     public static function create(
         string $name,
