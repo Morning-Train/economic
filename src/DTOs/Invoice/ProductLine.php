@@ -20,6 +20,8 @@ class ProductLine extends Resource
     #[FloatPrecision(2)]
     public ?float $discountPercentage;
 
+    public ?int $lineNumber;
+
     public ?float $marginInBaseCurrency;
 
     public ?float $marginPercentage;
@@ -34,9 +36,15 @@ class ProductLine extends Resource
     #[ResourceToArray('unitNumber', 'self')]
     public ?Unit $unit;
 
+    public ?float $totalNetAmount;
+
     public ?float $unitCostPrice;
 
     public ?float $unitNetPrice;
+
+    public ?float $vatAmount;
+
+    public ?float $vatRate;
 
     public static function new(
         Product|int|string $product,

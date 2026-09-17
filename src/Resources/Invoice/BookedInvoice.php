@@ -13,6 +13,15 @@ class BookedInvoice extends Invoice
 {
     public ?int $bookedInvoiceNumber = null;
 
+    public ?int $orderNumber = null;
+
+    public ?float $remainder = null;
+
+    public ?float $remainderInBaseCurrency = null;
+
+    /** Link to the sent state of this invoice */
+    public ?string $sent = null;
+
     public static function createFromDraft(int|DraftInvoice $draft, ?string $idempotencyKey = null)
     {
         return static::createRequest([

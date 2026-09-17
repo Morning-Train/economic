@@ -27,6 +27,9 @@ class Invoice extends Resource
     use GetSingleable;
     use HasLines;
 
+    /** Link to the attachment of this invoice */
+    public ?string $attachment = null;
+
     #[ResourceToPrimaryKey()]
     public ?Currency $currency = null;
 
@@ -35,7 +38,7 @@ class Invoice extends Resource
 
     public ?DateTime $date = null;
 
-    // public ?array $delivery; // TODO: Implement
+    public ?array $delivery = null;
 
     public ?string $externalId = null;
 
@@ -69,11 +72,15 @@ class Invoice extends Resource
 
     public ?Recipient $recipient = null;
 
+    /** The legacy SOAP handle of this invoice */
+    public ?array $soap = null;
+
     public ?Reference $references = null;
 
     public ?float $roundingAmount = null;
 
-    // public ?Template $templates; // TODO: Implement
+    /** Links to the templates of this invoice */
+    public ?array $templates = null;
 
     public ?float $vatAmount = null;
 }

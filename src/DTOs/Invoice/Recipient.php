@@ -20,6 +20,8 @@ class Recipient extends Resource
 
     public ?string $country = null;
 
+    public ?string $cvr = null;
+
     public ?string $ean = null;
 
     public ?string $publicEntryNumber = null;
