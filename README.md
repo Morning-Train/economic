@@ -294,6 +294,9 @@ Developed by <br>
 <br>
 <div align="center">
 <a href="https://morningtrain.dk" target="_blank">
-<img src="https://morningtrain.dk/wp-content/themes/mtt-wordpress-theme/assets/img/logo-only-text.svg" width="200" alt="Morningtrain logo">
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="art/morningtrain-logo-white.svg">
+<img src="art/morningtrain-logo.svg" width="200" alt="Morningtrain logo">
+</picture>
 </a>
 </div>
