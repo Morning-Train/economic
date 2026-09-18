@@ -2,6 +2,7 @@
 
 namespace Morningtrain\Economic\Classes;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\LazyCollection;
 
 /**
@@ -15,7 +16,7 @@ class EconomicCollection extends LazyCollection
     /**
      * Create a new lazy collection instance.
      *
-     * @param  \Illuminate\Contracts\Support\Arrayable<TKey, TValue>|iterable<TKey, TValue>|(Closure(): \Generator<TKey, TValue, mixed, void>)|self<TKey, TValue>|array<TKey, TValue>|null  $source
+     * @param  Arrayable<TKey, TValue>|iterable<TKey, TValue>|(Closure(): \Generator<TKey, TValue, mixed, void>)|self<TKey, TValue>|array<TKey, TValue>|null  $source
      * @return void
      */
     public function __construct($source = null)

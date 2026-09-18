@@ -41,7 +41,7 @@ class AccountingYear extends Resource
     #[Filterable]
     #[Sortable]
     #[Required]
-    public DateTime $fromDate;
+    public Datetime $fromDate;
 
     /**
      * @var EconomicCollection<Period>
@@ -52,7 +52,7 @@ class AccountingYear extends Resource
     #[Filterable]
     #[Sortable]
     #[Required]
-    public DateTime $toDate;
+    public Datetime $toDate;
 
     /**
      * @var EconomicCollection<Total>
@@ -70,7 +70,7 @@ class AccountingYear extends Resource
     #[Sortable]
     public string $year;
 
-    public static function create(DateTime $fromDate, DateTime $toDate): static
+    public static function create(Datetime $fromDate, Datetime $toDate): static
     {
         return static::createRequest([
             'fromDate' => $fromDate->format('Y-m-d'),
