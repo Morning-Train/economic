@@ -2,7 +2,9 @@
 
 use Morningtrain\Economic\Classes\EconomicResponse;
 use Morningtrain\Economic\Resources\Customer;
+use Morningtrain\Economic\Resources\Customer\DeliveryLocation;
 use Morningtrain\Economic\Resources\CustomerGroup;
+use Morningtrain\Economic\Resources\Employee;
 use Morningtrain\Economic\Resources\PaymentTerm;
 use Morningtrain\Economic\Resources\VatZone;
 
@@ -165,4 +167,56 @@ it('does not filter falsy values', function () {
         paymentTerms: 1,
         customerNumber: 0,
     );
+});
+
+it('does not log about unknown properties when e-conomic returns a full customer', function () {
+    $this->driver->expects()->get(
+        'https://restapi.e-conomic.com/customers/1',
+        []
+    )
+        ->andReturn(new EconomicResponse(200, fixture('Customers/create-response')));
+
+    $logs = economicLogs(function () use (&$customer) {
+        $customer = Customer::find(1);
+    });
+
+    expect($logs)->toBeEmpty();
+
+    expect($customer)->toBeInstanceOf(Customer::class)
+        ->deliveryLocations->toBe('https://restapi.e-conomic.com/customers/1/delivery-locations')
+        ->invoices->toBeArray()
+        ->templates->toBeArray()
+        ->metaData->toBeArray();
+});
+
+it('hydrates the delivery location and sales person of a customer', function () {
+    $this->driver->expects()->get(
+        'https://restapi.e-conomic.com/customers/1',
+        []
+    )
+        ->andReturn(new EconomicResponse(200, [
+            'customerNumber' => 1,
+            'name' => 'Morningtrain',
+            'defaultDeliveryLocation' => [
+                'deliveryLocationNumber' => 7,
+                'self' => 'https://restapi.e-conomic.com/customers/1/delivery-locations/7',
+            ],
+            'salesPerson' => [
+                'employeeNumber' => 3,
+                'self' => 'https://restapi.e-conomic.com/employees/3',
+            ],
+            'self' => 'https://restapi.e-conomic.com/customers/1',
+        ]));
+
+    $logs = economicLogs(function () use (&$customer) {
+        $customer = Customer::find(1);
+    });
+
+    expect($logs)->toBeEmpty();
+
+    expect($customer)
+        ->defaultDeliveryLocation->toBeInstanceOf(DeliveryLocation::class)
+        ->defaultDeliveryLocation->deliveryLocationNumber->toBe(7)
+        ->salesPerson->toBeInstanceOf(Employee::class)
+        ->salesPerson->employeeNumber->toBe(3);
 });

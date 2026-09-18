@@ -18,7 +18,7 @@ class ProductGroup extends Resource
      */
     use GetCollectionable, GetSingleable;
 
-    // public ?object $accrual; // TODO: implement
+    public ?Account $accrual;
 
     public ?bool $inventoryEnabled;
 
@@ -27,8 +27,9 @@ class ProductGroup extends Resource
     #[PrimaryKey]
     public ?int $productGroupNumber;
 
-    // public ?string $products; // TODO: implement
+    /** Link to the products in this product group */
+    public ?string $products;
 
-    // public ?string $salesAccounts; // TODO: implement
-
+    /** Link to the sales accounts of this product group */
+    public ?string $salesAccounts;
 }

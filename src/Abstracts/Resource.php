@@ -22,8 +22,12 @@ abstract class Resource implements JsonSerializable
 {
     public string $self;
 
-    public function __construct(array|string|int|float|null $properties = null)
+    public function __construct(array|object|string|int|float|null $properties = null)
     {
+        if (is_object($properties)) {
+            $properties = get_object_vars($properties);
+        }
+
         if (is_array($properties)) {
             $this->populate($properties);
         } elseif (! empty($properties)) {

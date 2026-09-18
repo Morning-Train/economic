@@ -2,11 +2,27 @@
   "productNumber": "p-1",
   "description": "test",
   "name": "Product 1",
-  "costPrice": 100.00,
-  "recommendedPrice": 150.00,
+  "costPrice": 100.0,
+  "recommendedPrice": 150.0,
   "salesPrice": 199.95,
   "barCode": "1234567890",
   "barred": false,
+  "departmentalDistribution": {
+    "departmentalDistributionNumber": 1,
+    "distributionType": "department",
+    "self": "https://restapi.e-conomic.com/departmental-distributions/1"
+  },
+  "inventory": {
+    "available": 10.0,
+    "inStock": 12.0,
+    "orderedByCustomers": 2.0,
+    "orderedFromSuppliers": 5.0,
+    "packageVolume": 1.5,
+    "grossWeight": 2.5,
+    "netWeight": 2.0,
+    "inventoryLastUpdated": "2024-02-25T10:46:00Z",
+    "recommendedCostPrice": 75.0
+  },
   "lastUpdated": "2024-02-25T10:46:00Z",
   "productGroup": {
     "productGroupNumber": 1,

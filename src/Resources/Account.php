@@ -10,9 +10,14 @@ class Account extends Resource
 
     public int $accountNumber;
 
-    public array $accountSummed;
+    public array $accountsSummed;
 
     public string $accountType;
+
+    /** Link to the accounting years of this account */
+    public ?string $accountingYears;
+
+    public ?float $balance;
 
     public bool $barred;
 
@@ -28,5 +33,5 @@ class Account extends Resource
 
     public Account $totalFromAccount;
 
-    // public VatAccount $vatAccount;
+    public ?VatAccount $vatAccount;
 }

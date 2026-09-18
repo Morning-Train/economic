@@ -1,0 +1,12 @@
+{
+  "name": "Product 1",
+  "productGroup": {
+    "productGroupNumber": 1,
+    "self": "https:\/\/restapi.e-conomic.com\/product-groups\/1"
+  },
+  "productNumber": "p-1",
+  "inventory": {
+    "packageVolume": 1.5,
+    "recommendedCostPrice": 75.0
+  }
+}

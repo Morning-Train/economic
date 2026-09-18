@@ -372,3 +372,52 @@ it('books draft invoice with idempotency key', function () {
 
     $bookedInvoice = $invoice->book('test-idempotency-key');
 });
+
+it('does not log about unknown properties when e-conomic returns a draft invoice', function () {
+    $this->driver->expects()->get(
+        'https://restapi.e-conomic.com/invoices/drafts/422',
+        []
+    )
+        ->andReturn(new EconomicResponse(200, fixture('Invoices/draft/get-single')));
+
+    $logs = economicLogs(function () use (&$invoice) {
+        $invoice = DraftInvoice::find(422);
+    });
+
+    expect($logs)->toBeEmpty();
+
+    expect($invoice)->toBeInstanceOf(DraftInvoice::class)
+        ->attachment->toBe('https://restapi.e-conomic.com/invoices/drafts/422/attachment')
+        ->templates->toBeArray()
+        ->soap->toBeArray()
+        ->recipient->cvr->toBe('33362749');
+
+    expect($invoice->lines->first())
+        ->toBeInstanceOf(ProductLine::class)
+        ->lineNumber->toBe(1)
+        ->totalNetAmount->toBe(1000.0);
+});
+
+it('does not log about unknown properties when e-conomic returns a booked invoice', function () {
+    $this->driver->expects()->get(
+        'https://restapi.e-conomic.com/invoices/booked/300',
+        []
+    )
+        ->andReturn(new EconomicResponse(200, fixture('Invoices/draft/book-response')));
+
+    $logs = economicLogs(function () use (&$invoice) {
+        $invoice = BookedInvoice::find(300);
+    });
+
+    expect($logs)->toBeEmpty();
+
+    expect($invoice)->toBeInstanceOf(BookedInvoice::class)
+        ->orderNumber->toBe(424)
+        ->remainder->toBe(625.0)
+        ->remainderInBaseCurrency->toBe(625.0)
+        ->sent->toBe('https://restapi.e-conomic.com/invoices/booked/300/sent');
+
+    expect($invoice->lines->first())
+        ->vatRate->toBe(25.0)
+        ->vatAmount->toBe(125.0);
+});
