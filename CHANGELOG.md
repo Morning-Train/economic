@@ -2,6 +2,46 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v1.3.0 - 2026-08-26
+
+### What's Changed
+
+* Allow Laravel 13, require PHP 8.2+, test on PHP 8.4 by @larzraz in https://github.com/Morning-Train/economic/pull/46
+
+### New Contributors
+
+* @larzraz made their first contribution in https://github.com/Morning-Train/economic/pull/46
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v1.2.0...v1.3.0
+
+## v1.2.0 - 2025-08-20
+
+### What's Changed
+
+* Hotfix/discounts by @mschadegg in https://github.com/Morning-Train/economic/pull/45
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v1.1.1...v1.2.0
+
+## v1.1.1 - 2025-06-18
+
+### What's Changed
+
+* Set attention to instance of Attention, and not Contact by @SimonJnsson in https://github.com/Morning-Train/economic/pull/44
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v1.1.0...v1.1.1
+
+## v1.1.0 - 2025-05-19
+
+### What's Changed
+
+* ⬆️ Support Illuminate 12 by @VKattou in https://github.com/Morning-Train/economic/pull/43
+
+### New Contributors
+
+* @VKattou made their first contribution in https://github.com/Morning-Train/economic/pull/43
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v0.9.0...v1.1.0
+
 ## v0.8.0 - 2024-08-29
 
 ### What's Changed

@@ -28,5 +28,5 @@ class Account extends Resource
 
     public Account $totalFromAccount;
 
-    //public VatAccount $vatAccount;
+    // public VatAccount $vatAccount;
 }

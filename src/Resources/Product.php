@@ -41,11 +41,11 @@ class Product extends Resource
     #[Sortable]
     public ?float $costPrice;
 
-    //public ?DepartmentalDistribution $departmentalDistribution; // TODO: implement
+    // public ?DepartmentalDistribution $departmentalDistribution; // TODO: implement
 
     public ?string $description;
 
-    //public ?object $inventory; // TODO: implement
+    // public ?object $inventory; // TODO: implement
 
     public ?array $invoices;
 

@@ -73,7 +73,7 @@ class Invoice extends Resource
 
     public ?float $roundingAmount = null;
 
-    //public ?Template $templates; // TODO: Implement
+    // public ?Template $templates; // TODO: Implement
 
     public ?float $vatAmount = null;
 }
