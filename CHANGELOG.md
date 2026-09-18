@@ -2,6 +2,16 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v1.4.0 - 2026-09-18
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 1.6.0 to 2.2.0 by @dependabot[bot] in https://github.com/Morning-Train/economic/pull/30
+* Update pestphp/pest requirement from ^2.15 to ^3.6 by @dependabot[bot] in https://github.com/Morning-Train/economic/pull/42
+* Hotfix/missing properties by @mschadegg in https://github.com/Morning-Train/economic/pull/47
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v1.3.0...v1.4.0
+
 ## v1.3.0 - 2026-08-26
 
 ### What's Changed
