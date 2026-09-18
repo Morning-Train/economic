@@ -14,7 +14,7 @@ trait GetSingleable
     /**
      * @param  ...$references  - The references to pass to the endpoint. Can be string(s), integer(s) or a single array with named references
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public static function find(...$references): ?static
     {
