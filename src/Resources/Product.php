@@ -82,7 +82,7 @@ class Product extends Resource
         ?float $costPrice = null,
         ?DepartmentalDistribution $departmentalDistribution = null,
         ?string $description = null,
-        Inventory|array|null $inventory = null,
+        object|array|null $inventory = null,
         ?float $recommendedPrice = null,
         ?float $salesPrice = null,
         Unit|int|null $unit = null,

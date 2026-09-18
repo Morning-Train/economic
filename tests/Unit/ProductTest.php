@@ -268,3 +268,38 @@ it('sends the inventory when creating a product', function () {
     expect($product)->toBeInstanceOf(Product::class)
         ->inventory->toBeInstanceOf(Inventory::class);
 });
+
+it('accepts a plain object as the inventory when creating a product', function () {
+    $inventory = new stdClass;
+    $inventory->packageVolume = 1.5;
+    $inventory->recommendedCostPrice = 75.0;
+
+    $this->driver->expects()->post()
+        ->with(
+            'https://restapi.e-conomic.com/products',
+            fixture('Products/create-request-with-inventory'),
+            null
+        )
+        ->andReturn(new EconomicResponse(201, fixture('Products/create-response')));
+
+    $product = Product::create('Product 1', 1, 'p-1', inventory: $inventory);
+
+    expect($product)->toBeInstanceOf(Product::class)
+        ->inventory->toBeInstanceOf(Inventory::class);
+});
+
+it('hydrates a resource from a plain object', function () {
+    $data = new stdClass;
+    $data->packageVolume = 1.5;
+    $data->inStock = 12.0;
+
+    $logs = economicLogs(function () use ($data, &$inventory) {
+        $inventory = new Inventory($data);
+    });
+
+    expect($logs)->toBeEmpty();
+
+    expect($inventory)
+        ->packageVolume->toBe(1.5)
+        ->inStock->toBe(12.0);
+});
