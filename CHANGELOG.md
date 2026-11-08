@@ -2,6 +2,18 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v1.5.0 - 2026-11-08
+
+### What's Changed
+
+* Bump aglipanci/laravel-pint-action from 2.4 to 2.6 by @dependabot[bot] in https://github.com/Morning-Train/economic/pull/50
+* Bump actions/checkout from 4 to 7 by @dependabot[bot] in https://github.com/Morning-Train/economic/pull/48
+* Bump dependabot/fetch-metadata from 2.2.0 to 3.1.0 by @dependabot[bot] in https://github.com/Morning-Train/economic/pull/49
+* Bump stefanzweifel/git-auto-commit-action from 5 to 7 by @dependabot[bot] in https://github.com/Morning-Train/economic/pull/51
+* ✨ Add Agreement resource for GET /self by @mschadegg in https://github.com/Morning-Train/economic/pull/53
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v1.4.0...v1.5.0
+
 ## v1.4.0 - 2026-09-18
 
 ### What's Changed
