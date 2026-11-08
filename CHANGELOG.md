@@ -2,12 +2,6 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
-## Unreleased
-
-### What's Changed
-
-* Add `Agreement` resource for `GET /self` (agreement number, company, user, settings etc.). Replaces the empty `Resources\Self` class, which could never be loaded because `self` is a reserved word in PHP.
-
 ## v1.4.0 - 2026-09-18
 
 ### What's Changed
