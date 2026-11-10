@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v1.6.0 - 2026-11-10
+
+### What's Changed
+
+* ✨ Allow deleting draft invoices by @mschadegg in https://github.com/Morning-Train/economic/pull/54
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v1.5.0...v1.6.0
+
 ## v1.5.0 - 2026-11-08
 
 ### What's Changed
