@@ -5,6 +5,7 @@ namespace Morningtrain\Economic\Resources\Invoice;
 use DateTime;
 use Illuminate\Support\Collection;
 use Morningtrain\Economic\Attributes\Resources\Create;
+use Morningtrain\Economic\Attributes\Resources\Delete;
 use Morningtrain\Economic\Attributes\Resources\GetCollection;
 use Morningtrain\Economic\Attributes\Resources\GetSingle;
 use Morningtrain\Economic\Attributes\Resources\Properties\PrimaryKey;
@@ -17,14 +18,17 @@ use Morningtrain\Economic\Resources\Currency;
 use Morningtrain\Economic\Resources\Customer;
 use Morningtrain\Economic\Resources\Layout;
 use Morningtrain\Economic\Resources\PaymentTerm;
+use Morningtrain\Economic\Traits\Resources\Deletable;
 use Morningtrain\Economic\Traits\Resources\Updatable;
 
 #[GetCollection('invoices/drafts')]
 #[GetSingle('invoices/drafts/:draftInvoiceNumber')]
 #[Create('invoices/drafts')]
 #[Update('invoices/drafts/:draftInvoiceNumber', [':draftInvoiceNumber' => 'draftInvoiceNumber'])]
+#[Delete('invoices/drafts/:draftInvoiceNumber', [':draftInvoiceNumber' => 'draftInvoiceNumber'])]
 class DraftInvoice extends Invoice
 {
+    use Deletable;
     use Updatable {
         Updatable::save as protected saveRequest;
     }

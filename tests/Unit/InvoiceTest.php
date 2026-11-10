@@ -421,3 +421,77 @@ it('does not log about unknown properties when e-conomic returns a booked invoic
         ->vatRate->toBe(25.0)
         ->vatAmount->toBe(125.0);
 });
+
+it('deletes a draft invoice with delete', function () {
+    $this->driver->expects()->delete(
+        'https://restapi.e-conomic.com/invoices/drafts/422'
+    )->andReturn(new EconomicResponse(200, [
+        'message' => 'Deleted invoice.',
+        'deletedCount' => 1,
+        'deletedItems' => [
+            [
+                'draftInvoiceNumber' => 422,
+                'self' => 'https://restapi.e-conomic.com/invoices/drafts/422',
+            ],
+        ],
+    ]));
+
+    $draft = new DraftInvoice(['draftInvoiceNumber' => 422]);
+
+    expect($draft->delete())->toBeTrue();
+});
+
+it('deletes a draft invoice with deleteByPrimaryKey', function () {
+    $this->driver->expects()->delete(
+        'https://restapi.e-conomic.com/invoices/drafts/422'
+    )->andReturn(new EconomicResponse(200, [
+        'message' => 'Deleted invoice.',
+        'deletedCount' => 1,
+    ]));
+
+    expect(DraftInvoice::deleteByPrimaryKey(422))->toBeTrue();
+});
+
+it('returns false when the draft invoice to delete does not exist', function () {
+    $this->driver->expects()->delete(
+        'https://restapi.e-conomic.com/invoices/drafts/422'
+    )->andReturn(new EconomicResponse(404, [
+        'message' => "Draft Invoice with draftInvoiceNumber 422 doesn't exist.",
+        'errorCode' => 'E06000',
+    ]));
+
+    expect(DraftInvoice::deleteByPrimaryKey(422))->toBeFalse();
+});
+
+it('does not call the api when deleting a draft invoice without a number', function () {
+    // DELETE /invoices/drafts without a number deletes every draft invoice
+    $this->driver->shouldNotReceive('delete');
+
+    $draft = new DraftInvoice;
+
+    expect($draft->delete())->toBeFalse()
+        ->and(DraftInvoice::deleteByPrimaryKey(''))->toBeFalse();
+});
+
+it('never sends a collection-wide delete for a draft invoice number', function (string $draftInvoiceNumber, string $expectedUrl) {
+    $sentUrl = null;
+
+    $this->driver->shouldReceive('delete')->once()->andReturnUsing(function (string $url) use (&$sentUrl) {
+        $sentUrl = $url;
+
+        return new EconomicResponse(404, []);
+    });
+
+    expect(DraftInvoice::deleteByPrimaryKey($draftInvoiceNumber))->toBeFalse()
+        ->and($sentUrl)->toBe($expectedUrl)
+        ->and(rtrim(parse_url($sentUrl, PHP_URL_PATH), '/'))->not->toBe('/invoices/drafts');
+})->with([
+    '$1' => ['$1', 'https://restapi.e-conomic.com/invoices/drafts/%241'],
+    '\1' => ['\1', 'https://restapi.e-conomic.com/invoices/drafts/_7_1'],
+    '${1}' => ['${1}', 'https://restapi.e-conomic.com/invoices/drafts/%24%7B1%7D'],
+    '.' => ['.', 'https://restapi.e-conomic.com/invoices/drafts/_11_'],
+    '..' => ['..', 'https://restapi.e-conomic.com/invoices/drafts/_11__11_'],
+    '/' => ['/', 'https://restapi.e-conomic.com/invoices/drafts/_6_'],
+    '?' => ['?', 'https://restapi.e-conomic.com/invoices/drafts/_10_'],
+    '#' => ['#', 'https://restapi.e-conomic.com/invoices/drafts/_12_'],
+]);
