@@ -472,3 +472,26 @@ it('does not call the api when deleting a draft invoice without a number', funct
     expect($draft->delete())->toBeFalse()
         ->and(DraftInvoice::deleteByPrimaryKey(''))->toBeFalse();
 });
+
+it('never sends a collection-wide delete for a draft invoice number', function (string $draftInvoiceNumber, string $expectedUrl) {
+    $sentUrl = null;
+
+    $this->driver->shouldReceive('delete')->once()->andReturnUsing(function (string $url) use (&$sentUrl) {
+        $sentUrl = $url;
+
+        return new EconomicResponse(404, []);
+    });
+
+    expect(DraftInvoice::deleteByPrimaryKey($draftInvoiceNumber))->toBeFalse()
+        ->and($sentUrl)->toBe($expectedUrl)
+        ->and(rtrim(parse_url($sentUrl, PHP_URL_PATH), '/'))->not->toBe('/invoices/drafts');
+})->with([
+    '$1' => ['$1', 'https://restapi.e-conomic.com/invoices/drafts/%241'],
+    '\1' => ['\1', 'https://restapi.e-conomic.com/invoices/drafts/_7_1'],
+    '${1}' => ['${1}', 'https://restapi.e-conomic.com/invoices/drafts/%24%7B1%7D'],
+    '.' => ['.', 'https://restapi.e-conomic.com/invoices/drafts/_11_'],
+    '..' => ['..', 'https://restapi.e-conomic.com/invoices/drafts/_11__11_'],
+    '/' => ['/', 'https://restapi.e-conomic.com/invoices/drafts/_6_'],
+    '?' => ['?', 'https://restapi.e-conomic.com/invoices/drafts/_10_'],
+    '#' => ['#', 'https://restapi.e-conomic.com/invoices/drafts/_12_'],
+]);
