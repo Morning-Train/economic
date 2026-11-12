@@ -3,6 +3,7 @@
 namespace Morningtrain\Economic\Classes;
 
 use Closure;
+use InvalidArgumentException;
 
 class EconomicQueryFilterBuilder
 {
@@ -29,6 +30,11 @@ class EconomicQueryFilterBuilder
     const FILTER_OPERATOR_NOT_IN = '$nin:';
 
     const FILTER_VALUE_NULL = '$null:';
+
+    /**
+     * e-conomic's limit on the number of values for $in: and $nin:.
+     */
+    const FILTER_LIST_MAX_LENGTH = 200;
 
     const ESCAPES = [
         '$' => '$$',
@@ -73,9 +79,9 @@ class EconomicQueryFilterBuilder
         return $operator;
     }
 
-    protected static function isOperator(string $operator): bool
+    protected static function isOperator(mixed $operator): bool
     {
-        return in_array($operator, [
+        return is_string($operator) && in_array($operator, [
             '=',
             '!=',
             '>',
@@ -97,7 +103,41 @@ class EconomicQueryFilterBuilder
             static::FILTER_OPERATOR_LIKE,
             static::FILTER_OPERATOR_IN,
             static::FILTER_OPERATOR_NOT_IN,
-        ]);
+        ], true);
+    }
+
+    protected static function isListOperator(string $operator): bool
+    {
+        return in_array($operator, [static::FILTER_OPERATOR_IN, static::FILTER_OPERATOR_NOT_IN], true);
+    }
+
+    /**
+     * Build the list for $in: and $nin:, such as [1,2,3].
+     * e-conomic only allows these operators on numeric properties, so the list takes integers only.
+     *
+     * @throws InvalidArgumentException
+     */
+    protected static function buildList(mixed $values): string
+    {
+        if (! is_array($values)) {
+            throw new InvalidArgumentException('The in and not in operators take an array of integers.');
+        }
+
+        if (empty($values)) {
+            throw new InvalidArgumentException('The in and not in operators take at least one value.');
+        }
+
+        if (count($values) > static::FILTER_LIST_MAX_LENGTH) {
+            throw new InvalidArgumentException('e-conomic allows at most '.static::FILTER_LIST_MAX_LENGTH.' values for the in and not in operators, '.count($values).' given.');
+        }
+
+        foreach ($values as $value) {
+            if (! is_int($value)) {
+                throw new InvalidArgumentException('The in and not in operators only take integers, '.get_debug_type($value).' given.');
+            }
+        }
+
+        return '['.implode(',', $values).']';
     }
 
     protected function whereNested(Closure $closure)
@@ -114,8 +154,22 @@ class EconomicQueryFilterBuilder
             return $this->whereNested($propertyName);
         }
 
-        $operator = ! static::isOperator($operatorOrValue) ? static::FILTER_OPERATOR_EQUAL : $operatorOrValue;
+        $operator = $this->convertOperator(! static::isOperator($operatorOrValue) ? static::FILTER_OPERATOR_EQUAL : $operatorOrValue);
         $value = is_null($value) && ! static::isOperator($operatorOrValue) ? $operatorOrValue : $value;
+
+        if (static::isListOperator($operator)) {
+            $this->filters[] = [
+                'property' => $propertyName,
+                'operator' => $operator,
+                'value' => static::buildList($value),
+            ];
+
+            return $this;
+        }
+
+        if (is_array($value)) {
+            throw new InvalidArgumentException('An array can only be used with the in and not in operators.');
+        }
 
         if (is_string($value)) {
             $value = str_replace(array_keys(static::ESCAPES), array_values(static::ESCAPES), $value);
@@ -135,7 +189,7 @@ class EconomicQueryFilterBuilder
 
         $this->filters[] = [
             'property' => $propertyName,
-            'operator' => $this->convertOperator($operator),
+            'operator' => $operator,
             'value' => $value,
         ];
 

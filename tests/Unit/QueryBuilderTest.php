@@ -108,3 +108,100 @@ describe('a collection from a URL', function () {
             ->and($collection->getSelf())->toBe('customers/1/contacts');
     });
 });
+
+describe('in and not in', function () {
+    it('sends a list with first()', function () {
+        $this->driver->expects()->get('https://restapi.e-conomic.com/customers', [
+            'pageSize' => 1,
+            'skipPages' => 0,
+            'filter' => 'customerNumber$in:[1,2]',
+        ])
+            ->once()
+            ->andReturn(new EconomicResponse(200, []));
+
+        Customer::where('customerNumber', 'in', [1, 2])->first();
+    });
+
+    it('sends a list with all()', function () {
+        $this->driver->expects()->get('https://restapi.e-conomic.com/customers', [
+            'filter' => 'customerNumber$in:[1,2]',
+            'skipPages' => 0,
+            'pageSize' => 20,
+        ])
+            ->once()
+            ->andReturn(customerCollectionResponse([1], 1));
+
+        expect(Customer::where('customerNumber', 'in', [1, 2])->all()->all())->toHaveCount(1);
+    });
+
+    it('converts the operator', function (string $operator, string $filter) {
+        $this->driver->expects()->get('https://restapi.e-conomic.com/customers', [
+            'pageSize' => 1,
+            'skipPages' => 0,
+            'filter' => $filter,
+        ])
+            ->once()
+            ->andReturn(new EconomicResponse(200, []));
+
+        Customer::where('customerNumber', $operator, [1, 2])->first();
+    })->with([
+        ['in', 'customerNumber$in:[1,2]'],
+        ['IN', 'customerNumber$in:[1,2]'],
+        ['$in:', 'customerNumber$in:[1,2]'],
+        ['not in', 'customerNumber$nin:[1,2]'],
+        ['NOT IN', 'customerNumber$nin:[1,2]'],
+        ['$nin:', 'customerNumber$nin:[1,2]'],
+    ]);
+
+    it('works in orWhere() and a nested where()', function () {
+        $this->driver->expects()->get('https://restapi.e-conomic.com/customers', [
+            'pageSize' => 1,
+            'skipPages' => 0,
+            'filter' => 'name$eq:A$or:(customerNumber$in:[1,2])$and:customerNumber$nin:[3]',
+        ])
+            ->once()
+            ->andReturn(new EconomicResponse(200, []));
+
+        Customer::where('name', 'A')
+            ->orWhere('customerNumber', 'in', [1, 2])
+            ->where(fn ($query) => $query->where('customerNumber', 'not in', [3]))
+            ->first();
+    });
+
+    it('sends a list of 200 integers', function () {
+        $numbers = range(1, 200);
+
+        $this->driver->expects()->get('https://restapi.e-conomic.com/customers', [
+            'pageSize' => 1,
+            'skipPages' => 0,
+            'filter' => 'customerNumber$in:['.implode(',', $numbers).']',
+        ])
+            ->once()
+            ->andReturn(new EconomicResponse(200, []));
+
+        Customer::where('customerNumber', 'in', $numbers)->first();
+    });
+
+    it('throws before e-conomic is called', function (string $operator, mixed $value) {
+        $this->driver->shouldNotReceive('get');
+
+        expect(fn () => Customer::where('customerNumber', $operator, $value)->all()->all())
+            ->toThrow(InvalidArgumentException::class);
+    })->with([
+        'an empty list' => ['in', []],
+        '201 integers' => ['in', range(1, 201)],
+        'a numeric string' => ['in', [1, '10']],
+        'a float' => ['in', [1, 1.5]],
+        'null' => ['not in', [1, null]],
+        'a string instead of a list' => ['in', '[1,2]'],
+        'no value' => ['in', null],
+        'a list with =' => ['=', [1, 2]],
+    ]);
+
+    it('throws on a list without an operator', function () {
+        $this->driver->shouldNotReceive('get');
+
+        expect(fn () => Customer::where('customerNumber', [1, 2])->first())
+            ->toThrow(InvalidArgumentException::class);
+    });
+});
