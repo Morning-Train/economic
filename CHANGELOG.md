@@ -2,6 +2,28 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v1.7.0 - 2026-11-12
+
+### 🐛 Fixed
+
+- **Filtered collections returned every row.** `EconomicCollectionIterator` sent the filter in the URL's query string, which drivers that pass query arguments through Guzzle (such as laravel-economic's `HttpEconomicDriver`) replaced, so `where(...)->all()` read the whole collection. The iterator now sends the URL's query as arguments, merged with its own `skipPages` and `pageSize`.
+- **`in` and `not in` could not take a list.** `where('customerNumber', 'in', [1, 2])` produced "Array to string conversion" instead of a filter.
+
+### ✨ Added
+
+- `in`, `not in`, `$in:` and `$nin:` take an array of integers and build e-conomic's list syntax, e.g. `customerNumber$in:[1,2]`.
+
+### ♻️ Changed
+
+- Invalid list filters throw `InvalidArgumentException` before e-conomic is called: an empty list, more than 200 values, non-integer values, a non-array value for `in`/`not in`, or an array with any other operator.
+- `where(...)->all()` now returns only matching rows with drivers that were affected by the bug above.
+
+### ⚠️ Notes
+
+- No changes to settings or the database. laravel-economic needs no change.
+- `EconomicQueryFilterBuilder::isOperator()` now accepts `mixed`; a subclass overriding it with a `string` parameter must be updated.
+- Rollback: redeploy `v1.6.0`.
+
 ## v1.6.0 - 2026-11-10
 
 ### What's Changed
