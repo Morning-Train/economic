@@ -43,10 +43,12 @@ class EconomicCollectionIterator implements ArrayAccess, Countable, SeekableIter
     {
         $skipPages = (int) floor($position / $this->pageSize);
 
-        $response = EconomicApiService::get($this->self, [
+        [$path, $queryArgs] = static::splitUrl($this->self);
+
+        $response = EconomicApiService::get($path, array_merge($queryArgs, [
             'skipPages' => $skipPages,
             'pageSize' => $this->pageSize,
-        ]);
+        ]));
 
         if ($response->getStatusCode() !== 200) {
             // TODO: log error and throw exception
@@ -69,6 +71,29 @@ class EconomicCollectionIterator implements ArrayAccess, Countable, SeekableIter
         } else {
             $this->itemCount = count($this->items);
         }
+    }
+
+    /**
+     * Split a URL into the path and its query arguments, so the query reaches the driver as arguments.
+     * A driver may replace the URL's query string with its arguments, as Guzzle does.
+     * The iterator pages on its own, so any skipPages and pageSize in the URL are dropped,
+     * in any case, since e-conomic's own links write them as skippages and pagesize.
+     *
+     * @return array{0: string, 1: array<string, mixed>}
+     */
+    protected static function splitUrl(string $url): array
+    {
+        [$path, $query] = array_pad(explode('?', $url, 2), 2, '');
+
+        parse_str($query, $queryArgs);
+
+        $queryArgs = array_filter(
+            $queryArgs,
+            fn ($key) => ! in_array(strtolower((string) $key), ['skippages', 'pagesize'], true),
+            ARRAY_FILTER_USE_KEY
+        );
+
+        return [$path, $queryArgs];
     }
 
     public function current(): mixed
