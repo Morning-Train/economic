@@ -32,7 +32,7 @@ class EconomicApiService
 
     public static function createURL(string $endpoint): string
     {
-        $endpoint = str_replace(static::$url, '', $endpoint);
+        $endpoint = ltrim(str_replace(static::$url, '', $endpoint), '/');
 
         return static::$url.'/'.$endpoint;
     }
