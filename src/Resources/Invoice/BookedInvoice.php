@@ -55,23 +55,19 @@ class BookedInvoice extends Invoice
      * invoice: an empty collection (200) when the invoice was not sent, and one item when it was. It also answers
      * an empty collection for a booked invoice number that does not exist. This returns the first item.
      *
-     * Only a link to e-conomic's own API (https://restapi.e-conomic.com/) is followed, and only its path and
-     * query are passed on, so the request goes through the driver to e-conomic like any other.
-     * Returns null when the invoice has no such link.
+     * The link is followed like the SDK's other links (such as Pdf::$download): EconomicApiService::createURL()
+     * puts e-conomic's base URL in front of it, so the request always goes to e-conomic.
+     * Returns null when the invoice has no link.
      *
      * @throws Exception when e-conomic answers with anything other than 200 or 404
      */
     public function sentInvoice(): ?SentInvoice
     {
-        $link = static::parseApiLink($this->sent);
-
-        if ($link === null) {
+        if (empty($this->sent)) {
             return null;
         }
 
-        [$path, $queryArgs] = $link;
-
-        $response = EconomicApiService::get($path, $queryArgs);
+        $response = EconomicApiService::get($this->sent);
 
         if ($response->getStatusCode() === 404) {
             return null;
@@ -95,42 +91,5 @@ class BookedInvoice extends Invoice
         }
 
         return new SentInvoice($collection[0]);
-    }
-
-    /**
-     * Split a link to e-conomic's API into its path and query arguments.
-     * Returns null for an empty link and for a link to anywhere else.
-     *
-     * @return array{0: string, 1: array<string, mixed>}|null
-     */
-    protected static function parseApiLink(?string $link): ?array
-    {
-        if ($link === null || $link === '') {
-            return null;
-        }
-
-        $parts = parse_url($link);
-
-        if (
-            $parts === false
-            || strtolower($parts['scheme'] ?? '') !== 'https'
-            || strtolower($parts['host'] ?? '') !== 'restapi.e-conomic.com'
-            || isset($parts['port'])
-            || isset($parts['user'])
-            || isset($parts['pass'])
-            || empty($parts['path'])
-            || $parts['path'] === '/'
-        ) {
-            EconomicLoggerService::warning('Not following a link that does not point to e-conomic\'s API', [
-                'link' => $link,
-                'resource' => static::class,
-            ]);
-
-            return null;
-        }
-
-        parse_str($parts['query'] ?? '', $queryArgs);
-
-        return [$parts['path'], $queryArgs];
     }
 }

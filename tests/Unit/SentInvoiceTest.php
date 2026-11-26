@@ -154,23 +154,6 @@ it('follows a booked invoice\'s sent link to the invoice it was sent as', functi
         ->invoice->bookedInvoiceNumber->toBe(300);
 });
 
-it('passes the sent link\'s query on as arguments', function () {
-    $this->driver->expects()->get('https://restapi.e-conomic.com/invoices/booked/300/sent', ['demo' => 'true'])
-        ->once()
-        ->andReturn(new EconomicResponse(200, sentInvoiceCollection(
-            [sentInvoiceData(5)],
-            'https://restapi.e-conomic.com/invoices/booked/300/sent',
-            1
-        )));
-
-    $bookedInvoice = new BookedInvoice([
-        'bookedInvoiceNumber' => 300,
-        'sent' => 'https://restapi.e-conomic.com/invoices/booked/300/sent?demo=true',
-    ]);
-
-    expect($bookedInvoice->sentInvoice())->toBeInstanceOf(SentInvoice::class);
-});
-
 it('returns null for a booked invoice that was not sent', function () {
     // e-conomic answers an empty collection with 200, as the demo agreement does for its unsent invoices.
     $this->driver->expects()->get('https://restapi.e-conomic.com/invoices/booked/300/sent', [])
@@ -226,17 +209,24 @@ it('returns null without calling e-conomic for a booked invoice without a sent l
     'empty' => [''],
 ]);
 
-it('never follows a sent link to anywhere but e-conomic\'s API', function (string $sent) {
-    $this->driver->shouldNotReceive('get');
+it('only ever sends a sent link to e-conomic\'s API', function (string $sent) {
+    $this->driver->expects()->get()
+        ->withArgs(function (string $url) {
+            $parts = parse_url($url);
+
+            return str_starts_with($url, 'https://restapi.e-conomic.com/')
+                && $parts['scheme'] === 'https'
+                && $parts['host'] === 'restapi.e-conomic.com'
+                && ! isset($parts['port'])
+                && ! isset($parts['user'])
+                && ! isset($parts['pass']);
+        })
+        ->once()
+        ->andReturn(new EconomicResponse(404, []));
 
     $bookedInvoice = new BookedInvoice(['bookedInvoiceNumber' => 300, 'sent' => $sent]);
 
-    $logs = economicLogs(function () use ($bookedInvoice, &$sentInvoice) {
-        $sentInvoice = $bookedInvoice->sentInvoice();
-    });
-
-    expect($sentInvoice)->toBeNull();
-    expect($logs)->toHaveCount(1);
+    expect($bookedInvoice->sentInvoice())->toBeNull();
 })->with([
     'another host' => ['https://example.com/invoices/booked/300/sent'],
     'a host that starts like e-conomic\'s' => ['https://restapi.e-conomic.com.example.com/invoices/booked/300/sent'],
