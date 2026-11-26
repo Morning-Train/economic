@@ -257,6 +257,30 @@ if(!empty($customer)) {
 }
 ```
 
+### Book a draft invoice and send it
+
+```php
+use Morningtrain\Economic\Enums\SendBy;
+use Morningtrain\Economic\Resources\Invoice\DraftInvoice;
+
+$draftInvoice = DraftInvoice::find(1); // Where 1 is the draft invoice number
+
+// Leave out sendBy to book the invoice without sending it
+$bookedInvoice = $draftInvoice->book(sendBy: SendBy::Email); // Or SendBy::Ean to send it through NemHandel
+```
+
+### See whether a booked invoice was sent
+
+```php
+use Morningtrain\Economic\Resources\Invoice\BookedInvoice;
+
+$sentInvoice = BookedInvoice::find(1)?->sentInvoice(); // Null if the invoice was not sent
+
+if (!empty($sentInvoice)) {
+    echo $sentInvoice->status;
+}
+```
+
 ## Testing
 
 ```bash

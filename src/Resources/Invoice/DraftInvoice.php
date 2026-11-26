@@ -14,6 +14,7 @@ use Morningtrain\Economic\DTOs\Invoice\Note;
 use Morningtrain\Economic\DTOs\Invoice\Project;
 use Morningtrain\Economic\DTOs\Invoice\Recipient;
 use Morningtrain\Economic\DTOs\Invoice\Reference;
+use Morningtrain\Economic\Enums\SendBy;
 use Morningtrain\Economic\Resources\Currency;
 use Morningtrain\Economic\Resources\Customer;
 use Morningtrain\Economic\Resources\Layout;
@@ -128,8 +129,13 @@ class DraftInvoice extends Invoice
         return $this->saveRequest();
     }
 
-    public function book(?string $idempotencyKey = null): ?BookedInvoice
+    /**
+     * Book this draft invoice.
+     *
+     * @param  SendBy|null  $sendBy  - Let e-conomic send the invoice to the recipient once it is booked. Not sent when null.
+     */
+    public function book(?string $idempotencyKey = null, ?SendBy $sendBy = null): ?BookedInvoice
     {
-        return BookedInvoice::createFromDraft($this, $idempotencyKey);
+        return BookedInvoice::createFromDraft($this, $idempotencyKey, $sendBy);
     }
 }
