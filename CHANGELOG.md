@@ -2,6 +2,14 @@
 
 All notable changes to `e-conomic` will be documented in this file.
 
+## v1.8.0 - 2026-11-26
+
+### What's Changed
+
+* ✨ Send invoices when booking them, and read sent invoices by @mschadegg in https://github.com/Morning-Train/economic/pull/57
+
+**Full Changelog**: https://github.com/Morning-Train/economic/compare/v1.7.0...v1.8.0
+
 ## v1.7.0 - 2026-11-12
 
 ### 🐛 Fixed
